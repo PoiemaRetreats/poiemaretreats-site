@@ -1,0 +1,3 @@
+# Toolchain — managed with mise (https://mise.jdx.dev)
+[tools]
+node = "lts"
