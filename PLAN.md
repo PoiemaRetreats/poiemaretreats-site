@@ -27,11 +27,14 @@ Rebuild of poiemaretreats.org from an outdated WordPress site to **EmDash CMS** 
 - [ ] Decide registration/payment story for retreats (WooCommerce replacement):
   - Options: EmDash payment support if mature, a checkout provider (Stripe), or external ticketing link
   - **Needed input from site owner:** how registrations/payments currently happen
-- [ ] Decide donation flow (current site links to a donation page — confirm provider)
+- [x] Donation flow: **easytithe form embed** (carried over from current site)
+- [x] Scaffold EmDash from the `cloudflare:marketing` template — done on `master`
 
 ## Phase 1 — Scaffold (staging)
 
-- [ ] Scaffold EmDash site from the **marketing template** (hero, features, FAQ, contact form) — closest fit for Poiema
+- [x] Scaffolded with `npm create emdash@latest . -- --template cloudflare:marketing --pm npm --yes --force`
+- [x] Official EmDash agent skills + docs MCP wired in (`.agents/skills/`, `.mcp.json`)
+- [x] Toolchain pinned with mise (`.mise.toml`)
 - [ ] Define content model (seed file):
   - `retreats` — title, slug, dates, location, hero image, price, registration link, excerpt, body, status (upcoming/past)
   - `testimonials` — quote, name (optional), context
