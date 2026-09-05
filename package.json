@@ -11,7 +11,9 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "deploy": "astro build && wrangler deploy",
+    "deploy": "astro build && wrangler deploy --env production",
+    "deploy:staging": "astro build && wrangler deploy --env staging",
+    "deploy:production": "astro build && wrangler deploy --env production",
     "typecheck": "astro check"
   },
   "dependencies": {

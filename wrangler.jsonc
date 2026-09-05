@@ -4,26 +4,105 @@
 	"main": "./src/worker.ts",
 	"compatibility_date": "2026-02-24",
 	"compatibility_flags": ["nodejs_compat"],
+
+	// Local development baseline (Miniflare simulations)
 	"d1_databases": [
 		{
 			"binding": "DB",
-			"database_name": "poiemaretreats-site",
-		},
+			"database_name": "poiemaretreats-site"
+		}
 	],
 	"r2_buckets": [
 		{
 			"binding": "MEDIA",
-			"bucket_name": "poiemaretreats-media",
-		},
+			"bucket_name": "poiemaretreats-media"
+		}
 	],
-	// Worker Loader for plugin sandboxing
 	"worker_loaders": [
 		{
-			"binding": "LOADER",
-		},
+			"binding": "LOADER"
+		}
 	],
-	// General maintenance cron trigger
 	"triggers": {
-		"crons": ["* * * * *"],
+		"crons": ["* * * * *"]
 	},
+
+	// ---------------------------------------------------------------------------
+	// Multi-Environment Configuration (Cloudflare & EmDash Upstream Standard)
+	// ---------------------------------------------------------------------------
+	"env": {
+		// STAGING ENVIRONMENT
+		"staging": {
+			"name": "poiemaretreats-site-staging",
+			"routes": [
+				{
+					"pattern": "staging.poiemaretreats.org",
+					"custom_domain": true
+				}
+			],
+			"vars": {
+				"ENVIRONMENT": "staging",
+				"EMDASH_SITE_URL": "https://staging.poiemaretreats.org"
+			},
+			"d1_databases": [
+				{
+					"binding": "DB",
+					"database_name": "poiemaretreats-db-staging"
+				}
+			],
+			"r2_buckets": [
+				{
+					"binding": "MEDIA",
+					"bucket_name": "poiemaretreats-media-staging"
+				}
+			],
+			"worker_loaders": [
+				{
+					"binding": "LOADER"
+				}
+			],
+			"triggers": {
+				"crons": ["* * * * *"]
+			}
+		},
+
+		// PRODUCTION ENVIRONMENT
+		"production": {
+			"name": "poiemaretreats-site-production",
+			"routes": [
+				{
+					"pattern": "poiemaretreats.org",
+					"custom_domain": true
+				},
+				{
+					"pattern": "www.poiemaretreats.org",
+					"custom_domain": true
+				}
+			],
+			"vars": {
+				"ENVIRONMENT": "production",
+				"EMDASH_SITE_URL": "https://poiemaretreats.org"
+			},
+			"d1_databases": [
+				{
+					"binding": "DB",
+					"database_name": "poiemaretreats-db-prod"
+				}
+			],
+			"r2_buckets": [
+				{
+					"binding": "MEDIA",
+					"bucket_name": "poiemaretreats-media-prod"
+				}
+			],
+			"worker_loaders": [
+				{
+					"binding": "LOADER"
+				}
+			],
+			"triggers": {
+				"crons": ["* * * * *"]
+			}
+		}
+	}
 }
