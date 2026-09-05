@@ -1,6 +1,7 @@
 ---
 import { getEmDashCollection } from "emdash";
 import Base from "../../layouts/Base.astro";
+import { recordingYear, recordingTime, recordingRetreat } from "../../utils/media";
 
 const { entries: mediaItems, cacheHint } = await getEmDashCollection("recordings", {
 	status: "published",
@@ -12,10 +13,15 @@ if (Astro.cache?.enabled && cacheHint) {
 
 // Sort chronologically
 const sortedMedia = [...mediaItems].sort((a, b) => {
-	const timeA = a.data.date ? new Date(String(a.data.date)).getTime() : 0;
-	const timeB = b.data.date ? new Date(String(b.data.date)).getTime() : 0;
-	return timeB - timeA;
+	return recordingTime(b.data) - recordingTime(a.data) || String(a.data.title).localeCompare(String(b.data.title), undefined, { numeric: true });
 });
+const years = [...new Set(sortedMedia.map(item => recordingYear(item.data)).filter(Boolean))].sort().reverse();
+const types = [...new Set(sortedMedia.map(item => String(item.data.media_type || '')).filter(Boolean))].sort();
+const groups = [...new Set(sortedMedia.map(item => recordingRetreat(item.data)))].map(name => ({
+  name,
+  items: sortedMedia.filter(item => recordingRetreat(item.data) === name),
+  time: Math.max(...sortedMedia.filter(item => recordingRetreat(item.data) === name).map(item => recordingTime(item.data))),
+}));
 ---
 
 <Base
@@ -35,13 +41,26 @@ const sortedMedia = [...mediaItems].sort((a, b) => {
 
 		<section class="section">
 			<div class="container">
+				<form class="media-filters" id="media-filters" role="search" aria-label="Filter recordings" hidden>
+					<label>Search<input id="media-search" type="search" placeholder="Title or speaker" /></label>
+					<label>Retreat<select id="media-retreat"><option value="">All retreats</option>{groups.map(group => <option value={group.name}>{group.name}</option>)}</select></label>
+					<label>Year<select id="media-year"><option value="">All years</option>{years.map(year => <option value={year}>{year}</option>)}<option value="unknown">Year not listed</option></select></label>
+					<label>Type<select id="media-type"><option value="">All types</option>{types.map(type => <option value={type}>{type}</option>)}</select></label>
+					<label>Sort<select id="media-sort"><option value="newest">Newest first</option><option value="oldest">Oldest first</option><option value="title">Title A–Z</option></select></label>
+					<button type="reset" class="btn btn-secondary">Clear filters</button>
+				</form>
+				<p id="media-count" role="status" aria-live="polite"></p>
+				<p id="media-no-results" hidden>No recordings match these filters. Try another search or clear the filters.</p>
 				{sortedMedia.length === 0 ? (
 					<div class="empty-state">
 						<p>No media recordings published yet. Check back soon for audio archives.</p>
 					</div>
 				) : (
-					<div class="media-grid">
-						{sortedMedia.map((item) => {
+					<div class="media-groups">
+					{groups.map(group => <section class="media-group" data-group={group.name} data-time={group.time} aria-label={group.name}>
+						<h2 class="group-heading">{group.name}</h2>
+						<div class="media-grid">
+						{group.items.map((item) => {
 							const dateStr = item.data.date ? String(item.data.date) : null;
 							const formattedDate = dateStr
 								? new Date(dateStr).toLocaleDateString("en-US", {
@@ -55,7 +74,7 @@ const sortedMedia = [...mediaItems].sort((a, b) => {
 							const isAudioFile = mediaUrl ? /\.(m4a|mp3|ogg|wav)$/i.test(mediaUrl) : false;
 
 							return (
-								<article class="media-card" {...item.edit}>
+								<article class="media-card" data-year={recordingYear(item.data)} data-type={item.data.media_type || ''} data-time={recordingTime(item.data)} data-title={item.data.title} data-search={[item.data.title, item.data.speaker, item.data.description].filter(Boolean).join(' ').toLowerCase()} {...item.edit}>
 									<div class="media-card-top">
 										<span class="media-type-badge">{item.data.media_type}</span>
 										{formattedDate && <span class="media-date">{formattedDate}</span>}
@@ -96,6 +115,8 @@ const sortedMedia = [...mediaItems].sort((a, b) => {
 								</article>
 							);
 						})}
+						</div>
+					</section>)}
 					</div>
 				)}
 			</div>
@@ -103,7 +124,78 @@ const sortedMedia = [...mediaItems].sort((a, b) => {
 	</div>
 </Base>
 
+<script>
+  const form = document.querySelector<HTMLFormElement>('#media-filters');
+  const grid = document.querySelector<HTMLElement>('.media-groups');
+  if (form && grid) {
+    const search = document.querySelector<HTMLInputElement>('#media-search')!;
+    const year = document.querySelector('#media-year') as unknown as HTMLSelectElement;
+    const type = document.querySelector('#media-type') as unknown as HTMLSelectElement;
+    const sort = document.querySelector('#media-sort') as unknown as HTMLSelectElement;
+    const retreat = document.querySelector('#media-retreat') as unknown as HTMLSelectElement;
+    const groups = [...grid.querySelectorAll<HTMLElement>('.media-group')];
+    const cards = [...grid.querySelectorAll<HTMLElement>('.media-card')];
+    const params = new URLSearchParams(location.search);
+    search.value = params.get('q') || '';
+    year.value = params.get('year') || '';
+    type.value = params.get('type') || '';
+    sort.value = params.get('sort') || 'newest';
+    retreat.value = params.get('retreat') || '';
+    if (!sort.value) sort.value = 'newest';
+    const update = () => {
+      const query = search.value.trim().toLowerCase();
+      let count = 0;
+      const ordered = [...groups].sort((a, b) => {
+        const title = (a.dataset.group || '').localeCompare(b.dataset.group || '', undefined, { numeric: true });
+        if (sort.value === 'title') return title;
+        const at = Number(a.dataset.time), bt = Number(b.dataset.time);
+        if (!at || !bt) return at ? -1 : bt ? 1 : title;
+        return (sort.value === 'oldest' ? at - bt : bt - at) || title;
+      });
+      const existing = [...grid.children];
+      if (ordered.some((card, index) => existing[index] !== card)) {
+        for (const card of ordered) {
+          // Preserve an active audio player while reordering in supporting browsers.
+          if ('moveBefore' in grid) (grid as HTMLElement & { moveBefore(node: Node, child: Node | null): void }).moveBefore(card, null);
+          else (grid as unknown as { appendChild(node: unknown): void }).appendChild(card);
+        }
+      }
+      for (const card of cards) {
+        const groupName = (card.closest('.media-group') as HTMLElement).dataset.group;
+        card.hidden = !((!query || (card.dataset.search || '').includes(query)) && (!retreat.value || groupName === retreat.value) && (!year.value || (card.dataset.year || 'unknown') === year.value) && (!type.value || card.dataset.type === type.value));
+        if (card.hidden) card.querySelector('audio')?.pause();
+        else count++;
+      }
+      for (const group of groups) group.hidden = !group.querySelector('.media-card:not([hidden])');
+      document.querySelector('#media-count')!.textContent = `${count} of ${cards.length} recordings`;
+      document.querySelector<HTMLElement>('#media-no-results')!.hidden = count > 0;
+      const url = new URL(location.href);
+      for (const [key, value] of [['q', search.value.trim()], ['retreat', retreat.value], ['year', year.value], ['type', type.value], ['sort', sort.value === 'newest' ? '' : sort.value]]) {
+        if (value) url.searchParams.set(key, value); else url.searchParams.delete(key);
+      }
+      history.replaceState(null, '', url);
+    };
+    form.hidden = false;
+    form.addEventListener('submit', event => event.preventDefault());
+    form.addEventListener('input', update);
+    form.addEventListener('change', update);
+    form.addEventListener('reset', () => setTimeout(update, 0));
+    update();
+  }
+</script>
+
 <style>
+  [hidden] { display: none !important; }
+  .media-filters { display:grid; grid-template-columns:1.5fr 1.6fr .8fr .9fr 1.1fr auto; gap:12px; align-items:end; margin-bottom:18px; }
+  .media-group { margin-bottom:48px; }
+  .group-heading { font-size:30px; padding-bottom:16px; border-bottom:1px solid var(--color-border); margin:0 0 24px; }
+  .media-filters label { display:grid; gap:7px; font-size:14px; font-weight:600; min-width:0; }
+  .media-filters input,.media-filters select { width:100%; min-height:44px; padding:10px; font:inherit; color:var(--color-text); background:var(--color-bg); border:1px solid var(--color-border); border-radius:5px; }
+  .media-filters button { min-height:44px; }
+  #media-count { color:var(--color-muted); font-size:14px; margin-bottom:22px; }
+  #media-no-results { padding:30px 0; }
+  @media(max-width:900px) { .media-filters { grid-template-columns:1fr 1fr; } .media-filters label:first-child { grid-column:1/-1; } }
+  @media(max-width:420px) { .media-filters { grid-template-columns:1fr; } }
 	.container {
 		max-width: var(--wide-width);
 		margin: 0 auto;

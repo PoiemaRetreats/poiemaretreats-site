@@ -69,17 +69,17 @@
         },
         {
           "slug": "easy_tithe_form_id",
-          "label": "Legacy form ID",
+          "label": "MinistryForms registration form ID",
           "type": "string"
         },
         {
           "slug": "registration_url",
-          "label": "Registration Form URL",
+          "label": "Archived registration URL (not used for signup)",
           "type": "string"
         },
         {
           "slug": "payment_url",
-          "label": "Payment URL",
+          "label": "Archived payment URL (not used for signup)",
           "type": "string"
         },
         {
@@ -326,6 +326,7 @@
           "status_override": "automatic",
           "location": "Kill Devil Hills, Outer Banks, NC",
           "price": "$325",
+        "easy_tithe_form_id": "aa7f78b7-1076-4016-a63b-047c6243fb71",
         "registration_url": "https://forms.gle/P56eUTsuWHw5aBHK7",
         "payment_url": "https://app.easytithe.com/app/giving/sppc",
           "excerpt": "Step out of the daily churn for rich interactive lectures, unhurried meals, coastal beauty, and deep Christian fellowship at the Outer Banks.",

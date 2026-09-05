@@ -1,12 +1,12 @@
 ---
 interface Props {
-	formId?: string;
+	formId: string;
 	title?: string;
 	subtitle?: string;
 }
 
 const {
-	formId = "aa7f78b7-1076-4016-a63b-047c6243fb71",
+	formId,
 	title,
 	subtitle,
 } = Astro.props;
@@ -31,7 +31,7 @@ const cleanFormId = formId?.includes("formId=")
 
 		<div class="easytithe-footer">
 			<span class="lock-icon" aria-hidden="true">&#128274;</span>
-			<span>Protected by 256-bit SSL encryption via MinistryForms / EasyTithe</span>
+			<a href={`https://forms.ministryforms.net/viewForm.aspx?formid=${cleanFormId}`} target="_blank" rel="noopener noreferrer">Open registration form in a new tab</a>
 		</div>
 	</div>
 </div>
@@ -88,6 +88,8 @@ const cleanFormId = formId?.includes("formId=")
 		justify-content: center;
 		align-items: center;
 	}
+	.easytithe-frame :global(iframe) { width:100%; max-width:100%; border:0; }
+	@media(max-width:760px) { .easytithe-frame { padding:8px; } .easytithe-header { padding:20px; } }
 
 	.easytithe-footer {
 		display: flex;

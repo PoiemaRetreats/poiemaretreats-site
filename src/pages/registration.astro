@@ -1,0 +1,15 @@
+---
+import Base from '../layouts/Base.astro';
+import EasyTitheEmbed from '../components/EasyTitheEmbed.astro';
+import { OBX_FORM_ID } from '../utils/registration';
+---
+<Base title="Poiema OBX 2026 registration">
+  <section class="registration-page">
+    <h1>Poiema OBX 2026 registration</h1>
+    <EasyTitheEmbed formId={OBX_FORM_ID} title="Registration" />
+  </section>
+</Base>
+<style>
+  .registration-page { max-width:960px; margin:0 auto; padding:40px 20px; }
+  h1 { font-size:36px; }
+</style>

@@ -4,6 +4,7 @@ import { PortableText } from "emdash/ui";
 import Base from "../../layouts/Base.astro";
 import EasyTitheEmbed from "../../components/EasyTitheEmbed.astro";
 import { getRetreatStatus } from "../../utils/retreats";
+import { retreatFormId } from "../../utils/registration";
 
 const { slug } = Astro.params;
 
@@ -22,7 +23,7 @@ if (Astro.cache?.enabled && cacheHint) {
 }
 
 const status = getRetreatStatus(retreat.data);
-const registration = retreat.data as typeof retreat.data & { registration_url?: string; payment_url?: string };
+const formId = retreatFormId(slug, retreat.data.easy_tithe_form_id);
 ---
 
 <Base
@@ -108,12 +109,10 @@ const registration = retreat.data as typeof retreat.data & { registration_url?: 
 				</div>
 
 				<aside class="sidebar-column">
-					{status.isOpen && registration.registration_url ? (
-						<div class="status-notice-card"><h3>Register for this retreat</h3><p>First, complete the registration form. Then submit payment through Saint Peter Presbyterian Church, selecting the Poiema fund.</p><a class="btn btn-primary" href={registration.registration_url} target="_blank" rel="noopener noreferrer">Open registration form &rarr;</a>{registration.payment_url && <p><a class="btn btn-secondary" href={registration.payment_url} target="_blank" rel="noopener noreferrer">Open payment portal &rarr;</a></p>}</div>
-					) : status.isOpen && retreat.data.easy_tithe_form_id ? (
+					{status.isOpen && formId ? (
 						<div class="registration-panel">
 							<EasyTitheEmbed
-								formId={retreat.data.easy_tithe_form_id}
+								formId={formId}
 								title="Reserve Your Spot"
 								subtitle="Complete the form below to register and submit payment."
 							/>
