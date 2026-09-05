@@ -1,42 +1,49 @@
 # Dependencies
 node_modules/
 
-# Build output
+# Build outputs
 dist/
 
-# Astro
+# Astro & Framework cache
 .astro/
-.emdash/migrations.json
 
-# Data
+# EmDash local state, schemas, and migration manifests
+.emdash/
+
+# SQLite & Local Data
 data.db
 data.db-shm
 data.db-wal
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
 uploads/
 
-# Environment
+# Environment variables & secrets
 .env
 .env.*
 !.env.example
 
-# Wrangler local secrets
+# Cloudflare Wrangler local state & secrets
+.wrangler/
 .dev.vars
 .dev.vars.*
 
-# IDE
+# IDEs & Editors
 .vscode/*
 !.vscode/mcp.json
 .idea/
 *.swp
 *.swo
 
-# OS
+# OS metadata
 .DS_Store
+._*
 Thumbs.db
 
 # Logs
 *.log
 npm-debug.log*
-.wrangler/
-data.db
-uploads/
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
