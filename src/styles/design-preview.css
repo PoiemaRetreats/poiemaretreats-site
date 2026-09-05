@@ -31,7 +31,7 @@
 .coast-shade { position:absolute; inset:0; background:linear-gradient(90deg,rgba(4,19,19,.78) 0%,rgba(4,19,19,.35) 47%,rgba(4,19,19,.12) 70%),linear-gradient(0deg,rgba(4,19,19,.34),transparent 42%); }
 .coast-hero-copy { position:absolute; z-index:2; left:clamp(24px,8vw,125px); bottom:clamp(72px,11vh,126px); width:min(700px,70vw); }
 .kicker { font-size:11px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; }
-.coast-hero h1 { margin:18px 0 22px; max-width:680px; font:400 clamp(58px,7vw,104px)/.91 var(--serif); letter-spacing:-.035em; }
+.coast-hero h1 { margin:18px 0 22px; max-width:760px; font:400 clamp(40px,4.5vw,66px)/1.05 var(--serif); letter-spacing:-.025em; }
 .coast-hero h1 em { font-weight:400; }
 .coast-hero-copy > p:not(.kicker) { max-width:580px; font-size:clamp(16px,1.35vw,20px); line-height:1.65; }
 .scripture-tag { position:absolute; z-index:2; right:clamp(24px,5vw,78px); bottom:45px; font:500 11px/1 var(--sans); letter-spacing:.14em; text-transform:uppercase; }
@@ -57,7 +57,7 @@
 .poiema-gather .wordmark-mark { background:#ef6541; color:white; border:0; }
 .gather-hero { min-height:700px; display:grid; grid-template-columns:47% 53%; }
 .gather-copy { padding:clamp(65px,8vw,125px) clamp(28px,6vw,95px) 75px clamp(24px,7vw,110px); }
-.gather-copy h1 { margin:22px 0 25px; max-width:650px; font:400 clamp(55px,6.2vw,92px)/.9 var(--serif); letter-spacing:-.035em; }
+.gather-copy h1 { margin:22px 0 25px; max-width:650px; font:400 clamp(36px,3.8vw,56px)/1.06 var(--serif); letter-spacing:-.025em; }
 .gather-copy h1 span { color:#e55332; font-style:italic; }
 .gather-copy .lede { max-width:520px; font-size:18px; line-height:1.65; }
 .gather-copy blockquote { margin:70px 0 0; padding:18px 0 0; border-top:1px solid rgba(23,53,41,.24); display:flex; justify-content:space-between; font:italic 20px/1.4 var(--serif); }
@@ -92,7 +92,7 @@
 .heritage-hero-grid { min-height:370px; display:grid; grid-template-columns:2fr .75fr; align-items:end; gap:9vw; padding:50px 0 48px; }
 .heritage-heading > p { font-size:10px; letter-spacing:.18em; }
 .heritage-heading > p i { margin-left:17px; font:italic 16px var(--serif); letter-spacing:0; }
-.heritage-heading h1 { font:400 clamp(62px,8vw,128px)/.8 var(--serif); letter-spacing:-.05em; margin:38px 0 0; }
+.heritage-heading h1 { font:400 clamp(38px,5vw,74px)/1.05 var(--serif); letter-spacing:-.025em; margin:38px 0 0; }
 .heritage-heading h1 em { font-weight:400; color:#765c35; }
 .heritage-side { padding-bottom:8px; }
 .heritage-side p { font:400 19px/1.65 var(--serif); margin:0 0 30px; }
@@ -134,7 +134,7 @@
   .coast-hero { min-height:700px; height:92svh; }
   .coast-shade { background:linear-gradient(0deg,rgba(4,19,19,.8),rgba(4,19,19,.08) 85%); }
   .coast-hero-copy { left:24px; right:24px; bottom:72px; width:auto; }
-  .coast-hero h1 { font-size:57px; }
+  .coast-hero h1 { font-size:40px; }
   .coast-hero-copy > p:not(.kicker) { font-size:15px; }
   .scripture-tag { display:none; }
   .coast-purpose { grid-template-columns:1fr; gap:35px; padding:75px 24px; }
@@ -146,7 +146,7 @@
 
   .gather-hero { grid-template-columns:1fr; }
   .gather-copy { padding:65px 24px 55px; }
-  .gather-copy h1 { font-size:58px; }
+  .gather-copy h1 { font-size:38px; }
   .gather-copy blockquote { margin-top:55px; }
   .gather-collage { min-height:560px; }
   .gather-intro { padding:65px 24px; display:block; }
@@ -160,7 +160,7 @@
   .heritage-hero { padding:0 20px 65px; }
   .heritage-rule span:last-child { display:none; }
   .heritage-hero-grid { grid-template-columns:1fr; gap:40px; padding:55px 0; }
-  .heritage-heading h1 { font-size:65px; }
+  .heritage-heading h1 { font-size:40px; }
   .heritage-side { max-width:460px; }
   .heritage-image { height:400px; }
   .heritage-purpose { grid-template-columns:1fr; padding:75px 24px; gap:35px; }

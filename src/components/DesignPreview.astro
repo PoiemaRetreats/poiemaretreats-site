@@ -1,5 +1,6 @@
 ---
 import "../styles/design-preview.css";
+import { copy } from "../data/original-copy";
 
 interface Props {
   variant: "coast" | "gather" | "heritage";
@@ -20,7 +21,7 @@ const nav = [
   <header class="site-header">
     <a class="wordmark" href="/" aria-label="Poiema home">
       <span class="wordmark-mark">P</span>
-      <span>POIEMA<small>Christian Retreats</small></span>
+      <span>POIEMA<small>Retreats</small></span>
     </a>
     <details class="mobile-nav">
       <summary aria-label="Open navigation"><span></span><span></span></summary>
@@ -37,23 +38,23 @@ const nav = [
         <img src="/images/poiema-gathering.webp" alt="Young adults gathered together at a Poiema retreat" />
         <div class="coast-shade"></div>
         <div class="coast-hero-copy">
-          <p class="kicker">A place to step away and remember</p>
-          <h1>For we are His <em>workmanship.</em></h1>
-          <p>Poiema retreats invite Christian young adults into honest fellowship, sound teaching, and the steady truth of who they are in Christ.</p>
-          <div class="actions"><a class="primary" href="/retreats">Explore retreats</a><a class="text-link" href="/about">Why Poiema <span>↗</span></a></div>
+          <p class="kicker">{copy.scripture}</p>
+          <h1>{copy.headline}</h1>
+          <p>{copy.purpose}</p>
+          <div class="actions"><a class="primary" href="/retreats">{copy.retreatCta}</a><a class="text-link" href="/about">About <span>↗</span></a></div>
         </div>
         <p class="scripture-tag">Ephesians 2:10</p>
       </section>
 
       <section class="coast-purpose">
-        <div><p class="section-no">01 / Our purpose</p><h2>Room for faith to become personal.</h2></div>
-        <div class="purpose-copy"><p>Poiema exists to inform, encourage, and inspire Christian young adults to know who they are in Christ.</p><p>We gather away from the usual noise, make space for Scripture and prayer, and build friendships that carry beyond a weekend.</p><a href="/about">Meet the ministry <span>→</span></a></div>
+        <div><p class="section-no">01 / About</p><h2>What is our Purpose?</h2></div>
+        <div class="purpose-copy"><p>{copy.awareness}</p><p>{copy.workmanship}</p><a href="/about">About <span>→</span></a></div>
       </section>
 
       <section class="coast-paths">
-        <article><span>Retreat weekends</span><h3>Come away together.</h3><p>Time set apart for worship, teaching, rest, and the kind of conversation that needs room to unfold.</p><a href="/retreats">View retreats</a></article>
+        <article><span>Retreats</span><h3>{copy.grow}</h3><p>{copy.origin}</p><a href="/retreats">{copy.retreatCta}</a></article>
         <article class="coast-photo"><img src="/images/poiema-fellowship.webp" alt="Friends sharing time together during a retreat" /></article>
-        <article><span>Stay connected</span><h3>Carry it home.</h3><p>Listen, read, and return to the ideas that keep shaping life with Christ after the retreat ends.</p><a href="/media">Browse media</a></article>
+        <article><span>Media</span><h3>{copy.media}</h3><a href="/media">{copy.mediaCta}</a></article>
       </section>
     </main>
   )}
@@ -62,11 +63,11 @@ const nav = [
     <main>
       <section class="gather-hero">
         <div class="gather-copy">
-          <p class="kicker">You were made with purpose.</p>
-          <h1>Know who you are <span>in Christ.</span></h1>
-          <p class="lede">Poiema brings Christian young adults together for Scripture, friendship, and time away that makes space for both.</p>
-          <div class="actions"><a class="primary" href="/retreats">Find your retreat</a><a class="text-link" href="/media">Watch & listen</a></div>
-          <blockquote>“For we are His workmanship” <cite>Ephesians 2:10</cite></blockquote>
+          <p class="kicker">ποίημα</p>
+          <h1>{copy.headline}</h1>
+          <p class="lede">{copy.purpose}</p>
+          <div class="actions"><a class="primary" href="/retreats">{copy.retreatCta}</a><a class="text-link" href="/media">{copy.mediaCta}</a></div>
+          <blockquote>{copy.scripture} <cite>Ephesians 2:10</cite></blockquote>
         </div>
         <div class="gather-collage">
           <div class="orange-note">inform<br />encourage<br />inspire</div>
@@ -77,15 +78,15 @@ const nav = [
       </section>
 
       <section class="gather-intro">
-        <p>Time together around Scripture, shared meals, and conversation. A chance to build friendships and encourage one another in faith.</p>
-        <a href="/about">This is Poiema <span>→</span></a>
+        <p>{copy.awareness}</p>
+        <a href="/about">About <span>→</span></a>
       </section>
 
       <section class="gather-grid">
-        <div class="gather-title"><span>Ways to gather</span><h2>Faith grows in good company.</h2></div>
-        <a class="gather-item retreat" href="/retreats"><span>01</span><h3>Retreats</h3><p>Step out of routine. Rest, learn, worship, and connect.</p><b>See what’s ahead ↗</b></a>
-        <a class="gather-item media" href="/media"><span>02</span><h3>Media</h3><p>Teaching and conversations to return to wherever you are.</p><b>Explore the library ↗</b></a>
-        <a class="gather-item support" href="/funding"><span>03</span><h3>Give</h3><p>Help make meaningful retreat experiences possible.</p><b>Support Poiema ↗</b></a>
+        <div class="gather-title"><span>Retreats</span><h2>{copy.grow}</h2></div>
+        <a class="gather-item retreat" href="/retreats"><span>01</span><h3>Retreats</h3><p>{copy.origin}</p><b>{copy.retreatCta} ↗</b></a>
+        <a class="gather-item media" href="/media"><span>02</span><h3>Media</h3><p>{copy.media}</p><b>{copy.mediaCta} ↗</b></a>
+        <a class="gather-item support" href="/funding"><span>03</span><h3>Donate</h3><p>{copy.donationPurpose}</p><b>{copy.donationCta} ↗</b></a>
       </section>
     </main>
   )}
@@ -93,25 +94,25 @@ const nav = [
   {variant === "heritage" && (
     <main>
       <section class="heritage-hero">
-        <div class="heritage-rule"><span>Christian formation for young adults</span><span>Bristol, Virginia</span></div>
+        <div class="heritage-rule"><span>Poiema Retreats</span><span>Bristol, Virginia</span></div>
         <div class="heritage-hero-grid">
-          <div class="heritage-heading"><p>POIEMA <i>ποί­ημα</i></p><h1>For we are His<br /><em>workmanship.</em></h1></div>
-          <div class="heritage-side"><p>Informing, encouraging, and inspiring Christian young adults to know who they are in Christ.</p><a class="primary" href="/retreats">Discover Poiema</a></div>
+          <div class="heritage-heading"><p>POIEMA <i>ποί­ημα</i></p><h1>{copy.headline}</h1></div>
+          <div class="heritage-side"><p>{copy.purpose}</p><a class="primary" href="/retreats">{copy.retreatCta}</a></div>
         </div>
         <div class="heritage-image"><img src="/images/poiema-gathering.webp" alt="Young adults gathered at a Poiema retreat" /><span>Ephesians 2:10</span></div>
       </section>
 
       <section class="heritage-purpose">
-        <p class="dropcap">Poiema is a retreat ministry of Saint Peter Presbyterian Church in Bristol, Virginia. We welcome young adults into a thoughtful rhythm of teaching, worship, rest, and fellowship.</p>
-        <div><p>We believe our identity begins with the One who made us. Retreats offer time to listen carefully, ask honest questions, and enjoy the company of others learning to follow Christ.</p><a href="/about">Read our story →</a></div>
+        <p class="dropcap">{copy.awareness}</p>
+        <div><p>{copy.workmanship}</p><a href="/about">About →</a></div>
       </section>
 
       <section class="heritage-offerings">
-        <header><span>Come and see</span><h2>A weekend set apart.</h2></header>
+        <header><span>Retreats</span><h2>{copy.grow}</h2></header>
         <div class="heritage-list">
-          <a href="/retreats"><span>I</span><div><h3>Retreats</h3><p>Shared meals, biblical teaching, worship, and unhurried fellowship.</p></div><b>→</b></a>
-          <a href="/media"><span>II</span><div><h3>Media archive</h3><p>Messages and resources from the life of Poiema.</p></div><b>→</b></a>
-          <a href="/funding"><span>III</span><div><h3>Support the ministry</h3><p>Partner with the work and help welcome more young adults.</p></div><b>→</b></a>
+          <a href="/retreats"><span>I</span><div><h3>Retreats</h3><p>{copy.origin}</p></div><b>→</b></a>
+          <a href="/media"><span>II</span><div><h3>Media</h3><p>{copy.media}</p></div><b>→</b></a>
+          <a href="/funding"><span>III</span><div><h3>Donate</h3><p>{copy.donationPurpose}</p></div><b>→</b></a>
         </div>
       </section>
     </main>
@@ -121,6 +122,6 @@ const nav = [
     <div class="footer-word">POIEMA</div>
     <div><p>A ministry of Saint Peter Presbyterian Church</p><p>Bristol, Virginia</p></div>
     <nav>{nav.map(([label, href]) => <a href={href}>{label}</a>)}</nav>
-    <a class="footer-contact" href="/contact">Get in touch ↗</a>
+    <a class="footer-contact" href="/contact">Contact ↗</a>
   </footer>
 </div>

@@ -2,6 +2,10 @@
 
 ## Scope
 
+Copy correction, 2026-09-05: the homepage and all three concepts now reuse original WordPress wording through `src/data/original-copy.ts`. Removed the replacement marketing headlines and paragraphs. Restored the original headline, Scripture quotation, full value descriptions, donation wording, and all five testimonials on the main page. Only layout, short navigation labels, and the empty-state contact prompt differ where needed. Uncertain event dates remain unpublished rather than being rewritten.
+
+Hero image check: WordPress media item 747 identifies `DA2A4259.jpg` as 1334 by 885 pixels at full size. The downloaded photo and direct JPEG both have those dimensions. The listed derivatives are smaller, and no larger duplicate was found in the archived media inventory. The same photo is retained without artificial enlargement.
+
 The main design keeps the Greek wordmark, gold accents, existing group photography, purpose copy, and testimonials. It replaces the starter's spacing, typography, colors, navigation, and homepage layout. Shared styles clean up the other pages. Mobile navigation and light/dark controls work without paid plugins.
 
 Three independent homepage concepts live at `/designs/coast`, `/designs/gather`, and `/designs/heritage`. They have no public navigation links. A secret link exchanges its access key for an HTTP-only cookie. Unauthenticated requests return 404. Responses prohibit indexing and caching.
