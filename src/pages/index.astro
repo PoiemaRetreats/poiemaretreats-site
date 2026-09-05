@@ -18,12 +18,12 @@ if (Astro.cache?.enabled) {
 const upcomingRetreats = allRetreats
 	.filter((r) => !getRetreatStatus(r.data).isPast)
 	.sort((a, b) => new Date(a.data.start_date).getTime() - new Date(b.data.start_date).getTime())
-	.slice(0, 2);
+	.slice(0, 3);
 ---
 
 <Base
 	title="Poiema Retreats — For We Are His Workmanship"
-	description="Transformative conferences, pastoral study, and restful fellowship for young adults across the East Coast."
+	description="The purpose of our retreats is to inform, encourage, and inspire Christian young adults regarding who they are in Christ — Ephesians 2:10."
 >
 	<div class="home-page">
 		<!-- Hero Section -->
@@ -37,14 +37,17 @@ const upcomingRetreats = allRetreats
 					Formed by Grace.<br />Sustained in Fellowship.
 				</h1>
 				<p class="hero-lead">
-					Poiema Retreats gathers college students, young professionals, and singles for rich biblical teaching, restful communion, and deep laughter in the quiet beauty of coast and mountain.
+					The purpose of our retreats is to inform, encourage, and inspire Christian young adults regarding who they are in Christ. We see this as a life-awareness that is essential for everyone’s spiritual walk as well as the wellspring of joy and confidence.
+				</p>
+				<p class="hero-sublead">
+					After all, we are God’s workmanship (<em>poiema</em>) and we want that to set in, be real to us: worldview, apologetics, theology, vocation, and all of life set in true perspective.
 				</p>
 				<div class="hero-cta-group">
 					<a href="/retreats" class="btn btn-primary btn-lg">
-						Upcoming Retreats &rarr;
+						View Upcoming Retreats &rarr;
 					</a>
 					<a href="/about" class="btn btn-secondary btn-lg">
-						Our Mission & Beliefs
+						About Our Ministry
 					</a>
 				</div>
 			</div>
@@ -57,7 +60,7 @@ const upcomingRetreats = allRetreats
 					<span class="section-kicker">Gatherings</span>
 					<h2 class="section-title">Upcoming Conferences & Retreats</h2>
 					<p class="section-subtitle">
-						Step out of the daily churn. Join us for intentional days around Scripture and common tables.
+						Step out of the daily churn. Join us for intentional days around Scripture, ocean and mountain air, and common tables.
 					</p>
 				</div>
 
@@ -124,34 +127,69 @@ const upcomingRetreats = allRetreats
 			</div>
 		</section>
 
-		<!-- Pillars Section -->
+		<!-- Testimonials Section (from poiemaretreats.org) -->
+		<section class="section section-testimonials">
+			<div class="container">
+				<div class="section-header-home">
+					<span class="section-kicker">Voices from Poiema</span>
+					<h2 class="section-title">What Attendees Are Saying</h2>
+					<p class="section-subtitle">
+						Encouragement and reflections from college students and young adults.
+					</p>
+				</div>
+
+				<div class="testimonials-grid">
+					<blockquote class="testimonial-card">
+						<p>“It was so nice to hang out with other Christians my age and hear lectures aimed towards us.”</p>
+					</blockquote>
+					<blockquote class="testimonial-card">
+						<p>“The lectures were thought provoking, at times convicting…”</p>
+					</blockquote>
+					<blockquote class="testimonial-card">
+						<p>“It was a huge blessing to be with the body of Christ and see that we are larger than just our small church.”</p>
+					</blockquote>
+					<blockquote class="testimonial-card">
+						<p>“It was an incredible experience! I was so encouraged and refreshed.”</p>
+					</blockquote>
+				</div>
+			</div>
+		</section>
+
+		<!-- Pillars Section (Core Values from poiemaretreats.org) -->
 		<section class="section section-pillars">
 			<div class="container">
 				<div class="section-header-home">
-					<span class="section-kicker">What to Expect</span>
-					<h2 class="section-title">The Rhythm of a Poiema Retreat</h2>
+					<span class="section-kicker">What We Cherish</span>
+					<h2 class="section-title">The Heart of Poiema</h2>
+					<p class="section-subtitle">
+						Four foundational commitments woven into every gathering.
+					</p>
 				</div>
 
 				<div class="pillars-grid">
 					<div class="pillar-item">
 						<div class="pillar-icon-box">01</div>
-						<h3>Theological Depth</h3>
-						<p>Lectures, sermons, and open Q&A sessions that anchor faith in historical Christian orthodoxy.</p>
+						<h3>Encouragement</h3>
+						<p class="pillar-scripture">“...that I may be encouraged together with you by the mutual faith both of you and me.” — Romans 1:12</p>
+						<p>Encouraging each other is woven into every activity, prayer, and conversation at Poiema.</p>
 					</div>
 					<div class="pillar-item">
 						<div class="pillar-icon-box">02</div>
-						<h3>Shared Tables</h3>
-						<p>Communal feasts and unhurried meals where authentic conversations and lifelong friendships take root.</p>
+						<h3>Communication</h3>
+						<p class="pillar-scripture">Interactive & Engaging</p>
+						<p>Sure there are lectures, but they are interactive on purpose. Communication involves both speaking and listening so truth is understood and lived.</p>
 					</div>
 					<div class="pillar-item">
 						<div class="pillar-icon-box">03</div>
-						<h3>Creation & Wonder</h3>
-						<p>Barrier island coastlines and mountain highlands that invite quiet reflection and joyful Sabbath rest.</p>
+						<h3>JOY</h3>
+						<p class="pillar-scripture">The Joy of the Lord</p>
+						<p>We just really have a good time wherever we are. Laughter, sure, but greater still, the joy of the Lord in every aspect—from dining to dancing to discussion.</p>
 					</div>
 					<div class="pillar-item">
 						<div class="pillar-icon-box">04</div>
-						<h3>Accessible to All</h3>
-						<p>Subsidized costs and full need-based scholarships so every student and young worker can attend.</p>
+						<h3>Life Together</h3>
+						<p class="pillar-scripture">Humility & Openness</p>
+						<p>Transparency, humility, openness, looking on the interests of others, and genuinely caring. A fellowship you will never want to settle for less than.</p>
 					</div>
 				</div>
 			</div>
@@ -163,9 +201,9 @@ const upcomingRetreats = allRetreats
 				<div class="container">
 					<div class="section-header-home">
 						<span class="section-kicker">Writings</span>
-						<h2 class="section-title">From Our Pastors & Teachers</h2>
+						<h2 class="section-title">Pastoral Articles & Essays</h2>
 						<p class="section-subtitle">
-							Theological essays and pastoral wisdom on Christian vocation and communion.
+							Writings from our pastors and teachers on Christian discipleship, vocation, and communion.
 						</p>
 					</div>
 
@@ -201,14 +239,14 @@ const upcomingRetreats = allRetreats
 				<div class="giving-banner-card">
 					<div class="giving-banner-text">
 						<span class="banner-kicker">Support Our Mission</span>
-						<h2>Help a Student Attend Poiema</h2>
+						<h2>Help Keep Retreats Affordable</h2>
 						<p>
-							Every year, generous gifts allow college students and young adults in financial distress to experience life-changing fellowship and teaching.
+							Registration fees do not cover all our costs. We don’t want expense to be the reason someone doesn’t attend. Your donations provide scholarships and sustain our speakers.
 						</p>
 					</div>
 					<div class="giving-banner-action">
 						<a href="/funding" class="btn btn-primary btn-lg">
-							Support the Scholarship Fund &rarr;
+							Funding & Donation Info &rarr;
 						</a>
 					</div>
 				</div>
@@ -238,7 +276,7 @@ const upcomingRetreats = allRetreats
 	}
 
 	.hero-container {
-		max-width: 820px;
+		max-width: 840px;
 	}
 
 	.hero-badge {
@@ -258,81 +296,88 @@ const upcomingRetreats = allRetreats
 		font-family: var(--font-heading);
 		font-size: var(--font-size-sm);
 		font-style: italic;
-		color: var(--color-accent);
-	}
-
-	.badge-verse {
-		color: var(--color-text);
-		text-transform: uppercase;
+		color: var(--color-brand);
 		letter-spacing: 0.05em;
 	}
 
+	.badge-verse {
+		color: var(--color-text-muted);
+		border-left: 1px solid var(--color-border);
+		padding-left: var(--spacing-sm);
+	}
+
 	.hero-title {
-		font-size: var(--font-size-6xl);
-		line-height: var(--leading-tight);
-		letter-spacing: var(--tracking-tight);
-		margin: 0 0 var(--spacing-lg);
-		color: var(--color-text);
+		font-size: clamp(2.4rem, 5vw, 3.8rem);
+		line-height: 1.1;
+		font-weight: 700;
+		color: var(--color-text-main);
+		margin-bottom: var(--spacing-lg);
+		letter-spacing: -0.02em;
 	}
 
 	.hero-lead {
-		font-size: var(--font-size-xl);
-		color: var(--color-muted);
-		line-height: var(--leading-relaxed);
-		margin: 0 auto var(--spacing-2xl);
-		max-width: 680px;
+		font-size: var(--font-size-lg);
+		line-height: 1.6;
+		color: var(--color-text-main);
+		margin-bottom: var(--spacing-md);
+		font-weight: 500;
+	}
+
+	.hero-sublead {
+		font-size: var(--font-size-base);
+		line-height: 1.6;
+		color: var(--color-text-muted);
+		margin-bottom: var(--spacing-2xl);
+		max-width: 720px;
+		margin-left: auto;
+		margin-right: auto;
 	}
 
 	.hero-cta-group {
 		display: flex;
-		justify-content: center;
 		gap: var(--spacing-md);
+		justify-content: center;
 		flex-wrap: wrap;
 	}
 
-	.btn-lg {
-		padding: var(--spacing-md) var(--spacing-2xl);
-		font-size: var(--font-size-base);
-	}
-
-	/* Common Section */
+	/* Section Headings */
 	.section {
 		padding: var(--spacing-5xl) 0;
 	}
 
 	.section-header-home {
 		text-align: center;
-		max-width: 650px;
+		max-width: 680px;
 		margin: 0 auto var(--spacing-3xl);
 	}
 
 	.section-kicker {
+		display: inline-block;
 		font-size: var(--font-size-xs);
 		font-weight: 700;
 		text-transform: uppercase;
-		letter-spacing: 0.08em;
+		letter-spacing: 0.12em;
 		color: var(--color-accent);
-		display: block;
 		margin-bottom: var(--spacing-xs);
 	}
 
 	.section-title {
-		font-size: var(--font-size-4xl);
-		margin: 0 0 var(--spacing-sm);
+		font-size: var(--font-size-3xl);
+		color: var(--color-text-main);
+		margin-bottom: var(--spacing-sm);
 	}
 
 	.section-subtitle {
+		color: var(--color-text-muted);
 		font-size: var(--font-size-base);
-		color: var(--color-muted);
-		line-height: var(--leading-relaxed);
-		margin: 0;
+		line-height: 1.5;
 	}
 
-	/* Featured Retreats */
+	/* Retreat Cards Grid */
 	.featured-retreats-grid {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-		gap: var(--spacing-2xl);
+		grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+		gap: var(--spacing-xl);
 		margin-bottom: var(--spacing-2xl);
 	}
 
@@ -340,82 +385,41 @@ const upcomingRetreats = allRetreats
 		background: var(--color-surface);
 		border: 1px solid var(--color-border);
 		border-radius: var(--radius-lg);
-		overflow: hidden;
+		padding: var(--spacing-xl);
 		display: flex;
 		flex-direction: column;
-		box-shadow: var(--shadow-sm);
-		transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+		justify-content: space-between;
+		transition: transform 0.2s ease, box-shadow 0.2s ease;
 	}
 
 	.featured-card:hover {
-		transform: translateY(-2px);
-		box-shadow: var(--shadow-lg);
+		transform: translateY(-3px);
+		box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
 	}
 
 	.featured-card-top {
-		padding: var(--spacing-lg) var(--spacing-xl) 0;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-	}
-
-	.status-badge {
-		font-size: var(--font-size-xs);
-		font-weight: 700;
-		padding: 4px 10px;
-		border-radius: var(--radius-full);
-		text-transform: uppercase;
-		letter-spacing: 0.05em;
-	}
-
-	.badge-open {
-		background: color-mix(in srgb, var(--color-accent) 15%, transparent);
-		color: var(--color-accent);
-		border: 1px solid color-mix(in srgb, var(--color-accent) 30%, transparent);
-	}
-
-	.badge-waitlist {
-		background: color-mix(in srgb, var(--color-ochre) 15%, transparent);
-		color: var(--color-ochre);
-		border: 1px solid color-mix(in srgb, var(--color-ochre) 30%, transparent);
-	}
-
-	.badge-sold-out {
-		background: color-mix(in srgb, var(--color-danger) 15%, transparent);
-		color: var(--color-danger);
-		border: 1px solid color-mix(in srgb, var(--color-danger) 30%, transparent);
-	}
-
-	.badge-canceled {
-		background: color-mix(in srgb, var(--color-danger) 15%, transparent);
-		color: var(--color-danger);
-		border: 1px solid color-mix(in srgb, var(--color-danger) 30%, transparent);
-	}
-
-	.badge-past {
-		background: color-mix(in srgb, var(--color-muted) 15%, transparent);
-		color: var(--color-muted);
-		border: 1px solid color-mix(in srgb, var(--color-muted) 30%, transparent);
+		margin-bottom: var(--spacing-md);
 	}
 
 	.featured-price {
 		font-size: var(--font-size-sm);
-		font-weight: 600;
+		font-weight: 700;
 		color: var(--color-brand);
-	}
-
-	.featured-card-body {
-		padding: var(--spacing-lg) var(--spacing-xl);
-		flex: 1;
+		background: color-mix(in srgb, var(--color-brand) 10%, transparent);
+		padding: 2px 10px;
+		border-radius: var(--radius-full);
 	}
 
 	.featured-title {
-		margin: 0 0 var(--spacing-xs);
-		font-size: var(--font-size-2xl);
+		font-size: var(--font-size-xl);
+		margin-bottom: var(--spacing-xs);
 	}
 
 	.featured-title a {
-		color: var(--color-text);
+		color: var(--color-text-main);
 		text-decoration: none;
 	}
 
@@ -424,53 +428,56 @@ const upcomingRetreats = allRetreats
 	}
 
 	.featured-subtitle {
-		font-size: var(--font-size-sm);
-		color: var(--color-muted);
-		font-style: italic;
-		margin: 0 0 var(--spacing-md);
+		font-size: var(--font-size-xs);
+		color: var(--color-accent);
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		margin-bottom: var(--spacing-md);
 	}
 
 	.featured-details {
-		background: var(--color-bg);
-		border: 1px solid var(--color-border);
-		border-radius: var(--radius-sm);
-		padding: var(--spacing-sm) var(--spacing-md);
-		margin-bottom: var(--spacing-md);
 		display: flex;
 		flex-direction: column;
-		gap: var(--spacing-xs);
-		font-size: var(--font-size-sm);
+		gap: 6px;
+		background: var(--color-surface-soft);
+		border-radius: var(--radius-md);
+		padding: var(--spacing-sm) var(--spacing-md);
+		margin-bottom: var(--spacing-md);
+		font-size: var(--font-size-xs);
 	}
 
 	.detail-row {
 		display: flex;
-		gap: var(--spacing-sm);
+		gap: var(--spacing-xs);
 	}
 
 	.detail-name {
 		font-weight: 600;
-		color: var(--color-muted);
-		min-width: 65px;
+		color: var(--color-text-muted);
+		min-width: 60px;
 	}
 
 	.detail-val {
-		color: var(--color-text);
+		color: var(--color-text-main);
+		font-weight: 500;
 	}
 
 	.featured-excerpt {
+		color: var(--color-text-muted);
 		font-size: var(--font-size-sm);
-		color: var(--color-muted);
-		margin: 0;
-		line-height: var(--leading-normal);
+		line-height: 1.5;
+		margin-bottom: var(--spacing-lg);
 	}
 
 	.featured-card-bottom {
-		padding: var(--spacing-md) var(--spacing-xl) var(--spacing-lg);
-		border-top: 1px solid var(--color-border);
+		margin-top: auto;
 	}
 
 	.w-full {
 		width: 100%;
+		display: block;
+		text-align: center;
 	}
 
 	.all-retreats-link-wrap {
@@ -479,66 +486,113 @@ const upcomingRetreats = allRetreats
 	}
 
 	.link-muted-arrow {
-		font-size: var(--font-size-sm);
-		font-weight: 600;
 		color: var(--color-brand);
+		font-weight: 600;
 		text-decoration: none;
+		font-size: var(--font-size-sm);
 	}
 
 	.link-muted-arrow:hover {
-		color: var(--color-brand-strong);
 		text-decoration: underline;
 	}
 
-	/* Pillars */
-	.section-pillars {
+	/* Testimonials Section */
+	.section-testimonials {
 		background: var(--color-surface);
 		border-top: 1px solid var(--color-border);
 		border-bottom: 1px solid var(--color-border);
 	}
 
+	.testimonials-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+		gap: var(--spacing-lg);
+	}
+
+	.testimonial-card {
+		background: var(--color-surface-soft);
+		border: 1px solid var(--color-border);
+		border-left: 3px solid var(--color-accent);
+		border-radius: var(--radius-md);
+		padding: var(--spacing-lg);
+		margin: 0;
+	}
+
+	.testimonial-card p {
+		font-family: var(--font-heading);
+		font-size: var(--font-size-lg);
+		line-height: 1.4;
+		font-style: italic;
+		color: var(--color-text-main);
+		margin: 0;
+	}
+
+	/* Pillars Section */
+	.section-pillars {
+		background: var(--color-surface-soft);
+	}
+
 	.pillars-grid {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-		gap: var(--spacing-2xl);
+		gap: var(--spacing-xl);
 	}
 
 	.pillar-item {
-		display: flex;
-		flex-direction: column;
-		gap: var(--spacing-xs);
+		background: var(--color-surface);
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-lg);
+		padding: var(--spacing-xl);
 	}
 
 	.pillar-icon-box {
-		font-family: var(--font-heading);
-		font-size: var(--font-size-xl);
+		width: 36px;
+		height: 36px;
+		background: color-mix(in srgb, var(--color-brand) 12%, transparent);
+		color: var(--color-brand);
 		font-weight: 700;
-		color: var(--color-ochre);
-		margin-bottom: var(--spacing-xs);
+		font-size: var(--font-size-xs);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: var(--radius-md);
+		margin-bottom: var(--spacing-md);
 	}
 
 	.pillar-item h3 {
-		margin: 0;
-		font-size: var(--font-size-xl);
+		font-size: var(--font-size-lg);
+		margin-bottom: 4px;
+		color: var(--color-text-main);
 	}
 
-	.pillar-item p {
-		margin: 0;
+	.pillar-scripture {
+		font-size: var(--font-size-xs);
+		color: var(--color-accent);
+		font-weight: 600;
+		margin-bottom: var(--spacing-sm);
+		font-style: italic;
+	}
+
+	.pillar-item p:last-child {
 		font-size: var(--font-size-sm);
-		color: var(--color-muted);
-		line-height: var(--leading-relaxed);
+		line-height: 1.5;
+		color: var(--color-text-muted);
+		margin: 0;
 	}
 
-	/* Articles */
+	/* Articles Section */
+	.section-articles {
+		background: var(--color-surface);
+	}
+
 	.articles-summary-grid {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-		gap: var(--spacing-2xl);
-		margin-bottom: var(--spacing-xl);
+		gap: var(--spacing-xl);
 	}
 
 	.article-summary-card {
-		background: var(--color-surface);
+		background: var(--color-surface-soft);
 		border: 1px solid var(--color-border);
 		border-radius: var(--radius-lg);
 		padding: var(--spacing-xl);
@@ -548,20 +602,20 @@ const upcomingRetreats = allRetreats
 
 	.summary-author {
 		font-size: var(--font-size-xs);
-		font-weight: 600;
-		color: var(--color-accent);
 		text-transform: uppercase;
-		letter-spacing: 0.05em;
+		letter-spacing: 0.08em;
+		font-weight: 700;
+		color: var(--color-accent);
 		margin-bottom: var(--spacing-xs);
 	}
 
 	.summary-title {
-		margin: 0 0 var(--spacing-sm);
-		font-size: var(--font-size-2xl);
+		font-size: var(--font-size-xl);
+		margin-bottom: var(--spacing-sm);
 	}
 
 	.summary-title a {
-		color: var(--color-text);
+		color: var(--color-text-main);
 		text-decoration: none;
 	}
 
@@ -570,18 +624,18 @@ const upcomingRetreats = allRetreats
 	}
 
 	.summary-excerpt {
+		color: var(--color-text-muted);
 		font-size: var(--font-size-sm);
-		color: var(--color-muted);
-		line-height: var(--leading-relaxed);
-		margin: 0 0 var(--spacing-lg);
-		flex: 1;
+		line-height: 1.5;
+		margin-bottom: var(--spacing-lg);
 	}
 
 	.summary-link {
-		font-size: var(--font-size-sm);
-		font-weight: 600;
+		margin-top: auto;
 		color: var(--color-brand);
+		font-weight: 600;
 		text-decoration: none;
+		font-size: var(--font-size-sm);
 	}
 
 	.summary-link:hover {
@@ -589,60 +643,57 @@ const upcomingRetreats = allRetreats
 	}
 
 	/* Giving Banner */
+	.section-giving-callout {
+		background: var(--color-surface-soft);
+		border-top: 1px solid var(--color-border);
+	}
+
 	.giving-banner-card {
-		background: color-mix(in srgb, var(--color-brand) 8%, var(--color-surface));
-		border: 1px solid color-mix(in srgb, var(--color-brand) 25%, var(--color-border));
-		border-radius: var(--radius-lg);
+		background: linear-gradient(
+			135deg,
+			color-mix(in srgb, var(--color-brand) 12%, var(--color-surface)),
+			color-mix(in srgb, var(--color-accent) 8%, var(--color-surface))
+		);
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-xl);
 		padding: var(--spacing-3xl);
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
 		gap: var(--spacing-2xl);
+		flex-wrap: wrap;
+	}
+
+	.giving-banner-text {
+		max-width: 600px;
 	}
 
 	.banner-kicker {
 		font-size: var(--font-size-xs);
-		font-weight: 700;
 		text-transform: uppercase;
-		letter-spacing: 0.08em;
-		color: var(--color-ochre);
-		display: block;
+		letter-spacing: 0.1em;
+		font-weight: 700;
+		color: var(--color-accent);
 		margin-bottom: var(--spacing-xs);
+		display: block;
 	}
 
 	.giving-banner-text h2 {
-		margin: 0 0 var(--spacing-xs);
-		font-size: var(--font-size-3xl);
+		font-size: var(--font-size-2xl);
+		color: var(--color-text-main);
+		margin-bottom: var(--spacing-sm);
 	}
 
 	.giving-banner-text p {
+		color: var(--color-text-muted);
+		line-height: 1.5;
 		margin: 0;
-		color: var(--color-muted);
-		font-size: var(--font-size-base);
-		max-width: 580px;
-		line-height: var(--leading-normal);
-	}
-
-	.giving-banner-action {
-		flex-shrink: 0;
 	}
 
 	@media (max-width: 768px) {
-		.hero-title {
-			font-size: var(--font-size-4xl);
-		}
-
 		.giving-banner-card {
 			flex-direction: column;
 			align-items: flex-start;
-		}
-
-		.giving-banner-action {
-			width: 100%;
-		}
-
-		.giving-banner-action .btn {
-			width: 100%;
 		}
 	}
 </style>

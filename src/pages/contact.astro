@@ -29,14 +29,14 @@ import Base from "../layouts/Base.astro";
 						<div class="email-cards">
 							<div class="email-card">
 								<div class="email-card-body">
-									<h3>General Inquiries</h3>
-									<p>Questions about our mission, leadership, or general ministry details.</p>
+									<h3>Direct Pastoral Contact</h3>
+									<p>Reach Pastor Laurence Windham directly regarding retreats, teaching, or pastoral questions.</p>
 								</div>
 								<a
-									href="mailto:contact@poiemaretreats.org?subject=Poiema%20Retreats%20General%20Inquiry"
+									href="mailto:sppcpastor@gmail.com?subject=Poiema%20Retreats%20Inquiry"
 									class="btn btn-primary email-btn"
 								>
-									Email General Team &rarr;
+									Email Laurence Windham &rarr;
 								</a>
 							</div>
 
@@ -46,8 +46,8 @@ import Base from "../layouts/Base.astro";
 									<p>Questions regarding venue housing, meals, schedules, or payments.</p>
 								</div>
 								<a
-									href="mailto:contact@poiemaretreats.org?subject=Retreat%20Registration%20Inquiry"
-									class="btn btn-primary email-btn"
+									href="mailto:sppcpastor@gmail.com?subject=Retreat%20Registration%20Inquiry"
+									class="btn btn-secondary email-btn"
 								>
 									Email Registration Team &rarr;
 								</a>
@@ -59,7 +59,7 @@ import Base from "../layouts/Base.astro";
 									<p>Inquire confidentially about need-based student registration assistance.</p>
 								</div>
 								<a
-									href="mailto:contact@poiemaretreats.org?subject=Poiema%20Scholarship%20Inquiry"
+									href="mailto:sppcpastor@gmail.com?subject=Poiema%20Scholarship%20Inquiry"
 									class="btn btn-secondary email-btn"
 								>
 									Email Scholarship Team &rarr;
@@ -70,9 +70,18 @@ import Base from "../layouts/Base.astro";
 
 					<aside class="contact-sidebar">
 						<div class="sidebar-box">
+							<h3>Direct Phone</h3>
+							<p>For urgent questions or phone inquiries:</p>
+							<a href="tel:4233662079" class="phone-link">
+								<span class="phone-icon">&#9742;</span> 423-366-2079
+							</a>
+							<span class="phone-label">Pastor Laurence Windham</span>
+						</div>
+
+						<div class="sidebar-box">
 							<h3>Ministry Location</h3>
 							<p>
-								Poiema Retreats operates under the oversight of the Session of <strong>Saint Peter Presbyterian Church</strong>.
+								Poiema Retreats operates under the oversight of the Session and Diaconate of <strong>Saint Peter Presbyterian Church</strong>.
 							</p>
 							<div class="address-card">
 								<span class="address-title">Mailing Address</span>
@@ -83,13 +92,6 @@ import Base from "../layouts/Base.astro";
 									Bristol, VA 24209
 								</p>
 							</div>
-						</div>
-
-						<div class="sidebar-box pastoral-box">
-							<h3>Pastoral Oversight</h3>
-							<p>
-								If you are a pastor interested in partnering, bringing a college group, or speaking at a future retreat, please contact our ministry coordinators directly at <a href="mailto:pastor@poiemaretreats.org">pastor@poiemaretreats.org</a>.
-							</p>
 						</div>
 					</aside>
 				</div>
@@ -113,26 +115,29 @@ import Base from "../layouts/Base.astro";
 	}
 
 	.sub-heading {
-		font-size: var(--font-size-sm);
-		font-weight: 600;
+		font-size: var(--font-size-xs);
+		font-weight: 700;
 		color: var(--color-accent);
 		text-transform: uppercase;
-		letter-spacing: 0.08em;
+		letter-spacing: 0.12em;
 		display: block;
 		margin-bottom: var(--spacing-xs);
 	}
 
 	.page-title {
+		font-size: var(--font-size-4xl);
 		margin: 0 0 var(--spacing-md);
-		color: var(--color-text);
+		color: var(--color-text-main);
 	}
 
 	.page-intro {
-		max-width: 620px;
+		max-width: 680px;
 		margin: 0 auto;
 		font-size: var(--font-size-lg);
-		color: var(--color-muted);
-		line-height: var(--leading-relaxed);
+		color: var(--color-text-muted);
+		line-height: 1.6;
+		font-style: italic;
+		font-family: var(--font-heading);
 	}
 
 	.section {
@@ -141,21 +146,22 @@ import Base from "../layouts/Base.astro";
 
 	.contact-grid {
 		display: grid;
-		grid-template-columns: 1.4fr 1fr;
+		grid-template-columns: 1.5fr 1fr;
 		gap: var(--spacing-4xl);
 		align-items: start;
 	}
 
 	.contact-methods h2 {
-		font-size: var(--font-size-3xl);
-		margin: 0 0 var(--spacing-xs);
+		font-size: var(--font-size-2xl);
+		margin-bottom: var(--spacing-xs);
+		color: var(--color-text-main);
 	}
 
 	.contact-lead {
 		font-size: var(--font-size-base);
-		color: var(--color-muted);
-		line-height: var(--leading-relaxed);
-		margin: 0 0 var(--spacing-2xl);
+		color: var(--color-text-muted);
+		line-height: 1.6;
+		margin-bottom: var(--spacing-2xl);
 	}
 
 	.email-cards {
@@ -173,19 +179,25 @@ import Base from "../layouts/Base.astro";
 		justify-content: space-between;
 		align-items: center;
 		gap: var(--spacing-xl);
-		box-shadow: var(--shadow-sm);
+		transition: transform 0.2s ease, box-shadow 0.2s ease;
+	}
+
+	.email-card:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 6px 20px -2px rgba(0, 0, 0, 0.06);
 	}
 
 	.email-card-body h3 {
-		margin: 0 0 var(--spacing-xs);
-		font-size: var(--font-size-xl);
+		font-size: var(--font-size-lg);
+		margin-bottom: 4px;
+		color: var(--color-text-main);
 	}
 
 	.email-card-body p {
+		font-size: var(--font-size-xs);
+		color: var(--color-text-muted);
+		line-height: 1.5;
 		margin: 0;
-		font-size: var(--font-size-sm);
-		color: var(--color-muted);
-		line-height: var(--leading-normal);
 	}
 
 	.email-btn {
@@ -193,6 +205,7 @@ import Base from "../layouts/Base.astro";
 		flex-shrink: 0;
 	}
 
+	/* Sidebar */
 	.contact-sidebar {
 		display: flex;
 		flex-direction: column;
@@ -200,59 +213,71 @@ import Base from "../layouts/Base.astro";
 	}
 
 	.sidebar-box {
-		background: var(--color-surface);
+		background: var(--color-surface-soft);
 		border: 1px solid var(--color-border);
 		border-radius: var(--radius-lg);
 		padding: var(--spacing-xl);
 	}
 
 	.sidebar-box h3 {
-		margin: 0 0 var(--spacing-sm);
-		font-size: var(--font-size-xl);
+		font-size: var(--font-size-lg);
+		margin-bottom: var(--spacing-sm);
+		color: var(--color-text-main);
 	}
 
 	.sidebar-box p {
-		font-size: var(--font-size-sm);
-		color: var(--color-muted);
-		line-height: var(--leading-normal);
-		margin: 0 0 var(--spacing-md);
+		font-size: var(--font-size-xs);
+		color: var(--color-text-muted);
+		line-height: 1.6;
+		margin-bottom: var(--spacing-md);
+	}
+
+	.phone-link {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--spacing-sm);
+		font-size: var(--font-size-lg);
+		font-weight: 700;
+		color: var(--color-brand);
+		text-decoration: none;
+		margin-bottom: 4px;
+	}
+
+	.phone-link:hover {
+		text-decoration: underline;
+	}
+
+	.phone-label {
+		display: block;
+		font-size: var(--font-size-xs);
+		color: var(--color-text-muted);
 	}
 
 	.address-card {
-		background: var(--color-bg);
+		background: var(--color-surface);
 		border: 1px solid var(--color-border);
-		border-radius: var(--radius);
+		border-radius: var(--radius-md);
 		padding: var(--spacing-md) var(--spacing-lg);
 	}
 
 	.address-title {
 		font-size: var(--font-size-xs);
-		font-weight: 600;
+		font-weight: 700;
 		text-transform: uppercase;
 		letter-spacing: 0.05em;
-		color: var(--color-muted);
+		color: var(--color-accent);
 		display: block;
-		margin-bottom: var(--spacing-xs);
+		margin-bottom: 4px;
 	}
 
 	.address-card p {
 		margin: 0;
-		color: var(--color-text);
-		font-size: var(--font-size-sm);
-		line-height: var(--leading-normal);
+		font-size: var(--font-size-xs);
+		line-height: 1.6;
+		color: var(--color-text-main);
 	}
 
-	.pastoral-box {
-		background: color-mix(in srgb, var(--color-accent) 8%, var(--color-surface));
-		border-color: color-mix(in srgb, var(--color-accent) 25%, var(--color-border));
-	}
-
-	.pastoral-box a {
-		color: var(--color-brand);
-		font-weight: 600;
-	}
-
-	@media (max-width: 800px) {
+	@media (max-width: 860px) {
 		.contact-grid {
 			grid-template-columns: 1fr;
 		}
@@ -265,6 +290,7 @@ import Base from "../layouts/Base.astro";
 
 		.email-btn {
 			width: 100%;
+			text-align: center;
 		}
 	}
 </style>

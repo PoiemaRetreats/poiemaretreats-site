@@ -19,8 +19,9 @@ if (Astro.cache?.enabled && cacheHint) {
 	Astro.cache.set(cacheHint);
 }
 
-const formattedDate = article.data.published_at
-	? new Date(article.data.published_at).toLocaleDateString("en-US", {
+const rawDate = article.data.publishedAt;
+const formattedDate = rawDate
+	? new Date(rawDate).toLocaleDateString("en-US", {
 			month: "long",
 			day: "numeric",
 			year: "numeric",
@@ -42,7 +43,7 @@ const formattedDate = article.data.published_at
 					{formattedDate && (
 						<>
 							<span class="meta-dot">&bull;</span>
-							<time datetime={article.data.published_at}>{formattedDate}</time>
+							<time datetime={rawDate ? new Date(rawDate).toISOString() : undefined}>{formattedDate}</time>
 						</>
 					)}
 				</div>
@@ -55,146 +56,168 @@ const formattedDate = article.data.published_at
 			</div>
 		</header>
 
-		<div class="container article-body-container">
-			<div class="article-body prose">
-				{article.data.content && <PortableText value={article.data.content} />}
-			</div>
+		<section class="article-content-section">
+			<div class="container prose-container">
+				{article.data.content ? (
+					<div class="prose-content">
+						<PortableText value={article.data.content} />
+					</div>
+				) : (
+					<p class="article-empty">No body content provided for this article.</p>
+				)}
 
-			<footer class="article-footer-box">
-				<div class="author-note">
-					<h4>About the Ministry</h4>
-					<p>
-						Poiema Retreats is a ministry of Saint Peter Presbyterian Church in Bristol, Virginia, gathering young adults from across the nation for theological study, godly fellowship, and Sabbath rest.
-					</p>
-					<a href="/about" class="learn-more-link">Learn more about our mission &rarr;</a>
-				</div>
-			</footer>
-		</div>
+				<footer class="article-footer">
+					<div class="author-bio-card">
+						<div class="author-bio-info">
+							<span class="bio-author-name">{article.data.author}</span>
+							<p>Pastoral teacher and contributor to Poiema Retreats conferences.</p>
+						</div>
+					</div>
+
+					<div class="footer-cta-box">
+						<h3>Join Us at Our Next Gathering</h3>
+						<p>Experience in-person fellowship, teaching, and shared tables at an upcoming retreat.</p>
+						<a href="/retreats" class="btn btn-primary">View Upcoming Retreats &rarr;</a>
+					</div>
+				</footer>
+			</div>
+		</section>
 	</article>
 </Base>
 
 <style>
 	.container {
-		max-width: var(--max-width);
+		max-width: var(--content-width);
 		margin: 0 auto;
 		padding: 0 var(--spacing-xl);
 	}
 
+	.prose-container {
+		max-width: 680px;
+	}
+
 	.article-header {
+		padding: var(--spacing-4xl) 0 var(--spacing-3xl);
 		background: var(--color-surface);
 		border-bottom: 1px solid var(--color-border);
-		padding: var(--spacing-3xl) 0 var(--spacing-3xl);
 	}
 
 	.back-link {
 		display: inline-block;
-		color: var(--color-muted);
+		font-size: var(--font-size-xs);
+		color: var(--color-brand);
+		font-weight: 600;
 		text-decoration: none;
-		font-size: var(--font-size-sm);
-		font-weight: 500;
 		margin-bottom: var(--spacing-lg);
-		transition: color var(--transition-fast);
 	}
 
 	.back-link:hover {
-		color: var(--color-text);
+		text-decoration: underline;
 	}
 
 	.article-meta {
-		font-size: var(--font-size-xs);
-		color: var(--color-muted);
-		margin-bottom: var(--spacing-sm);
 		display: flex;
 		align-items: center;
-		gap: var(--spacing-xs);
+		gap: var(--spacing-sm);
+		font-size: var(--font-size-xs);
+		color: var(--color-text-muted);
+		margin-bottom: var(--spacing-md);
 	}
 
 	.article-author {
-		font-weight: 600;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
 		color: var(--color-accent);
 	}
 
 	.meta-dot {
-		opacity: 0.5;
+		color: var(--color-border);
 	}
 
 	.article-title {
-		margin: 0 0 var(--spacing-md);
-		font-size: var(--font-size-4xl);
-		line-height: var(--leading-tight);
-		color: var(--color-text);
+		font-size: clamp(2rem, 4vw, 3rem);
+		line-height: 1.2;
+		color: var(--color-text-main);
+		margin-bottom: var(--spacing-lg);
 	}
 
 	.article-lead {
-		font-size: var(--font-size-xl);
-		color: var(--color-muted);
-		line-height: var(--leading-relaxed);
-		margin: 0;
-		font-style: italic;
-	}
-
-	.article-body-container {
-		padding-top: var(--spacing-4xl);
-		padding-bottom: var(--spacing-5xl);
-	}
-
-	.article-body {
 		font-size: var(--font-size-lg);
-		line-height: var(--leading-relaxed);
-		color: var(--color-text);
+		line-height: 1.6;
+		color: var(--color-text-muted);
+		font-style: italic;
+		border-left: 3px solid var(--color-brand);
+		padding-left: var(--spacing-lg);
+		margin: 0;
 	}
 
-	.article-body :global(p) {
+	.article-content-section {
+		padding: var(--spacing-5xl) 0;
+	}
+
+	.prose-content {
+		font-size: var(--font-size-base);
+		line-height: 1.8;
+		color: var(--color-text-main);
+	}
+
+	.prose-content p {
 		margin-bottom: var(--spacing-xl);
 	}
 
-	.article-body :global(h2) {
-		margin-top: var(--spacing-3xl);
-		margin-bottom: var(--spacing-md);
-	}
-
-	.article-body :global(blockquote) {
-		border-left: 3px solid var(--color-accent);
-		margin: var(--spacing-2xl) 0;
-		padding-left: var(--spacing-lg);
-		color: var(--color-muted);
-		font-style: italic;
-	}
-
-	.article-footer-box {
+	.article-footer {
 		margin-top: var(--spacing-5xl);
+		padding-top: var(--spacing-3xl);
 		border-top: 1px solid var(--color-border);
-		padding-top: var(--spacing-2xl);
+		display: flex;
+		flex-direction: column;
+		gap: var(--spacing-2xl);
 	}
 
-	.author-note {
-		background: var(--color-surface);
+	.author-bio-card {
+		background: var(--color-surface-soft);
 		border: 1px solid var(--color-border);
-		border-radius: var(--radius);
+		border-radius: var(--radius-lg);
 		padding: var(--spacing-xl);
 	}
 
-	.author-note h4 {
-		margin: 0 0 var(--spacing-xs);
-		font-size: var(--font-size-base);
-		color: var(--color-text);
+	.bio-author-name {
+		font-size: var(--font-size-lg);
+		font-weight: 700;
+		color: var(--color-text-main);
+		display: block;
+		margin-bottom: var(--spacing-xs);
 	}
 
-	.author-note p {
-		margin: 0 0 var(--spacing-md);
+	.author-bio-card p {
 		font-size: var(--font-size-sm);
-		color: var(--color-muted);
-		line-height: var(--leading-relaxed);
+		color: var(--color-text-muted);
+		margin: 0;
+		line-height: 1.5;
 	}
 
-	.learn-more-link {
+	.footer-cta-box {
+		background: linear-gradient(
+			135deg,
+			color-mix(in srgb, var(--color-brand) 10%, var(--color-surface)),
+			var(--color-surface)
+		);
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-lg);
+		padding: var(--spacing-xl);
+		text-align: center;
+	}
+
+	.footer-cta-box h3 {
+		font-size: var(--font-size-xl);
+		margin-bottom: var(--spacing-xs);
+		color: var(--color-text-main);
+	}
+
+	.footer-cta-box p {
 		font-size: var(--font-size-sm);
-		font-weight: 600;
-		color: var(--color-brand);
-		text-decoration: none;
-	}
-
-	.learn-more-link:hover {
-		text-decoration: underline;
+		color: var(--color-text-muted);
+		margin-bottom: var(--spacing-lg);
 	}
 </style>

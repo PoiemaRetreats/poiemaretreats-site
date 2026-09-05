@@ -2,7 +2,7 @@
 import { getEmDashCollection } from "emdash";
 import Base from "../../layouts/Base.astro";
 
-const { entries: mediaItems, cacheHint } = await getEmDashCollection("media", {
+const { entries: mediaItems, cacheHint } = await getEmDashCollection("recordings", {
 	status: "published",
 });
 
@@ -10,25 +10,25 @@ if (Astro.cache?.enabled && cacheHint) {
 	Astro.cache.set(cacheHint);
 }
 
-// Group media items if desired, or sort chronologically
+// Sort chronologically
 const sortedMedia = [...mediaItems].sort((a, b) => {
-	const timeA = a.data.date ? new Date(a.data.date).getTime() : 0;
-	const timeB = b.data.date ? new Date(b.data.date).getTime() : 0;
+	const timeA = a.data.date ? new Date(String(a.data.date)).getTime() : 0;
+	const timeB = b.data.date ? new Date(String(b.data.date)).getTime() : 0;
 	return timeB - timeA;
 });
 ---
 
 <Base
 	title="Media & Audio Archive"
-	description="Sermons, lectures, and podcast audio from Poiema Retreats conferences and pastoral gatherings."
+	description="Lectures, evening devotions, and psalm singing recordings from Poiema Retreats."
 >
 	<div class="media-page">
 		<header class="page-header">
 			<div class="container">
 				<span class="sub-heading">Audio & Teaching</span>
-				<h1 class="page-title">Sermons & Lectures</h1>
+				<h1 class="page-title">Sermons, Podcasts & Lectures</h1>
 				<p class="page-intro">
-					Listen to teachings from past conferences, pastoral addresses on vocation and community, and theological discussions.
+					Listen to lectures, devotions, and psalm singing from past conferences and retreats.
 				</p>
 			</div>
 		</header>
@@ -42,13 +42,17 @@ const sortedMedia = [...mediaItems].sort((a, b) => {
 				) : (
 					<div class="media-grid">
 						{sortedMedia.map((item) => {
-							const formattedDate = item.data.date
-								? new Date(item.data.date).toLocaleDateString("en-US", {
+							const dateStr = item.data.date ? String(item.data.date) : null;
+							const formattedDate = dateStr
+								? new Date(dateStr).toLocaleDateString("en-US", {
 										month: "short",
 										day: "numeric",
 										year: "numeric",
 									})
 								: null;
+							
+							const mediaUrl = item.data.media_url ? String(item.data.media_url) : null;
+							const isAudioFile = mediaUrl ? /\.(m4a|mp3|ogg|wav)$/i.test(mediaUrl) : false;
 
 							return (
 								<article class="media-card" {...item.edit}>
@@ -67,15 +71,23 @@ const sortedMedia = [...mediaItems].sort((a, b) => {
 										<p class="media-desc">{item.data.description}</p>
 									)}
 
+									{isAudioFile && mediaUrl && (
+										<div class="audio-player-wrapper">
+											<audio controls preload="none" src={mediaUrl} class="native-audio">
+												Your browser does not support the audio element.
+											</audio>
+										</div>
+									)}
+
 									<div class="media-actions">
-										{item.data.media_url ? (
+										{mediaUrl ? (
 											<a
-												href={item.data.media_url}
+												href={mediaUrl}
 												target="_blank"
 												rel="noopener noreferrer"
 												class="btn btn-secondary btn-sm"
 											>
-												Listen / Open Media &rarr;
+												Direct Audio Link &rarr;
 											</a>
 										) : (
 											<span class="media-unavailable">Audio coming soon</span>
@@ -106,36 +118,48 @@ const sortedMedia = [...mediaItems].sort((a, b) => {
 	}
 
 	.sub-heading {
-		font-size: var(--font-size-sm);
-		font-weight: 600;
+		font-size: var(--font-size-xs);
+		font-weight: 700;
 		color: var(--color-accent);
 		text-transform: uppercase;
-		letter-spacing: 0.08em;
+		letter-spacing: 0.12em;
 		display: block;
 		margin-bottom: var(--spacing-xs);
 	}
 
 	.page-title {
+		font-size: var(--font-size-4xl);
 		margin: 0 0 var(--spacing-md);
-		color: var(--color-text);
+		color: var(--color-text-main);
 	}
 
 	.page-intro {
-		max-width: 640px;
+		max-width: 680px;
 		margin: 0 auto;
 		font-size: var(--font-size-lg);
-		color: var(--color-muted);
-		line-height: var(--leading-relaxed);
+		color: var(--color-text-muted);
+		line-height: 1.6;
+		font-style: italic;
+		font-family: var(--font-heading);
 	}
 
 	.section {
 		padding: var(--spacing-4xl) 0 var(--spacing-5xl);
 	}
 
+	.empty-state {
+		text-align: center;
+		padding: var(--spacing-4xl);
+		background: var(--color-surface);
+		border-radius: var(--radius-lg);
+		border: 1px solid var(--color-border);
+		color: var(--color-text-muted);
+	}
+
 	.media-grid {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-		gap: var(--spacing-2xl);
+		grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+		gap: var(--spacing-xl);
 	}
 
 	.media-card {
@@ -145,84 +169,86 @@ const sortedMedia = [...mediaItems].sort((a, b) => {
 		padding: var(--spacing-xl);
 		display: flex;
 		flex-direction: column;
-		box-shadow: var(--shadow-sm);
-		transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+		transition: transform 0.2s ease, box-shadow 0.2s ease;
 	}
 
 	.media-card:hover {
 		transform: translateY(-2px);
-		box-shadow: var(--shadow);
+		box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.08);
 	}
 
 	.media-card-top {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		margin-bottom: var(--spacing-sm);
+		margin-bottom: var(--spacing-md);
 	}
 
 	.media-type-badge {
 		font-size: var(--font-size-xs);
 		font-weight: 700;
-		color: var(--color-brand);
-		background: color-mix(in srgb, var(--color-brand) 12%, transparent);
-		padding: 3px 8px;
-		border-radius: var(--radius-sm);
 		text-transform: uppercase;
 		letter-spacing: 0.05em;
+		background: color-mix(in srgb, var(--color-brand) 12%, transparent);
+		color: var(--color-brand);
+		padding: 3px 10px;
+		border-radius: var(--radius-full);
 	}
 
 	.media-date {
 		font-size: var(--font-size-xs);
-		color: var(--color-muted);
+		color: var(--color-text-muted);
 	}
 
 	.media-title {
-		margin: 0 0 var(--spacing-xs);
 		font-size: var(--font-size-xl);
-		color: var(--color-text);
+		margin-bottom: var(--spacing-xs);
+		color: var(--color-text-main);
 	}
 
 	.media-speaker {
-		font-size: var(--font-size-sm);
-		color: var(--color-muted);
-		margin: 0 0 var(--spacing-sm);
+		font-size: var(--font-size-xs);
+		color: var(--color-accent);
+		margin-bottom: var(--spacing-md);
 	}
 
 	.media-speaker strong {
-		color: var(--color-text);
+		color: var(--color-text-main);
 	}
 
 	.media-desc {
 		font-size: var(--font-size-sm);
-		color: var(--color-muted);
-		line-height: var(--leading-normal);
-		margin: 0 0 var(--spacing-lg);
-		flex: 1;
+		line-height: 1.6;
+		color: var(--color-text-muted);
+		margin-bottom: var(--spacing-lg);
+	}
+
+	.audio-player-wrapper {
+		margin-bottom: var(--spacing-md);
+		width: 100%;
+	}
+
+	.native-audio {
+		width: 100%;
+		height: 38px;
+		border-radius: var(--radius-sm);
+		outline: none;
 	}
 
 	.media-actions {
-		padding-top: var(--spacing-md);
-		border-top: 1px solid var(--color-border);
-	}
-
-	.btn-sm {
-		font-size: var(--font-size-xs);
-		padding: var(--spacing-xs) var(--spacing-md);
+		margin-top: auto;
+		display: flex;
+		align-items: center;
 	}
 
 	.media-unavailable {
 		font-size: var(--font-size-xs);
-		color: var(--color-muted);
+		color: var(--color-text-muted);
 		font-style: italic;
 	}
 
-	.empty-state {
-		text-align: center;
-		padding: var(--spacing-3xl);
-		background: var(--color-surface);
-		border: 1px dashed var(--color-border);
-		border-radius: var(--radius-lg);
-		color: var(--color-muted);
+	.btn-sm {
+		padding: 6px 14px;
+		font-size: var(--font-size-xs);
 	}
 </style>

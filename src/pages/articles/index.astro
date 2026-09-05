@@ -14,15 +14,15 @@ if (Astro.cache?.enabled && cacheHint) {
 
 <Base
 	title="Pastoral Articles & Essays"
-	description="Essays, theological reflections, and letters from pastors on Christian vocation, discipleship, and communion."
+	description="Writings, theological reflections, and teachings from the pastors and leaders of Poiema Retreats."
 >
 	<div class="articles-page">
 		<header class="page-header">
 			<div class="container">
 				<span class="sub-heading">Writings & Reflections</span>
-				<h1 class="page-title">Articles & Essays</h1>
+				<h1 class="page-title">Pastoral Articles</h1>
 				<p class="page-intro">
-					Theological essays, pastoral letters, and devotional reflections on being crafted as God's workmanship in our homes, callings, and churches.
+					Biblical perspectives on vocation, Christian adulthood, theology, and common life from our pastoral team.
 				</p>
 			</div>
 		</header>
@@ -36,8 +36,9 @@ if (Astro.cache?.enabled && cacheHint) {
 				) : (
 					<div class="articles-list">
 						{articles.map((article) => {
-							const formattedDate = article.data.published_at
-								? new Date(article.data.published_at).toLocaleDateString("en-US", {
+							const rawDate = article.data.publishedAt;
+							const formattedDate = rawDate
+								? new Date(rawDate).toLocaleDateString("en-US", {
 										month: "long",
 										day: "numeric",
 										year: "numeric",
@@ -51,7 +52,7 @@ if (Astro.cache?.enabled && cacheHint) {
 										{formattedDate && (
 											<>
 												<span class="meta-dot">&bull;</span>
-												<time datetime={article.data.published_at}>
+												<time datetime={rawDate ? new Date(rawDate).toISOString() : undefined}>
 													{formattedDate}
 												</time>
 											</>
@@ -66,11 +67,9 @@ if (Astro.cache?.enabled && cacheHint) {
 										<p class="article-excerpt">{article.data.excerpt}</p>
 									)}
 
-									<div class="article-footer">
-										<a href={`/articles/${article.id}`} class="read-more-link">
-											Read Article &rarr;
-										</a>
-									</div>
+									<a href={`/articles/${article.id}`} class="read-more-link">
+										Read Essay &rarr;
+									</a>
 								</article>
 							);
 						})}
@@ -83,7 +82,7 @@ if (Astro.cache?.enabled && cacheHint) {
 
 <style>
 	.container {
-		max-width: var(--max-width);
+		max-width: var(--content-width);
 		margin: 0 auto;
 		padding: 0 var(--spacing-xl);
 	}
@@ -96,72 +95,90 @@ if (Astro.cache?.enabled && cacheHint) {
 	}
 
 	.sub-heading {
-		font-size: var(--font-size-sm);
-		font-weight: 600;
+		font-size: var(--font-size-xs);
+		font-weight: 700;
 		color: var(--color-accent);
 		text-transform: uppercase;
-		letter-spacing: 0.08em;
+		letter-spacing: 0.12em;
 		display: block;
 		margin-bottom: var(--spacing-xs);
 	}
 
 	.page-title {
+		font-size: var(--font-size-4xl);
 		margin: 0 0 var(--spacing-md);
-		color: var(--color-text);
+		color: var(--color-text-main);
 	}
 
 	.page-intro {
-		max-width: 600px;
+		max-width: 680px;
 		margin: 0 auto;
 		font-size: var(--font-size-lg);
-		color: var(--color-muted);
-		line-height: var(--leading-relaxed);
+		color: var(--color-text-muted);
+		line-height: 1.6;
+		font-style: italic;
+		font-family: var(--font-heading);
 	}
 
 	.section {
 		padding: var(--spacing-4xl) 0 var(--spacing-5xl);
 	}
 
+	.empty-state {
+		text-align: center;
+		padding: var(--spacing-4xl);
+		background: var(--color-surface);
+		border-radius: var(--radius-lg);
+		border: 1px solid var(--color-border);
+		color: var(--color-text-muted);
+	}
+
 	.articles-list {
 		display: flex;
 		flex-direction: column;
-		gap: var(--spacing-3xl);
+		gap: var(--spacing-2xl);
 	}
 
 	.article-card {
-		padding-bottom: var(--spacing-3xl);
-		border-bottom: 1px solid var(--color-border);
+		background: var(--color-surface);
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-lg);
+		padding: var(--spacing-2xl);
+		transition: transform 0.2s ease, box-shadow 0.2s ease;
 	}
 
-	.article-card:last-child {
-		border-bottom: none;
+	.article-card:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.08);
 	}
 
 	.article-meta {
-		font-size: var(--font-size-xs);
-		color: var(--color-muted);
-		margin-bottom: var(--spacing-xs);
 		display: flex;
 		align-items: center;
-		gap: var(--spacing-xs);
+		gap: var(--spacing-sm);
+		font-size: var(--font-size-xs);
+		color: var(--color-text-muted);
+		margin-bottom: var(--spacing-xs);
 	}
 
 	.article-author {
-		font-weight: 600;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
 		color: var(--color-accent);
 	}
 
 	.meta-dot {
-		opacity: 0.5;
+		color: var(--color-border);
 	}
 
 	.article-title {
-		margin: 0 0 var(--spacing-sm);
-		font-size: var(--font-size-3xl);
+		font-size: var(--font-size-2xl);
+		margin-bottom: var(--spacing-sm);
 	}
 
 	.article-title a {
-		color: var(--color-text);
+		color: var(--color-text-main);
 		text-decoration: none;
 	}
 
@@ -170,30 +187,20 @@ if (Astro.cache?.enabled && cacheHint) {
 	}
 
 	.article-excerpt {
+		color: var(--color-text-muted);
 		font-size: var(--font-size-base);
-		color: var(--color-muted);
-		line-height: var(--leading-relaxed);
-		margin: 0 0 var(--spacing-md);
+		line-height: 1.6;
+		margin-bottom: var(--spacing-lg);
 	}
 
 	.read-more-link {
-		font-size: var(--font-size-sm);
-		font-weight: 600;
 		color: var(--color-brand);
+		font-weight: 600;
 		text-decoration: none;
+		font-size: var(--font-size-sm);
 	}
 
 	.read-more-link:hover {
-		color: var(--color-brand-strong);
 		text-decoration: underline;
-	}
-
-	.empty-state {
-		text-align: center;
-		padding: var(--spacing-3xl);
-		background: var(--color-surface);
-		border: 1px dashed var(--color-border);
-		border-radius: var(--radius-lg);
-		color: var(--color-muted);
 	}
 </style>

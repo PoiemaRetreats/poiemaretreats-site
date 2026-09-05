@@ -4,16 +4,16 @@ import EasyTitheEmbed from "../components/EasyTitheEmbed.astro";
 ---
 
 <Base
-	title="Support & Give"
-	description="Support Poiema Retreats through tax-deductible giving to fund college scholarships and theological conferences."
+	title="Funding & Financial Stewardship"
+	description="We appreciate your financial help. Supporting Poiema Retreats keeps registration affordable and funds scholarships."
 >
 	<div class="funding-page">
 		<header class="page-header">
 			<div class="container">
 				<span class="sub-heading">Financial Stewardship & Giving</span>
-				<h1 class="page-title">Support Poiema Retreats</h1>
+				<h1 class="page-title">Funding & Donations</h1>
 				<p class="page-intro">
-					Investing in the formation, faith, and lifelong discipleship of young adults across the church of Jesus Christ.
+					We appreciate your financial help. The purpose of our ministry is to inform, encourage, and inspire Christian young adults regarding who they are in Christ.
 				</p>
 			</div>
 		</header>
@@ -23,62 +23,100 @@ import EasyTitheEmbed from "../components/EasyTitheEmbed.astro";
 				<div class="funding-grid">
 					<div class="funding-info">
 						<div class="info-block">
-							<h2>Why We Give</h2>
-							<p>
-								Many of our attendees are college students, recent graduates, or young workers navigating early career stages. We deliberately price our retreats below the actual cost per person so that cost is never a barrier to Christian community.
-							</p>
-							<p>
-								Your contributions make up the difference: funding venue deposits, communal feasts, speaker honorariums, and direct student scholarships.
-							</p>
+							<h2>Here’s what we do with your donations:</h2>
+							<ul class="donation-uses-list">
+								<li>
+									<strong>Affordable Retreats:</strong> We keep the cost of our retreats affordable. The registration fees do not cover all of our costs. We don’t want expense to be the reason that someone doesn’t attend.
+								</li>
+								<li>
+									<strong>Speaker & Helper Expenses:</strong> We basically pay the travel and retreat expenses of all of our speakers and helpers and, when we can, we give our guest speakers a little extra.
+								</li>
+								<li>
+									<strong>Website & Technology:</strong> We use donations to build, host, and maintain our website and digital resources.
+								</li>
+							</ul>
 						</div>
 
-						<div class="giving-pillars">
-							<div class="pillar-card">
-								<div class="pillar-number">01</div>
-								<div class="pillar-body">
-									<h3>Need-Based Scholarships</h3>
-									<p>Providing full and partial registration aid so students facing hardship can attend without anxiety.</p>
+						<div class="info-block">
+							<h2>Here is what we would do with more money:</h2>
+							<div class="future-initiatives-grid">
+								<div class="initiative-card">
+									<h3>Ministry Internships</h3>
+									<p>Mentoring and equipping college students and young adults for active leadership in their local churches.</p>
 								</div>
-							</div>
-
-							<div class="pillar-card">
-								<div class="pillar-number">02</div>
-								<div class="pillar-body">
-									<h3>Subsidized Registration</h3>
-									<p>Keeping base fees accessible for all attendees through upfront hospitality underwriting.</p>
+								<div class="initiative-card">
+									<h3>Summer Study Program</h3>
+									<p>Focused theological seminars and pastoral reading courses during summer breaks.</p>
 								</div>
-							</div>
-
-							<div class="pillar-card">
-								<div class="pillar-number">03</div>
-								<div class="pillar-body">
-									<h3>International Study Tours</h3>
-									<p>Supporting historical church history tours and collaborative conferences with European sister churches.</p>
+								<div class="initiative-card">
+									<h3>Selected Books for Attendees</h3>
+									<p>Purchasing foundational theology, worldview, and devotional books to give every participant.</p>
+								</div>
+								<div class="initiative-card">
+									<h3>Poiema International</h3>
+									<p>Taking young adults on retreats to other countries to be immersed in the work of Christ in other parts of the world.</p>
+								</div>
+								<div class="initiative-card">
+									<h3>Compensate Ministry Contributors</h3>
+									<p>Supporting writers, composers, lecturers, artists, organizers, and techies who serve this ministry.</p>
 								</div>
 							</div>
 						</div>
 
-						<div class="check-box">
-							<h3>Giving by Mail</h3>
+						<!-- Monthly Donor Mug Callout -->
+						<div class="mug-callout-card">
+							<div class="mug-content">
+								<span class="mug-badge">Monthly Partner Program</span>
+								<h3>Receive a Poiema Coffee Mug</h3>
+								<p>
+									If you’d like, we have a monthly donor program that if you sign up (for whatever amount) we will send you one of our coffee mugs as a token of our thanks and as a reminder to pray for the ministry as partners with us.
+								</p>
+							</div>
+						</div>
+
+						<div class="info-block church-oversight-block">
+							<h2>Church Oversight & Diaconate</h2>
 							<p>
-								Tax-deductible checks may be made payable to <strong>Saint Peter Presbyterian Church</strong> with <em>"Poiema Retreats"</em> in the memo line.
-							</p>
-							<p class="church-address">
-								<strong>Saint Peter Presbyterian Church</strong><br />
-								Attn: Poiema Retreats Ministry<br />
-								PO Box 16733<br />
-								Bristol, VA 24209
+								You should know that Poiema Retreats is a ministry of <strong>Saint Peter Presbyterian Church</strong> in Bristol, Virginia. All registrations and donations are received by our church treasurer and overseen by our diaconate.
 							</p>
 						</div>
 					</div>
 
-					<div class="funding-embed">
-						<EasyTitheEmbed
-							formId="aa7f78b7-1076-4016-a63b-047c6243fb71"
-							title="Give Online"
-							subtitle="Secure tax-deductible donations processed via MinistryForms / EasyTithe."
-						/>
-					</div>
+					<aside class="donation-card-container">
+						<div class="donation-card">
+							<h3>Donate to Poiema</h3>
+							<p class="donation-intro">
+								Give securely online via Saint Peter Presbyterian Church’s online portal. Select <strong>“Poiema”</strong> as the designated fund.
+							</p>
+
+							<div class="easy-tithe-wrapper">
+								<EasyTitheEmbed />
+							</div>
+
+							<div class="direct-link-box">
+								<p class="direct-link-note">Prefer giving directly on EasyTithe?</p>
+								<a
+									href="https://app.easytithe.com/app/giving/sppc"
+									target="_blank"
+									rel="noopener noreferrer"
+									class="btn btn-secondary w-full"
+								>
+									Open EasyTithe Giving Portal &rarr;
+								</a>
+							</div>
+
+							<div class="mail-donation">
+								<h4>Giving by Check</h4>
+								<p>Make checks payable to <strong>Saint Peter Presbyterian Church</strong> with <em>“Poiema Retreats”</em> in the memo:</p>
+								<address class="mail-address">
+									Saint Peter Presbyterian Church<br />
+									Attn: Poiema Retreats Treasurer<br />
+									PO Box 16733<br />
+									Bristol, VA 24209
+								</address>
+							</div>
+						</div>
+					</aside>
 				</div>
 			</div>
 		</section>
@@ -100,26 +138,29 @@ import EasyTitheEmbed from "../components/EasyTitheEmbed.astro";
 	}
 
 	.sub-heading {
-		font-size: var(--font-size-sm);
-		font-weight: 600;
+		font-size: var(--font-size-xs);
+		font-weight: 700;
 		color: var(--color-accent);
 		text-transform: uppercase;
-		letter-spacing: 0.08em;
+		letter-spacing: 0.12em;
 		display: block;
 		margin-bottom: var(--spacing-xs);
 	}
 
 	.page-title {
+		font-size: var(--font-size-4xl);
 		margin: 0 0 var(--spacing-md);
-		color: var(--color-text);
+		color: var(--color-text-main);
 	}
 
 	.page-intro {
-		max-width: 650px;
+		max-width: 680px;
 		margin: 0 auto;
 		font-size: var(--font-size-lg);
-		color: var(--color-muted);
-		line-height: var(--leading-relaxed);
+		color: var(--color-text-muted);
+		line-height: 1.6;
+		font-style: italic;
+		font-family: var(--font-heading);
 	}
 
 	.section {
@@ -128,92 +169,189 @@ import EasyTitheEmbed from "../components/EasyTitheEmbed.astro";
 
 	.funding-grid {
 		display: grid;
-		grid-template-columns: 1.2fr 1fr;
+		grid-template-columns: 1.4fr 1fr;
 		gap: var(--spacing-4xl);
 		align-items: start;
 	}
 
+	.info-block {
+		margin-bottom: var(--spacing-3xl);
+	}
+
 	.info-block h2 {
-		font-size: var(--font-size-3xl);
-		margin: 0 0 var(--spacing-md);
+		font-size: var(--font-size-2xl);
+		margin-bottom: var(--spacing-md);
+		color: var(--color-text-main);
 	}
 
-	.info-block p {
-		font-size: var(--font-size-base);
-		color: var(--color-muted);
-		line-height: var(--leading-relaxed);
-		margin-bottom: var(--spacing-lg);
-	}
-
-	.giving-pillars {
+	.donation-uses-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
 		display: flex;
 		flex-direction: column;
 		gap: var(--spacing-md);
-		margin: var(--spacing-2xl) 0;
 	}
 
-	.pillar-card {
+	.donation-uses-list li {
 		background: var(--color-surface);
 		border: 1px solid var(--color-border);
-		border-radius: var(--radius);
-		padding: var(--spacing-lg);
-		display: flex;
-		gap: var(--spacing-lg);
-		align-items: flex-start;
-	}
-
-	.pillar-number {
-		font-family: var(--font-heading);
-		font-size: var(--font-size-2xl);
-		font-weight: 700;
-		color: var(--color-ochre);
-		line-height: 1;
-	}
-
-	.pillar-body h3 {
-		margin: 0 0 var(--spacing-xs);
-		font-size: var(--font-size-lg);
-	}
-
-	.pillar-body p {
-		margin: 0;
+		border-left: 3px solid var(--color-brand);
+		border-radius: var(--radius-md);
+		padding: var(--spacing-md) var(--spacing-lg);
 		font-size: var(--font-size-sm);
-		color: var(--color-muted);
-		line-height: var(--leading-normal);
+		line-height: 1.6;
+		color: var(--color-text-muted);
 	}
 
-	.check-box {
-		background: color-mix(in srgb, var(--color-brand) 6%, var(--color-surface));
-		border: 1px solid color-mix(in srgb, var(--color-brand) 20%, var(--color-border));
-		border-radius: var(--radius);
+	.donation-uses-list strong {
+		color: var(--color-text-main);
+		font-size: var(--font-size-base);
+		display: block;
+		margin-bottom: 2px;
+	}
+
+	/* Future Initiatives Grid */
+	.future-initiatives-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+		gap: var(--spacing-md);
+	}
+
+	.initiative-card {
+		background: var(--color-surface-soft);
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-md);
+		padding: var(--spacing-md) var(--spacing-lg);
+	}
+
+	.initiative-card h3 {
+		font-size: var(--font-size-base);
+		color: var(--color-text-main);
+		margin: 0 0 var(--spacing-xs);
+	}
+
+	.initiative-card p {
+		font-size: var(--font-size-xs);
+		color: var(--color-text-muted);
+		line-height: 1.5;
+		margin: 0;
+	}
+
+	/* Mug Callout */
+	.mug-callout-card {
+		background: linear-gradient(
+			135deg,
+			color-mix(in srgb, var(--color-brand) 12%, var(--color-surface)),
+			color-mix(in srgb, var(--color-accent) 10%, var(--color-surface))
+		);
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-lg);
 		padding: var(--spacing-xl);
-		margin-top: var(--spacing-2xl);
+		margin-bottom: var(--spacing-3xl);
 	}
 
-	.check-box h3 {
-		margin: 0 0 var(--spacing-xs);
+	.mug-badge {
+		display: inline-block;
+		font-size: var(--font-size-xs);
+		font-weight: 700;
+		color: var(--color-brand);
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		margin-bottom: var(--spacing-xs);
+	}
+
+	.mug-content h3 {
 		font-size: var(--font-size-xl);
+		color: var(--color-text-main);
+		margin: 0 0 var(--spacing-sm);
 	}
 
-	.check-box p {
+	.mug-content p {
 		font-size: var(--font-size-sm);
-		color: var(--color-muted);
-		line-height: var(--leading-normal);
-		margin: 0 0 var(--spacing-md);
-	}
-
-	.church-address {
-		margin: 0 !important;
-		font-size: var(--font-size-sm);
-		color: var(--color-text) !important;
-		line-height: var(--leading-normal);
-	}
-
-	.funding-embed :global(.easytithe-wrapper) {
+		color: var(--color-text-muted);
+		line-height: 1.6;
 		margin: 0;
 	}
 
-	@media (max-width: 900px) {
+	.church-oversight-block p {
+		font-size: var(--font-size-sm);
+		color: var(--color-text-muted);
+		line-height: 1.6;
+	}
+
+	/* Donation Card */
+	.donation-card {
+		background: var(--color-surface);
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-lg);
+		padding: var(--spacing-2xl);
+		box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+	}
+
+	.donation-card h3 {
+		font-size: var(--font-size-xl);
+		margin-bottom: var(--spacing-xs);
+		color: var(--color-text-main);
+	}
+
+	.donation-intro {
+		color: var(--color-text-muted);
+		font-size: var(--font-size-xs);
+		line-height: 1.5;
+		margin-bottom: var(--spacing-xl);
+	}
+
+	.direct-link-box {
+		margin-top: var(--spacing-xl);
+		padding-top: var(--spacing-lg);
+		border-top: 1px solid var(--color-border);
+		text-align: center;
+	}
+
+	.direct-link-note {
+		font-size: var(--font-size-xs);
+		color: var(--color-text-muted);
+		margin-bottom: var(--spacing-sm);
+	}
+
+	.mail-donation {
+		margin-top: var(--spacing-xl);
+		padding-top: var(--spacing-lg);
+		border-top: 1px solid var(--color-border);
+	}
+
+	.mail-donation h4 {
+		font-size: var(--font-size-sm);
+		margin-bottom: var(--spacing-xs);
+		color: var(--color-text-main);
+	}
+
+	.mail-donation p {
+		font-size: var(--font-size-xs);
+		color: var(--color-text-muted);
+		line-height: 1.4;
+		margin-bottom: var(--spacing-sm);
+	}
+
+	.mail-address {
+		font-style: normal;
+		font-size: var(--font-size-xs);
+		line-height: 1.5;
+		background: var(--color-surface-soft);
+		padding: var(--spacing-md);
+		border-radius: var(--radius-sm);
+		color: var(--color-text-main);
+		font-family: monospace;
+	}
+
+	.w-full {
+		width: 100%;
+		display: block;
+		text-align: center;
+	}
+
+	@media (max-width: 860px) {
 		.funding-grid {
 			grid-template-columns: 1fr;
 		}

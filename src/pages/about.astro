@@ -4,15 +4,15 @@ import Base from "../layouts/Base.astro";
 
 <Base
 	title="About Poiema Retreats"
-	description="The mission, pastoral leadership, and purpose behind Poiema Retreats — Ephesians 2:10."
+	description="The mission, purpose, and pastoral leadership behind Poiema Retreats — Ephesians 2:10."
 >
 	<div class="about-page">
 		<header class="page-header">
 			<div class="container">
 				<span class="sub-heading">Our Mission & Identity</span>
-				<h1 class="page-title">For We Are His Workmanship</h1>
+				<h1 class="page-title">ABOUT POIEMA</h1>
 				<p class="page-intro">
-					"For we are His workmanship, created in Christ Jesus for good works, which God prepared beforehand that we should walk in them." &mdash; Ephesians 2:10
+					“For we are His workmanship, created in Christ Jesus for good works, which God prepared beforehand that we should walk in them.” &mdash; Ephesians 2:10
 				</p>
 			</div>
 		</header>
@@ -21,42 +21,70 @@ import Base from "../layouts/Base.astro";
 			<div class="container">
 				<div class="story-grid">
 					<div class="story-content">
-						<h2>The Purpose of Poiema</h2>
-						<p>
-							Poiema Retreats was formed out of a pastoral concern for young adults, college students, and singles living in a fragmented and hurried culture. Between college life and career demands, deep Christian friendship and unhurried theological reflection often get crowded out.
+						<h2>What are we about?</h2>
+						<p class="lead-paragraph">
+							<strong>Poiema was launched out of a passion to see young adults encouraged in their walk with Christ and to see them operating as vital members of their local congregations.</strong>
 						</p>
 						<p>
-							The Greek word <em>ποίημα</em> (poiema) signifies something skillfully crafted &mdash; a work of art, a poem, an intentional creation. Scripture reminds us that the church is not a machine or a corporate enterprise, but God's living workmanship in the world.
+							Often overlooked, too often not considered as important (until they are married) and sometimes limited in fellowshipping with peers due to the size of their church; Poiema was started to help yours and ours. And it seems to be working.
+						</p>
+
+						<h2>What is our Purpose?</h2>
+						<p>
+							The purpose of our retreats is to inform, encourage, and inspire Christian young adults regarding who they are in Christ. We see this as a life-awareness that is essential for everyone’s spiritual walk as well as the wellspring of joy and confidence.
 						</p>
 						<p>
-							Our retreats take young people away from daily distractions and place them in settings of natural wonder &mdash; whether the barrier island shores of the Outer Banks or the highlands of the Blue Ridge &mdash; to feast upon God's Word, sing together, break bread, and build enduring Christian friendships.
+							After all, we are God’s workmanship (<em>poiema</em>) and we want that to set in, be real to us, and when it does: worldview, apologetics, theology, vocation, and, well…all of life is set and in perspective.
 						</p>
+
+						<h2>Who are our Team leaders?</h2>
+						<div class="team-grid">
+							<div class="team-card">
+								<div class="team-card-header">
+									<h3>Laurence Windham</h3>
+									<span class="team-role">Pastor of Saint Peter Presbyterian Church</span>
+								</div>
+								<p>
+									Laurence has worked with teenagers, collegians, and single adults ever since he began training and working in the ministry, which included serving as campus minister for Reformed University Fellowship at the University of Central Florida before he moved to Virginia.
+								</p>
+							</div>
+
+							<div class="team-card">
+								<div class="team-card-header">
+									<h3>David Cooper</h3>
+									<span class="team-role">Elder at Providence Church in Lynchburg, Virginia</span>
+								</div>
+								<p>
+									David serves as an elder at Providence Church in Lynchburg Virginia. He is a graduate of Liberty University and has worked with young adults for years. He has been a welcome addition to teaching and leading devotions as well as busting dance moves at our retreats.
+								</p>
+							</div>
+						</div>
 
 						<h2>Church Oversight & Doctrine</h2>
 						<p>
-							Poiema Retreats is a ministry operating under the spiritual oversight and care of <strong>Saint Peter Presbyterian Church</strong>, located in Bristol, Virginia. Our teaching is firmly grounded in the historic Reformed and Presbyterian tradition, holding faithfully to the Westminster Confession of Faith and Catechisms while welcoming believers across faithful Christian denominations.
+							Poiema Retreats is a ministry of <strong>Saint Peter Presbyterian Church</strong> in Bristol, Virginia. All registrations and donations are received by our church treasurer and overseen by our diaconate.
 						</p>
 					</div>
 
 					<aside class="pillars-sidebar">
 						<div class="pillar-box">
-							<h3>Core Pillars</h3>
+							<h3>The Rhythm of Poiema</h3>
 							<ul class="pillars-list">
 								<li>
-									<strong>Theological Depth</strong>
-									<span>Sound doctrine that nourishes heart and mind, taught by seasoned pastors and teachers.</span>
+									<strong>Encouragement</strong>
+									<span>Woven into every activity, prayer, and conversation (Romans 1:12).</span>
 								</li>
 								<li>
-									<strong>Shared Hospitality</strong>
-									<span>Common tables, communal home cooking, and unstructured time for meaningful dialogue.</span>
+									<strong>Communication</strong>
+									<span>Interactive lectures with open discussions so truth is clearly delivered.</span>
 								</li>
 								<li>
-									<strong>Creation & Rest</strong>
-									<span>Coastal breezes and mountain vistas that invite contemplation and true Sabbath rest.</span>
+									<strong>Joy in Fellowship</strong>
+									<span>The joy of the Lord in every aspect—from dining to dancing to discussion.</span>
 								</li>
 								<li>
-									<strong>Lifelong Fellowship</strong>
-									<span>Friendships forged across churches, vocations, and geographic boundaries.</span>
+									<strong>Life Together</strong>
+									<span>Transparency, humility, openness, looking on the interests of others.</span>
 								</li>
 							</ul>
 						</div>
@@ -88,27 +116,29 @@ import Base from "../layouts/Base.astro";
 	}
 
 	.sub-heading {
-		font-size: var(--font-size-sm);
-		font-weight: 600;
+		font-size: var(--font-size-xs);
+		font-weight: 700;
 		color: var(--color-accent);
 		text-transform: uppercase;
-		letter-spacing: 0.08em;
+		letter-spacing: 0.12em;
 		display: block;
 		margin-bottom: var(--spacing-xs);
 	}
 
 	.page-title {
+		font-size: var(--font-size-4xl);
 		margin: 0 0 var(--spacing-md);
-		color: var(--color-text);
+		color: var(--color-text-main);
 	}
 
 	.page-intro {
 		max-width: 680px;
 		margin: 0 auto;
 		font-size: var(--font-size-lg);
-		color: var(--color-muted);
-		line-height: var(--leading-relaxed);
+		color: var(--color-text-muted);
+		line-height: 1.6;
 		font-style: italic;
+		font-family: var(--font-heading);
 	}
 
 	.section {
@@ -117,45 +147,93 @@ import Base from "../layouts/Base.astro";
 
 	.story-grid {
 		display: grid;
-		grid-template-columns: 1.5fr 1fr;
+		grid-template-columns: 1.6fr 1fr;
 		gap: var(--spacing-4xl);
 		align-items: start;
 	}
 
 	.story-content h2 {
-		font-size: var(--font-size-3xl);
+		font-size: var(--font-size-2xl);
 		margin: var(--spacing-2xl) 0 var(--spacing-md);
+		color: var(--color-text-main);
 	}
 
 	.story-content h2:first-child {
 		margin-top: 0;
 	}
 
-	.story-content p {
+	.lead-paragraph {
 		font-size: var(--font-size-lg);
-		color: var(--color-text);
-		line-height: var(--leading-relaxed);
+		color: var(--color-text-main);
+		line-height: 1.6;
+	}
+
+	.story-content p {
+		font-size: var(--font-size-base);
+		color: var(--color-text-muted);
+		line-height: 1.7;
 		margin-bottom: var(--spacing-xl);
 	}
 
+	/* Team Grid */
+	.team-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: var(--spacing-lg);
+		margin-bottom: var(--spacing-2xl);
+	}
+
+	.team-card {
+		background: var(--color-surface);
+		border: 1px solid var(--color-border);
+		border-left: 3px solid var(--color-brand);
+		border-radius: var(--radius-md);
+		padding: var(--spacing-lg);
+	}
+
+	.team-card-header h3 {
+		font-size: var(--font-size-xl);
+		margin: 0 0 4px;
+		color: var(--color-text-main);
+	}
+
+	.team-role {
+		display: block;
+		font-size: var(--font-size-xs);
+		font-weight: 600;
+		color: var(--color-accent);
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		margin-bottom: var(--spacing-sm);
+	}
+
+	.team-card p {
+		margin: 0;
+		font-size: var(--font-size-sm);
+		line-height: 1.6;
+		color: var(--color-text-muted);
+	}
+
+	/* Pillars Sidebar */
 	.pillars-sidebar {
 		display: flex;
 		flex-direction: column;
-		gap: var(--spacing-2xl);
+		gap: var(--spacing-xl);
 	}
 
 	.pillar-box {
-		background: var(--color-surface);
+		background: var(--color-surface-soft);
 		border: 1px solid var(--color-border);
 		border-radius: var(--radius-lg);
 		padding: var(--spacing-xl);
 	}
 
 	.pillar-box h3 {
+		font-size: var(--font-size-lg);
 		margin: 0 0 var(--spacing-lg);
-		font-size: var(--font-size-xl);
+		color: var(--color-text-main);
+		padding-bottom: var(--spacing-sm);
 		border-bottom: 1px solid var(--color-border);
-		padding-bottom: var(--spacing-xs);
 	}
 
 	.pillars-list {
@@ -164,47 +242,53 @@ import Base from "../layouts/Base.astro";
 		margin: 0;
 		display: flex;
 		flex-direction: column;
-		gap: var(--spacing-lg);
+		gap: var(--spacing-md);
 	}
 
 	.pillars-list li {
 		display: flex;
 		flex-direction: column;
-		gap: var(--spacing-xs);
+		gap: 2px;
 	}
 
 	.pillars-list strong {
-		color: var(--color-brand);
-		font-size: var(--font-size-base);
+		font-size: var(--font-size-sm);
+		color: var(--color-text-main);
 	}
 
 	.pillars-list span {
-		color: var(--color-muted);
-		font-size: var(--font-size-sm);
-		line-height: var(--leading-normal);
+		font-size: var(--font-size-xs);
+		color: var(--color-text-muted);
+		line-height: 1.5;
 	}
 
 	.sidebar-cta {
-		background: color-mix(in srgb, var(--color-accent) 10%, var(--color-surface));
-		border: 1px solid color-mix(in srgb, var(--color-accent) 25%, var(--color-border));
+		background: linear-gradient(
+			135deg,
+			color-mix(in srgb, var(--color-brand) 10%, var(--color-surface)),
+			var(--color-surface)
+		);
+		border: 1px solid var(--color-border);
 		border-radius: var(--radius-lg);
 		padding: var(--spacing-xl);
 		text-align: center;
 	}
 
 	.sidebar-cta h3 {
+		font-size: var(--font-size-lg);
 		margin: 0 0 var(--spacing-xs);
-		font-size: var(--font-size-xl);
+		color: var(--color-text-main);
 	}
 
 	.sidebar-cta p {
-		color: var(--color-muted);
-		font-size: var(--font-size-sm);
-		margin: 0 0 var(--spacing-lg);
+		font-size: var(--font-size-xs);
+		color: var(--color-text-muted);
+		margin: 0 0 var(--spacing-md);
 	}
 
 	.cta-btn {
 		width: 100%;
+		display: block;
 	}
 
 	@media (max-width: 860px) {

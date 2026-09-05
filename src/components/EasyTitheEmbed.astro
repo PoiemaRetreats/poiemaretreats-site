@@ -1,11 +1,15 @@
 ---
 interface Props {
-	formId: string;
+	formId?: string;
 	title?: string;
 	subtitle?: string;
 }
 
-const { formId, title, subtitle } = Astro.props;
+const {
+	formId = "aa7f78b7-1076-4016-a63b-047c6243fb71",
+	title,
+	subtitle,
+} = Astro.props;
 
 // Extract GUID if full URL was provided
 const cleanFormId = formId?.includes("formId=")
@@ -16,7 +20,7 @@ const cleanFormId = formId?.includes("formId=")
 <div class="easytithe-wrapper" id={`form-section-${cleanFormId}`}>
 	<div class="easytithe-card">
 		<div class="easytithe-header">
-			<span class="easytithe-badge">Secure Registration</span>
+			<span class="easytithe-badge">Secure Registration & Giving</span>
 			{title && <h3 class="easytithe-title">{title}</h3>}
 			{subtitle && <p class="easytithe-subtitle">{subtitle}</p>}
 		</div>
@@ -26,86 +30,78 @@ const cleanFormId = formId?.includes("formId=")
 		</div>
 
 		<div class="easytithe-footer">
-			<p class="easytithe-fallback">
-				Having trouble viewing the embedded form?
-				<a
-					href={`https://forms.ministryforms.net/embed.aspx?formId=${cleanFormId}`}
-					target="_blank"
-					rel="noopener noreferrer"
-					class="easytithe-direct-link"
-				>
-					Open registration form in a new tab &rarr;
-				</a>
-			</p>
+			<span class="lock-icon" aria-hidden="true">&#128274;</span>
+			<span>Protected by 256-bit SSL encryption via MinistryForms / EasyTithe</span>
 		</div>
 	</div>
 </div>
 
 <style>
 	.easytithe-wrapper {
-		margin: var(--spacing-2xl) 0;
+		width: 100%;
+		margin: var(--spacing-xl) 0;
 	}
 
 	.easytithe-card {
 		background: var(--color-surface);
 		border: 1px solid var(--color-border);
-		border-radius: var(--radius-lg);
-		box-shadow: var(--shadow);
-		padding: var(--spacing-xl);
+		border-radius: var(--radius-xl);
 		overflow: hidden;
+		box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
 	}
 
 	.easytithe-header {
-		margin-bottom: var(--spacing-lg);
+		padding: var(--spacing-xl) var(--spacing-2xl);
+		background: var(--color-surface-soft);
 		border-bottom: 1px solid var(--color-border);
-		padding-bottom: var(--spacing-md);
+		text-align: center;
 	}
 
 	.easytithe-badge {
 		display: inline-block;
 		font-size: var(--font-size-xs);
-		font-weight: 600;
+		font-weight: 700;
 		text-transform: uppercase;
-		letter-spacing: 0.05em;
+		letter-spacing: 0.1em;
 		color: var(--color-accent);
 		margin-bottom: var(--spacing-xs);
 	}
 
 	.easytithe-title {
-		margin: 0 0 var(--spacing-xs);
 		font-size: var(--font-size-2xl);
-		color: var(--color-text);
+		margin: 0 0 var(--spacing-xs);
+		color: var(--color-text-main);
 	}
 
 	.easytithe-subtitle {
-		margin: 0;
-		color: var(--color-muted);
 		font-size: var(--font-size-sm);
+		color: var(--color-text-muted);
+		margin: 0;
 	}
 
 	.easytithe-frame {
-		min-height: 380px;
-		width: 100%;
-		position: relative;
+		padding: var(--spacing-xl);
+		min-height: 480px;
+		background: #ffffff;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
 	}
 
 	.easytithe-footer {
-		margin-top: var(--spacing-lg);
-		padding-top: var(--spacing-md);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: var(--spacing-sm);
+		padding: var(--spacing-md);
+		background: var(--color-surface-soft);
 		border-top: 1px solid var(--color-border);
 		font-size: var(--font-size-xs);
-		color: var(--color-muted);
-		text-align: center;
+		color: var(--color-text-muted);
 	}
 
-	.easytithe-direct-link {
-		color: var(--color-brand);
-		font-weight: 600;
-		text-decoration: underline;
-		margin-left: var(--spacing-xs);
-	}
-
-	.easytithe-direct-link:hover {
-		color: var(--color-brand-strong);
+	.lock-icon {
+		font-size: var(--font-size-sm);
 	}
 </style>
