@@ -17,7 +17,7 @@ if (!retreat) {
 	return Astro.redirect("/404");
 }
 
-if (cacheHint) {
+if (Astro.cache?.enabled && cacheHint) {
 	Astro.cache.set(cacheHint);
 }
 
@@ -115,6 +115,12 @@ const status = getRetreatStatus(retreat.data);
 								subtitle="Complete the form below to register and submit payment."
 							/>
 						</div>
+					) : status.isCanceled ? (
+						<div class="status-notice-card">
+							<h3>Gathering Canceled</h3>
+							<p>This gathering has been canceled. Please contact us or check other upcoming retreat dates.</p>
+							<a href="/retreats" class="btn btn-secondary">Browse Other Retreats</a>
+						</div>
 					) : status.isPast ? (
 						<div class="status-notice-card">
 							<h3>Past Gathering</h3>
@@ -208,6 +214,12 @@ const status = getRetreatStatus(retreat.data);
 	}
 
 	.badge-sold-out {
+		background: color-mix(in srgb, var(--color-danger) 15%, transparent);
+		color: var(--color-danger);
+		border: 1px solid color-mix(in srgb, var(--color-danger) 30%, transparent);
+	}
+
+	.badge-canceled {
 		background: color-mix(in srgb, var(--color-danger) 15%, transparent);
 		color: var(--color-danger);
 		border: 1px solid color-mix(in srgb, var(--color-danger) 30%, transparent);

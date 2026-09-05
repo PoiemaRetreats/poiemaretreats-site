@@ -7,7 +7,7 @@ const { entries: allRetreats, cacheHint } = await getEmDashCollection("retreats"
 	status: "published",
 });
 
-if (cacheHint) {
+if (Astro.cache?.enabled && cacheHint) {
 	Astro.cache.set(cacheHint);
 }
 
@@ -270,6 +270,12 @@ pastRetreats.sort((a, b) => {
 	}
 
 	.badge-sold-out {
+		background: color-mix(in srgb, var(--color-danger) 15%, transparent);
+		color: var(--color-danger);
+		border: 1px solid color-mix(in srgb, var(--color-danger) 30%, transparent);
+	}
+
+	.badge-canceled {
 		background: color-mix(in srgb, var(--color-danger) 15%, transparent);
 		color: var(--color-danger);
 		border: 1px solid color-mix(in srgb, var(--color-danger) 30%, transparent);

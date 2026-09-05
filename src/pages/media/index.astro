@@ -6,7 +6,7 @@ const { entries: mediaItems, cacheHint } = await getEmDashCollection("media", {
 	status: "published",
 });
 
-if (cacheHint) {
+if (Astro.cache?.enabled && cacheHint) {
 	Astro.cache.set(cacheHint);
 }
 
