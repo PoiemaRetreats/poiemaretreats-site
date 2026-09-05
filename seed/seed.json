@@ -430,6 +430,42 @@
       }
     ],
     "articles": [
+      {
+        "id": "example-article-lorem-ipsum",
+        "slug": "example-article-lorem-ipsum",
+        "status": "draft",
+        "data": {
+          "title": "Example Article: Lorem Ipsum",
+          "author": "Sample author",
+          "excerpt": "Sample content for testing the article layout. Replace before publishing.",
+          "content": [
+            {
+              "_type": "block",
+              "_key": "sample-intro",
+              "style": "normal",
+              "children": [{ "_type": "span", "_key": "sample-intro-text", "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." }]
+            },
+            {
+              "_type": "block",
+              "_key": "sample-heading",
+              "style": "h2",
+              "children": [{ "_type": "span", "_key": "sample-heading-text", "text": "Lorem ipsum dolor sit amet" }]
+            },
+            {
+              "_type": "block",
+              "_key": "sample-body",
+              "style": "normal",
+              "children": [{ "_type": "span", "_key": "sample-body-text", "text": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." }]
+            },
+            {
+              "_type": "block",
+              "_key": "sample-quote",
+              "style": "blockquote",
+              "children": [{ "_type": "span", "_key": "sample-quote-text", "text": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." }]
+            }
+          ]
+        }
+      },
     {
       "id": "created-as-his-workmanship",
       "slug": "created-as-his-workmanship",
