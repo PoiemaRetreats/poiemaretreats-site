@@ -1,49 +1,630 @@
 ---
-import { getEmDashEntry } from "emdash";
+import { getEmDashCollection } from "emdash";
 import Base from "../layouts/Base.astro";
-import MarketingBlocks from "../components/MarketingBlocks.astro";
+import { getRetreatStatus } from "../utils/retreats";
 
-const { entry: page, cacheHint } = await getEmDashEntry("pages", "home");
+const [{ entries: allRetreats, cacheHint: retreatsHint }, { entries: articles, cacheHint: articlesHint }] =
+	await Promise.all([
+		getEmDashCollection("retreats", { status: "published" }),
+		getEmDashCollection("articles", { status: "published", limit: 2, orderBy: { published_at: "desc" } }),
+	]);
 
-if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
+if (Astro.cache?.enabled) {
+	if (retreatsHint) Astro.cache.set(retreatsHint);
+	if (articlesHint) Astro.cache.set(articlesHint);
+}
 
-const pageTitle = page?.data.title;
-const pageContent = page?.data.content;
+// Filter upcoming retreats
+const upcomingRetreats = allRetreats
+	.filter((r) => !getRetreatStatus(r.data).isPast)
+	.sort((a, b) => new Date(a.data.start_date).getTime() - new Date(b.data.start_date).getTime())
+	.slice(0, 2);
 ---
 
 <Base
-	title={pageTitle !== "Home" ? pageTitle : undefined}
-	description="Build products people actually want. The all-in-one platform for modern teams."
+	title="Poiema Retreats — For We Are His Workmanship"
+	description="Transformative conferences, pastoral study, and restful fellowship for young adults across the East Coast."
 >
-	{
-		pageContent ? (
-			<MarketingBlocks value={pageContent} />
-		) : (
-			<div class="empty-state">
-				<h1>Welcome to Acme</h1>
-				<p>Edit the home page content in the admin to get started.</p>
-				<a href="/_emdash/admin" class="btn btn-primary">
-					Open Admin
-				</a>
+	<div class="home-page">
+		<!-- Hero Section -->
+		<section class="hero-section">
+			<div class="container hero-container">
+				<div class="hero-badge">
+					<span class="badge-greek">ποίημα</span>
+					<span class="badge-verse">Ephesians 2:10</span>
+				</div>
+				<h1 class="hero-title">
+					Formed by Grace.<br />Sustained in Fellowship.
+				</h1>
+				<p class="hero-lead">
+					Poiema Retreats gathers college students, young professionals, and singles for rich biblical teaching, restful communion, and deep laughter in the quiet beauty of coast and mountain.
+				</p>
+				<div class="hero-cta-group">
+					<a href="/retreats" class="btn btn-primary btn-lg">
+						Upcoming Retreats &rarr;
+					</a>
+					<a href="/about" class="btn btn-secondary btn-lg">
+						Our Mission & Beliefs
+					</a>
+				</div>
 			</div>
-		)
-	}
+		</section>
+
+		<!-- Upcoming Gatherings Section -->
+		<section class="section section-gatherings">
+			<div class="container">
+				<div class="section-header-home">
+					<span class="section-kicker">Gatherings</span>
+					<h2 class="section-title">Upcoming Conferences & Retreats</h2>
+					<p class="section-subtitle">
+						Step out of the daily churn. Join us for intentional days around Scripture and common tables.
+					</p>
+				</div>
+
+				{upcomingRetreats.length === 0 ? (
+					<div class="empty-state-home">
+						<p>Retreat dates for the upcoming season are being finalized. Check back soon!</p>
+					</div>
+				) : (
+					<div class="featured-retreats-grid">
+						{upcomingRetreats.map((retreat) => {
+							const status = getRetreatStatus(retreat.data);
+							return (
+								<article class="featured-card" {...retreat.edit}>
+									<div class="featured-card-top">
+										<span class={`status-badge ${status.badgeClass}`}>
+											{status.badgeLabel}
+										</span>
+										{retreat.data.price && (
+											<span class="featured-price">{retreat.data.price}</span>
+										)}
+									</div>
+
+									<div class="featured-card-body">
+										<h3 class="featured-title">
+											<a href={`/retreats/${retreat.id}`}>{retreat.data.title}</a>
+										</h3>
+
+										{retreat.data.subtitle && (
+											<p class="featured-subtitle">{retreat.data.subtitle}</p>
+										)}
+
+										<div class="featured-details">
+											<div class="detail-row">
+												<span class="detail-name">Dates:</span>
+												<span class="detail-val">{status.dateRangeFormatted}</span>
+											</div>
+											<div class="detail-row">
+												<span class="detail-name">Location:</span>
+												<span class="detail-val">{retreat.data.location}</span>
+											</div>
+										</div>
+
+										{retreat.data.excerpt && (
+											<p class="featured-excerpt">{retreat.data.excerpt}</p>
+										)}
+									</div>
+
+									<div class="featured-card-bottom">
+										<a href={`/retreats/${retreat.id}`} class="btn btn-primary w-full">
+											{status.isOpen ? "View Details & Register" : "View Details"} &rarr;
+										</a>
+									</div>
+								</article>
+							);
+						})}
+					</div>
+				)}
+
+				<div class="all-retreats-link-wrap">
+					<a href="/retreats" class="link-muted-arrow">
+						View all retreats & past gatherings archive &rarr;
+					</a>
+				</div>
+			</div>
+		</section>
+
+		<!-- Pillars Section -->
+		<section class="section section-pillars">
+			<div class="container">
+				<div class="section-header-home">
+					<span class="section-kicker">What to Expect</span>
+					<h2 class="section-title">The Rhythm of a Poiema Retreat</h2>
+				</div>
+
+				<div class="pillars-grid">
+					<div class="pillar-item">
+						<div class="pillar-icon-box">01</div>
+						<h3>Theological Depth</h3>
+						<p>Lectures, sermons, and open Q&A sessions that anchor faith in historical Christian orthodoxy.</p>
+					</div>
+					<div class="pillar-item">
+						<div class="pillar-icon-box">02</div>
+						<h3>Shared Tables</h3>
+						<p>Communal feasts and unhurried meals where authentic conversations and lifelong friendships take root.</p>
+					</div>
+					<div class="pillar-item">
+						<div class="pillar-icon-box">03</div>
+						<h3>Creation & Wonder</h3>
+						<p>Barrier island coastlines and mountain highlands that invite quiet reflection and joyful Sabbath rest.</p>
+					</div>
+					<div class="pillar-item">
+						<div class="pillar-icon-box">04</div>
+						<h3>Accessible to All</h3>
+						<p>Subsidized costs and full need-based scholarships so every student and young worker can attend.</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Pastoral Articles Highlight -->
+		{articles.length > 0 && (
+			<section class="section section-articles">
+				<div class="container">
+					<div class="section-header-home">
+						<span class="section-kicker">Writings</span>
+						<h2 class="section-title">From Our Pastors & Teachers</h2>
+						<p class="section-subtitle">
+							Theological essays and pastoral wisdom on Christian vocation and communion.
+						</p>
+					</div>
+
+					<div class="articles-summary-grid">
+						{articles.map((article) => (
+							<article class="article-summary-card" {...article.edit}>
+								<span class="summary-author">{article.data.author}</span>
+								<h3 class="summary-title">
+									<a href={`/articles/${article.id}`}>{article.data.title}</a>
+								</h3>
+								{article.data.excerpt && (
+									<p class="summary-excerpt">{article.data.excerpt}</p>
+								)}
+								<a href={`/articles/${article.id}`} class="summary-link">
+									Read Essay &rarr;
+								</a>
+							</article>
+						))}
+					</div>
+
+					<div class="all-retreats-link-wrap">
+						<a href="/articles" class="link-muted-arrow">
+							Browse all pastoral articles &rarr;
+						</a>
+					</div>
+				</div>
+			</section>
+		)}
+
+		<!-- Giving Banner -->
+		<section class="section section-giving-callout">
+			<div class="container">
+				<div class="giving-banner-card">
+					<div class="giving-banner-text">
+						<span class="banner-kicker">Support Our Mission</span>
+						<h2>Help a Student Attend Poiema</h2>
+						<p>
+							Every year, generous gifts allow college students and young adults in financial distress to experience life-changing fellowship and teaching.
+						</p>
+					</div>
+					<div class="giving-banner-action">
+						<a href="/funding" class="btn btn-primary btn-lg">
+							Support the Scholarship Fund &rarr;
+						</a>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
 </Base>
 
 <style>
-	.empty-state {
-		text-align: center;
-		padding: var(--spacing-5xl) var(--spacing-lg);
-		max-width: var(--max-width);
+	.container {
+		max-width: var(--wide-width);
 		margin: 0 auto;
+		padding: 0 var(--spacing-xl);
 	}
 
-	.empty-state h1 {
-		margin-bottom: var(--spacing-md);
+	/* Hero */
+	.hero-section {
+		background: radial-gradient(
+				circle at 50% 15%,
+				color-mix(in srgb, var(--color-brand) 8%, transparent) 0%,
+				transparent 70%
+			),
+			var(--color-surface);
+		border-bottom: 1px solid var(--color-border);
+		padding: var(--spacing-5xl) 0 var(--spacing-4xl);
+		text-align: center;
 	}
 
-	.empty-state p {
+	.hero-container {
+		max-width: 820px;
+	}
+
+	.hero-badge {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--spacing-sm);
+		background: color-mix(in srgb, var(--color-accent) 12%, transparent);
+		border: 1px solid color-mix(in srgb, var(--color-accent) 30%, transparent);
+		padding: 4px 14px;
+		border-radius: var(--radius-full);
+		margin-bottom: var(--spacing-lg);
+		font-size: var(--font-size-xs);
+		font-weight: 600;
+	}
+
+	.badge-greek {
+		font-family: var(--font-heading);
+		font-size: var(--font-size-sm);
+		font-style: italic;
+		color: var(--color-accent);
+	}
+
+	.badge-verse {
+		color: var(--color-text);
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+	}
+
+	.hero-title {
+		font-size: var(--font-size-6xl);
+		line-height: var(--leading-tight);
+		letter-spacing: var(--tracking-tight);
+		margin: 0 0 var(--spacing-lg);
+		color: var(--color-text);
+	}
+
+	.hero-lead {
+		font-size: var(--font-size-xl);
 		color: var(--color-muted);
+		line-height: var(--leading-relaxed);
+		margin: 0 auto var(--spacing-2xl);
+		max-width: 680px;
+	}
+
+	.hero-cta-group {
+		display: flex;
+		justify-content: center;
+		gap: var(--spacing-md);
+		flex-wrap: wrap;
+	}
+
+	.btn-lg {
+		padding: var(--spacing-md) var(--spacing-2xl);
+		font-size: var(--font-size-base);
+	}
+
+	/* Common Section */
+	.section {
+		padding: var(--spacing-5xl) 0;
+	}
+
+	.section-header-home {
+		text-align: center;
+		max-width: 650px;
+		margin: 0 auto var(--spacing-3xl);
+	}
+
+	.section-kicker {
+		font-size: var(--font-size-xs);
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: var(--color-accent);
+		display: block;
+		margin-bottom: var(--spacing-xs);
+	}
+
+	.section-title {
+		font-size: var(--font-size-4xl);
+		margin: 0 0 var(--spacing-sm);
+	}
+
+	.section-subtitle {
+		font-size: var(--font-size-base);
+		color: var(--color-muted);
+		line-height: var(--leading-relaxed);
+		margin: 0;
+	}
+
+	/* Featured Retreats */
+	.featured-retreats-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+		gap: var(--spacing-2xl);
+		margin-bottom: var(--spacing-2xl);
+	}
+
+	.featured-card {
+		background: var(--color-surface);
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-lg);
+		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+		box-shadow: var(--shadow-sm);
+		transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+	}
+
+	.featured-card:hover {
+		transform: translateY(-2px);
+		box-shadow: var(--shadow-lg);
+	}
+
+	.featured-card-top {
+		padding: var(--spacing-lg) var(--spacing-xl) 0;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.status-badge {
+		font-size: var(--font-size-xs);
+		font-weight: 700;
+		padding: 4px 10px;
+		border-radius: var(--radius-full);
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+	}
+
+	.badge-open {
+		background: color-mix(in srgb, var(--color-accent) 15%, transparent);
+		color: var(--color-accent);
+		border: 1px solid color-mix(in srgb, var(--color-accent) 30%, transparent);
+	}
+
+	.badge-waitlist {
+		background: color-mix(in srgb, var(--color-ochre) 15%, transparent);
+		color: var(--color-ochre);
+		border: 1px solid color-mix(in srgb, var(--color-ochre) 30%, transparent);
+	}
+
+	.featured-price {
+		font-size: var(--font-size-sm);
+		font-weight: 600;
+		color: var(--color-brand);
+	}
+
+	.featured-card-body {
+		padding: var(--spacing-lg) var(--spacing-xl);
+		flex: 1;
+	}
+
+	.featured-title {
+		margin: 0 0 var(--spacing-xs);
+		font-size: var(--font-size-2xl);
+	}
+
+	.featured-title a {
+		color: var(--color-text);
+		text-decoration: none;
+	}
+
+	.featured-title a:hover {
+		color: var(--color-brand);
+	}
+
+	.featured-subtitle {
+		font-size: var(--font-size-sm);
+		color: var(--color-muted);
+		font-style: italic;
+		margin: 0 0 var(--spacing-md);
+	}
+
+	.featured-details {
+		background: var(--color-bg);
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-sm);
+		padding: var(--spacing-sm) var(--spacing-md);
+		margin-bottom: var(--spacing-md);
+		display: flex;
+		flex-direction: column;
+		gap: var(--spacing-xs);
+		font-size: var(--font-size-sm);
+	}
+
+	.detail-row {
+		display: flex;
+		gap: var(--spacing-sm);
+	}
+
+	.detail-name {
+		font-weight: 600;
+		color: var(--color-muted);
+		min-width: 65px;
+	}
+
+	.detail-val {
+		color: var(--color-text);
+	}
+
+	.featured-excerpt {
+		font-size: var(--font-size-sm);
+		color: var(--color-muted);
+		margin: 0;
+		line-height: var(--leading-normal);
+	}
+
+	.featured-card-bottom {
+		padding: var(--spacing-md) var(--spacing-xl) var(--spacing-lg);
+		border-top: 1px solid var(--color-border);
+	}
+
+	.w-full {
+		width: 100%;
+	}
+
+	.all-retreats-link-wrap {
+		text-align: center;
+		margin-top: var(--spacing-xl);
+	}
+
+	.link-muted-arrow {
+		font-size: var(--font-size-sm);
+		font-weight: 600;
+		color: var(--color-brand);
+		text-decoration: none;
+	}
+
+	.link-muted-arrow:hover {
+		color: var(--color-brand-strong);
+		text-decoration: underline;
+	}
+
+	/* Pillars */
+	.section-pillars {
+		background: var(--color-surface);
+		border-top: 1px solid var(--color-border);
+		border-bottom: 1px solid var(--color-border);
+	}
+
+	.pillars-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+		gap: var(--spacing-2xl);
+	}
+
+	.pillar-item {
+		display: flex;
+		flex-direction: column;
+		gap: var(--spacing-xs);
+	}
+
+	.pillar-icon-box {
+		font-family: var(--font-heading);
+		font-size: var(--font-size-xl);
+		font-weight: 700;
+		color: var(--color-ochre);
+		margin-bottom: var(--spacing-xs);
+	}
+
+	.pillar-item h3 {
+		margin: 0;
+		font-size: var(--font-size-xl);
+	}
+
+	.pillar-item p {
+		margin: 0;
+		font-size: var(--font-size-sm);
+		color: var(--color-muted);
+		line-height: var(--leading-relaxed);
+	}
+
+	/* Articles */
+	.articles-summary-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+		gap: var(--spacing-2xl);
 		margin-bottom: var(--spacing-xl);
+	}
+
+	.article-summary-card {
+		background: var(--color-surface);
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-lg);
+		padding: var(--spacing-xl);
+		display: flex;
+		flex-direction: column;
+	}
+
+	.summary-author {
+		font-size: var(--font-size-xs);
+		font-weight: 600;
+		color: var(--color-accent);
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		margin-bottom: var(--spacing-xs);
+	}
+
+	.summary-title {
+		margin: 0 0 var(--spacing-sm);
+		font-size: var(--font-size-2xl);
+	}
+
+	.summary-title a {
+		color: var(--color-text);
+		text-decoration: none;
+	}
+
+	.summary-title a:hover {
+		color: var(--color-brand);
+	}
+
+	.summary-excerpt {
+		font-size: var(--font-size-sm);
+		color: var(--color-muted);
+		line-height: var(--leading-relaxed);
+		margin: 0 0 var(--spacing-lg);
+		flex: 1;
+	}
+
+	.summary-link {
+		font-size: var(--font-size-sm);
+		font-weight: 600;
+		color: var(--color-brand);
+		text-decoration: none;
+	}
+
+	.summary-link:hover {
+		text-decoration: underline;
+	}
+
+	/* Giving Banner */
+	.giving-banner-card {
+		background: color-mix(in srgb, var(--color-brand) 8%, var(--color-surface));
+		border: 1px solid color-mix(in srgb, var(--color-brand) 25%, var(--color-border));
+		border-radius: var(--radius-lg);
+		padding: var(--spacing-3xl);
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: var(--spacing-2xl);
+	}
+
+	.banner-kicker {
+		font-size: var(--font-size-xs);
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: var(--color-ochre);
+		display: block;
+		margin-bottom: var(--spacing-xs);
+	}
+
+	.giving-banner-text h2 {
+		margin: 0 0 var(--spacing-xs);
+		font-size: var(--font-size-3xl);
+	}
+
+	.giving-banner-text p {
+		margin: 0;
+		color: var(--color-muted);
+		font-size: var(--font-size-base);
+		max-width: 580px;
+		line-height: var(--leading-normal);
+	}
+
+	.giving-banner-action {
+		flex-shrink: 0;
+	}
+
+	@media (max-width: 768px) {
+		.hero-title {
+			font-size: var(--font-size-4xl);
+		}
+
+		.giving-banner-card {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+
+		.giving-banner-action {
+			width: 100%;
+		}
+
+		.giving-banner-action .btn {
+			width: 100%;
+		}
 	}
 </style>

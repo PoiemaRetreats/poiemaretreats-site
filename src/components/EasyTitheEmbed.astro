@@ -1,0 +1,111 @@
+---
+interface Props {
+	formId: string;
+	title?: string;
+	subtitle?: string;
+}
+
+const { formId, title, subtitle } = Astro.props;
+
+// Extract GUID if full URL was provided
+const cleanFormId = formId?.includes("formId=")
+	? formId.split("formId=")[1].split("&")[0]
+	: formId?.trim();
+---
+
+<div class="easytithe-wrapper" id={`form-section-${cleanFormId}`}>
+	<div class="easytithe-card">
+		<div class="easytithe-header">
+			<span class="easytithe-badge">Secure Registration</span>
+			{title && <h3 class="easytithe-title">{title}</h3>}
+			{subtitle && <p class="easytithe-subtitle">{subtitle}</p>}
+		</div>
+
+		<div class="easytithe-frame">
+			<script is:inline src={`https://forms.ministryforms.net/embed.aspx?formId=${cleanFormId}`}></script>
+		</div>
+
+		<div class="easytithe-footer">
+			<p class="easytithe-fallback">
+				Having trouble viewing the embedded form?
+				<a
+					href={`https://forms.ministryforms.net/embed.aspx?formId=${cleanFormId}`}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="easytithe-direct-link"
+				>
+					Open registration form in a new tab &rarr;
+				</a>
+			</p>
+		</div>
+	</div>
+</div>
+
+<style>
+	.easytithe-wrapper {
+		margin: var(--spacing-2xl) 0;
+	}
+
+	.easytithe-card {
+		background: var(--color-surface);
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-lg);
+		box-shadow: var(--shadow);
+		padding: var(--spacing-xl);
+		overflow: hidden;
+	}
+
+	.easytithe-header {
+		margin-bottom: var(--spacing-lg);
+		border-bottom: 1px solid var(--color-border);
+		padding-bottom: var(--spacing-md);
+	}
+
+	.easytithe-badge {
+		display: inline-block;
+		font-size: var(--font-size-xs);
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		color: var(--color-accent);
+		margin-bottom: var(--spacing-xs);
+	}
+
+	.easytithe-title {
+		margin: 0 0 var(--spacing-xs);
+		font-size: var(--font-size-2xl);
+		color: var(--color-text);
+	}
+
+	.easytithe-subtitle {
+		margin: 0;
+		color: var(--color-muted);
+		font-size: var(--font-size-sm);
+	}
+
+	.easytithe-frame {
+		min-height: 380px;
+		width: 100%;
+		position: relative;
+	}
+
+	.easytithe-footer {
+		margin-top: var(--spacing-lg);
+		padding-top: var(--spacing-md);
+		border-top: 1px solid var(--color-border);
+		font-size: var(--font-size-xs);
+		color: var(--color-muted);
+		text-align: center;
+	}
+
+	.easytithe-direct-link {
+		color: var(--color-brand);
+		font-weight: 600;
+		text-decoration: underline;
+		margin-left: var(--spacing-xs);
+	}
+
+	.easytithe-direct-link:hover {
+		color: var(--color-brand-strong);
+	}
+</style>

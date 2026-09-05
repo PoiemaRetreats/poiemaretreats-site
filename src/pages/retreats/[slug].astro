@@ -1,0 +1,390 @@
+---
+import { getEmDashEntry } from "emdash";
+import { PortableText } from "emdash/ui";
+import Base from "../../layouts/Base.astro";
+import EasyTitheEmbed from "../../components/EasyTitheEmbed.astro";
+import { getRetreatStatus } from "../../utils/retreats";
+
+const { slug } = Astro.params;
+
+if (!slug) {
+	return Astro.redirect("/retreats");
+}
+
+const { entry: retreat, cacheHint } = await getEmDashEntry("retreats", slug);
+
+if (!retreat) {
+	return Astro.redirect("/404");
+}
+
+if (cacheHint) {
+	Astro.cache.set(cacheHint);
+}
+
+const status = getRetreatStatus(retreat.data);
+---
+
+<Base
+	title={retreat.data.title}
+	description={retreat.data.excerpt || retreat.data.subtitle}
+>
+	<article class="retreat-detail-page" {...retreat.edit}>
+		<header class="retreat-hero">
+			<div class="container">
+				<a href="/retreats" class="back-link">&larr; Back to all retreats</a>
+
+				<div class="hero-header-row">
+					<span class={`status-badge ${status.badgeClass}`}>
+						{status.badgeLabel}
+					</span>
+					{retreat.data.price && (
+						<span class="retreat-price">{retreat.data.price}</span>
+					)}
+				</div>
+
+				<h1 class="retreat-title">{retreat.data.title}</h1>
+
+				{retreat.data.subtitle && (
+					<p class="retreat-subtitle">{retreat.data.subtitle}</p>
+				)}
+
+				<div class="retreat-key-info">
+					<div class="info-card">
+						<span class="info-label">Dates</span>
+						<span class="info-value">{status.dateRangeFormatted}</span>
+					</div>
+					<div class="info-card">
+						<span class="info-label">Location</span>
+						<span class="info-value">{retreat.data.location}</span>
+					</div>
+					{retreat.data.registration_deadline && (
+						<div class="info-card">
+							<span class="info-label">Registration Deadline</span>
+							<span class="info-value">
+								{new Date(retreat.data.registration_deadline).toLocaleDateString("en-US", {
+									month: "short",
+									day: "numeric",
+									year: "numeric",
+								})}
+							</span>
+						</div>
+					)}
+				</div>
+			</div>
+		</header>
+
+		<div class="container retreat-content-container">
+			<div class="retreat-layout">
+				<div class="main-column">
+					{retreat.data.content && (
+						<section class="content-section">
+							<h2>About This Gathering</h2>
+							<div class="prose">
+								<PortableText value={retreat.data.content} />
+							</div>
+						</section>
+					)}
+
+					{retreat.data.schedule && (
+						<section class="content-section">
+							<h2>Schedule & Overview</h2>
+							<div class="schedule-box">
+								{retreat.data.schedule.split("\n").map((line: string) => (
+									<p class="schedule-line">{line}</p>
+								))}
+							</div>
+						</section>
+					)}
+
+					{retreat.data.lodging_info && (
+						<section class="content-section">
+							<h2>Lodging & Accommodations</h2>
+							<div class="lodging-box">
+								<p>{retreat.data.lodging_info}</p>
+							</div>
+						</section>
+					)}
+				</div>
+
+				<aside class="sidebar-column">
+					{status.isOpen && retreat.data.easy_tithe_form_id ? (
+						<div class="registration-panel">
+							<EasyTitheEmbed
+								formId={retreat.data.easy_tithe_form_id}
+								title="Reserve Your Spot"
+								subtitle="Complete the form below to register and submit payment."
+							/>
+						</div>
+					) : status.isPast ? (
+						<div class="status-notice-card">
+							<h3>Past Gathering</h3>
+							<p>This retreat has concluded. Check our upcoming schedule for future dates.</p>
+							<a href="/retreats" class="btn btn-secondary">Browse Upcoming Retreats</a>
+						</div>
+					) : status.isWaitlist ? (
+						<div class="status-notice-card">
+							<h3>Registration Closed / Waitlist</h3>
+							<p>The registration deadline for this retreat has passed or capacity is reached.</p>
+							<a href="/contact" class="btn btn-primary">Inquire About Waitlist</a>
+						</div>
+					) : status.isSoldOut ? (
+						<div class="status-notice-card">
+							<h3>Sold Out</h3>
+							<p>This gathering is at full capacity. Reach out to join our cancelation waitlist.</p>
+							<a href="/contact" class="btn btn-secondary">Contact Ministry</a>
+						</div>
+					) : (
+						<div class="status-notice-card">
+							<h3>Registration Information</h3>
+							<p>Registration details will be published soon. Feel free to contact us with questions.</p>
+							<a href="/contact" class="btn btn-secondary">Contact Us</a>
+						</div>
+					)}
+
+					<div class="scholarship-card">
+						<h4>Need-Based Scholarships</h4>
+						<p>We are committed to making retreats accessible regardless of financial circumstances.</p>
+						<a href="/funding" class="link-scholarship">Learn about financial aid &rarr;</a>
+					</div>
+				</aside>
+			</div>
+		</div>
+	</article>
+</Base>
+
+<style>
+	.container {
+		max-width: var(--wide-width);
+		margin: 0 auto;
+		padding: 0 var(--spacing-xl);
+	}
+
+	.retreat-hero {
+		background: var(--color-surface);
+		border-bottom: 1px solid var(--color-border);
+		padding: var(--spacing-3xl) 0 var(--spacing-3xl);
+	}
+
+	.back-link {
+		display: inline-block;
+		color: var(--color-muted);
+		text-decoration: none;
+		font-size: var(--font-size-sm);
+		font-weight: 500;
+		margin-bottom: var(--spacing-lg);
+		transition: color var(--transition-fast);
+	}
+
+	.back-link:hover {
+		color: var(--color-text);
+	}
+
+	.hero-header-row {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: var(--spacing-md);
+	}
+
+	.status-badge {
+		font-size: var(--font-size-xs);
+		font-weight: 700;
+		padding: 4px 12px;
+		border-radius: var(--radius-full);
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+	}
+
+	.badge-open {
+		background: color-mix(in srgb, var(--color-accent) 15%, transparent);
+		color: var(--color-accent);
+		border: 1px solid color-mix(in srgb, var(--color-accent) 30%, transparent);
+	}
+
+	.badge-waitlist {
+		background: color-mix(in srgb, var(--color-ochre) 15%, transparent);
+		color: var(--color-ochre);
+		border: 1px solid color-mix(in srgb, var(--color-ochre) 30%, transparent);
+	}
+
+	.badge-sold-out {
+		background: color-mix(in srgb, var(--color-danger) 15%, transparent);
+		color: var(--color-danger);
+		border: 1px solid color-mix(in srgb, var(--color-danger) 30%, transparent);
+	}
+
+	.badge-past {
+		background: color-mix(in srgb, var(--color-muted) 15%, transparent);
+		color: var(--color-muted);
+		border: 1px solid color-mix(in srgb, var(--color-muted) 30%, transparent);
+	}
+
+	.retreat-price {
+		font-size: var(--font-size-lg);
+		font-weight: 700;
+		color: var(--color-brand);
+	}
+
+	.retreat-title {
+		margin: 0 0 var(--spacing-xs);
+		font-size: var(--font-size-4xl);
+		color: var(--color-text);
+	}
+
+	.retreat-subtitle {
+		font-size: var(--font-size-xl);
+		color: var(--color-muted);
+		font-style: italic;
+		margin: 0 0 var(--spacing-2xl);
+	}
+
+	.retreat-key-info {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		gap: var(--spacing-md);
+	}
+
+	.info-card {
+		background: var(--color-bg);
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius);
+		padding: var(--spacing-md) var(--spacing-lg);
+		display: flex;
+		flex-direction: column;
+	}
+
+	.info-label {
+		font-size: var(--font-size-xs);
+		font-weight: 600;
+		color: var(--color-muted);
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		margin-bottom: var(--spacing-xs);
+	}
+
+	.info-value {
+		font-size: var(--font-size-base);
+		font-weight: 600;
+		color: var(--color-text);
+	}
+
+	.retreat-content-container {
+		padding-top: var(--spacing-4xl);
+		padding-bottom: var(--spacing-5xl);
+	}
+
+	.retreat-layout {
+		display: grid;
+		grid-template-columns: 1.5fr 1fr;
+		gap: var(--spacing-4xl);
+		align-items: start;
+	}
+
+	.content-section {
+		margin-bottom: var(--spacing-3xl);
+	}
+
+	.content-section h2 {
+		font-size: var(--font-size-2xl);
+		margin: 0 0 var(--spacing-md);
+		border-bottom: 1px solid var(--color-border);
+		padding-bottom: var(--spacing-xs);
+	}
+
+	.prose {
+		color: var(--color-text);
+		line-height: var(--leading-relaxed);
+		font-size: var(--font-size-base);
+	}
+
+	.schedule-box,
+	.lodging-box {
+		background: var(--color-surface);
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius);
+		padding: var(--spacing-lg);
+	}
+
+	.schedule-line {
+		margin: 0 0 var(--spacing-xs);
+		line-height: var(--leading-normal);
+		font-size: var(--font-size-sm);
+	}
+
+	.schedule-line:last-child {
+		margin-bottom: 0;
+	}
+
+	.sidebar-column {
+		position: sticky;
+		top: calc(75px + var(--spacing-xl));
+		display: flex;
+		flex-direction: column;
+		gap: var(--spacing-xl);
+	}
+
+	.registration-panel :global(.easytithe-wrapper) {
+		margin: 0;
+	}
+
+	.status-notice-card {
+		background: var(--color-surface);
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-lg);
+		padding: var(--spacing-xl);
+		text-align: center;
+	}
+
+	.status-notice-card h3 {
+		margin: 0 0 var(--spacing-xs);
+		font-size: var(--font-size-xl);
+	}
+
+	.status-notice-card p {
+		color: var(--color-muted);
+		font-size: var(--font-size-sm);
+		margin: 0 0 var(--spacing-lg);
+		line-height: var(--leading-normal);
+	}
+
+	.scholarship-card {
+		background: color-mix(in srgb, var(--color-accent) 8%, var(--color-surface));
+		border: 1px solid color-mix(in srgb, var(--color-accent) 25%, var(--color-border));
+		border-radius: var(--radius);
+		padding: var(--spacing-lg);
+	}
+
+	.scholarship-card h4 {
+		margin: 0 0 var(--spacing-xs);
+		font-size: var(--font-size-base);
+		color: var(--color-text);
+	}
+
+	.scholarship-card p {
+		margin: 0 0 var(--spacing-sm);
+		font-size: var(--font-size-xs);
+		color: var(--color-muted);
+		line-height: var(--leading-normal);
+	}
+
+	.link-scholarship {
+		font-size: var(--font-size-xs);
+		font-weight: 600;
+		color: var(--color-accent);
+		text-decoration: none;
+	}
+
+	.link-scholarship:hover {
+		text-decoration: underline;
+	}
+
+	@media (max-width: 900px) {
+		.retreat-layout {
+			grid-template-columns: 1fr;
+		}
+
+		.sidebar-column {
+			position: static;
+		}
+	}
+</style>

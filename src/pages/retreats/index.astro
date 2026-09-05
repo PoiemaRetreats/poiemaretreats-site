@@ -1,0 +1,452 @@
+---
+import { getEmDashCollection } from "emdash";
+import Base from "../../layouts/Base.astro";
+import { getRetreatStatus } from "../../utils/retreats";
+
+const { entries: allRetreats, cacheHint } = await getEmDashCollection("retreats", {
+	status: "published",
+});
+
+if (cacheHint) {
+	Astro.cache.set(cacheHint);
+}
+
+// Split into upcoming and past gatherings
+const upcomingRetreats: typeof allRetreats = [];
+const pastRetreats: typeof allRetreats = [];
+
+for (const retreat of allRetreats) {
+	const status = getRetreatStatus(retreat.data);
+	if (status.isPast) {
+		pastRetreats.push(retreat);
+	} else {
+		upcomingRetreats.push(retreat);
+	}
+}
+
+// Sort upcoming chronologically ascending
+upcomingRetreats.sort((a, b) => {
+	const timeA = new Date(a.data.start_date).getTime();
+	const timeB = new Date(b.data.start_date).getTime();
+	return timeA - timeB;
+});
+
+// Sort past reverse chronologically descending
+pastRetreats.sort((a, b) => {
+	const timeA = new Date(a.data.start_date).getTime();
+	const timeB = new Date(b.data.start_date).getTime();
+	return timeB - timeA;
+});
+---
+
+<Base
+	title="Retreats & Conferences"
+	description="Upcoming conferences and restful gatherings for young adults, college students, and singles."
+>
+	<div class="retreats-page">
+		<header class="page-header">
+			<div class="container">
+				<span class="sub-heading">Poiema Gatherings</span>
+				<h1 class="page-title">Retreats & Conferences</h1>
+				<p class="page-intro">
+					Stepping out of the noise and into fellowship, rich biblical teaching, and intentional rest in the beauty of God's creation.
+				</p>
+			</div>
+		</header>
+
+		<section class="section">
+			<div class="container">
+				<div class="section-title-wrap">
+					<h2>Upcoming Gatherings</h2>
+					<p class="section-desc">Open for registration and details</p>
+				</div>
+
+				{upcomingRetreats.length === 0 ? (
+					<div class="empty-state">
+						<p>No upcoming retreats currently scheduled. Check back soon or contact us for upcoming announcements!</p>
+					</div>
+				) : (
+					<div class="retreats-grid">
+						{upcomingRetreats.map((retreat) => {
+							const status = getRetreatStatus(retreat.data);
+							return (
+								<article class="retreat-card" {...retreat.edit}>
+									<div class="card-header">
+										<span class={`status-badge ${status.badgeClass}`}>
+											{status.badgeLabel}
+										</span>
+										{retreat.data.price && (
+											<span class="price-tag">{retreat.data.price}</span>
+										)}
+									</div>
+
+									<div class="card-body">
+										<h3 class="retreat-card-title">
+											<a href={`/retreats/${retreat.id}`}>
+												{retreat.data.title}
+											</a>
+										</h3>
+
+										{retreat.data.subtitle && (
+											<p class="retreat-subtitle">{retreat.data.subtitle}</p>
+										)}
+
+										<div class="retreat-meta">
+											<div class="meta-item">
+												<span class="meta-label">Dates:</span>
+												<span class="meta-value">{status.dateRangeFormatted}</span>
+											</div>
+											<div class="meta-item">
+												<span class="meta-label">Location:</span>
+												<span class="meta-value">{retreat.data.location}</span>
+											</div>
+										</div>
+
+										{retreat.data.excerpt && (
+											<p class="retreat-excerpt">{retreat.data.excerpt}</p>
+										)}
+									</div>
+
+									<div class="card-footer">
+										<a href={`/retreats/${retreat.id}`} class="btn btn-primary card-btn">
+											{status.isOpen ? "View Details & Register" : "View Details"} &rarr;
+										</a>
+									</div>
+								</article>
+							);
+						})}
+					</div>
+				)}
+			</div>
+		</section>
+
+		{pastRetreats.length > 0 && (
+			<section class="section section-past" id="past">
+				<div class="container">
+					<div class="section-title-wrap">
+						<h2>Past Gatherings & Archive</h2>
+						<p class="section-desc">Recaps and memories from previous conferences</p>
+					</div>
+
+					<div class="past-grid">
+						{pastRetreats.map((retreat) => {
+							const status = getRetreatStatus(retreat.data);
+							return (
+								<article class="past-card" {...retreat.edit}>
+									<div class="past-card-content">
+										<span class="past-dates">{status.dateRangeFormatted}</span>
+										<h3 class="past-title">
+											<a href={`/retreats/${retreat.id}`}>{retreat.data.title}</a>
+										</h3>
+										<p class="past-location">{retreat.data.location}</p>
+										{retreat.data.excerpt && (
+											<p class="past-excerpt">{retreat.data.excerpt}</p>
+										)}
+									</div>
+									<div class="past-card-action">
+										<a href={`/retreats/${retreat.id}`} class="btn btn-secondary btn-sm">
+											View Archive
+										</a>
+									</div>
+								</article>
+							);
+						})}
+					</div>
+				</div>
+			</section>
+		)}
+	</div>
+</Base>
+
+<style>
+	.container {
+		max-width: var(--wide-width);
+		margin: 0 auto;
+		padding: 0 var(--spacing-xl);
+	}
+
+	.page-header {
+		padding: var(--spacing-4xl) 0 var(--spacing-2xl);
+		background: var(--color-surface);
+		border-bottom: 1px solid var(--color-border);
+		text-align: center;
+	}
+
+	.sub-heading {
+		font-size: var(--font-size-sm);
+		font-weight: 600;
+		color: var(--color-accent);
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		display: block;
+		margin-bottom: var(--spacing-xs);
+	}
+
+	.page-title {
+		margin: 0 0 var(--spacing-md);
+		color: var(--color-text);
+	}
+
+	.page-intro {
+		max-width: 680px;
+		margin: 0 auto;
+		font-size: var(--font-size-lg);
+		color: var(--color-muted);
+		line-height: var(--leading-relaxed);
+	}
+
+	.section {
+		padding: var(--spacing-4xl) 0;
+	}
+
+	.section-past {
+		background: color-mix(in srgb, var(--color-surface) 50%, var(--color-bg));
+		border-top: 1px solid var(--color-border);
+	}
+
+	.section-title-wrap {
+		margin-bottom: var(--spacing-2xl);
+	}
+
+	.section-title-wrap h2 {
+		margin: 0 0 var(--spacing-xs);
+		font-size: var(--font-size-3xl);
+	}
+
+	.section-desc {
+		margin: 0;
+		color: var(--color-muted);
+		font-size: var(--font-size-base);
+	}
+
+	.retreats-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+		gap: var(--spacing-2xl);
+	}
+
+	.retreat-card {
+		background: var(--color-surface);
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-lg);
+		display: flex;
+		flex-direction: column;
+		overflow: hidden;
+		box-shadow: var(--shadow-sm);
+		transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+	}
+
+	.retreat-card:hover {
+		transform: translateY(-2px);
+		box-shadow: var(--shadow-lg);
+	}
+
+	.card-header {
+		padding: var(--spacing-lg) var(--spacing-xl) 0;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.status-badge {
+		font-size: var(--font-size-xs);
+		font-weight: 700;
+		padding: 4px 10px;
+		border-radius: var(--radius-full);
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+	}
+
+	.badge-open {
+		background: color-mix(in srgb, var(--color-accent) 15%, transparent);
+		color: var(--color-accent);
+		border: 1px solid color-mix(in srgb, var(--color-accent) 30%, transparent);
+	}
+
+	.badge-waitlist {
+		background: color-mix(in srgb, var(--color-ochre) 15%, transparent);
+		color: var(--color-ochre);
+		border: 1px solid color-mix(in srgb, var(--color-ochre) 30%, transparent);
+	}
+
+	.badge-sold-out {
+		background: color-mix(in srgb, var(--color-danger) 15%, transparent);
+		color: var(--color-danger);
+		border: 1px solid color-mix(in srgb, var(--color-danger) 30%, transparent);
+	}
+
+	.badge-past {
+		background: color-mix(in srgb, var(--color-muted) 15%, transparent);
+		color: var(--color-muted);
+		border: 1px solid color-mix(in srgb, var(--color-muted) 30%, transparent);
+	}
+
+	.price-tag {
+		font-size: var(--font-size-sm);
+		font-weight: 600;
+		color: var(--color-brand);
+	}
+
+	.card-body {
+		padding: var(--spacing-lg) var(--spacing-xl);
+		flex: 1;
+	}
+
+	.retreat-card-title {
+		margin: 0 0 var(--spacing-xs);
+		font-size: var(--font-size-2xl);
+	}
+
+	.retreat-card-title a {
+		color: var(--color-text);
+		text-decoration: none;
+	}
+
+	.retreat-card-title a:hover {
+		color: var(--color-brand);
+	}
+
+	.retreat-subtitle {
+		font-size: var(--font-size-sm);
+		color: var(--color-muted);
+		font-style: italic;
+		margin: 0 0 var(--spacing-md);
+	}
+
+	.retreat-meta {
+		background: var(--color-bg);
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-sm);
+		padding: var(--spacing-sm) var(--spacing-md);
+		margin-bottom: var(--spacing-md);
+		display: flex;
+		flex-direction: column;
+		gap: var(--spacing-xs);
+		font-size: var(--font-size-sm);
+	}
+
+	.meta-item {
+		display: flex;
+		gap: var(--spacing-sm);
+	}
+
+	.meta-label {
+		font-weight: 600;
+		color: var(--color-muted);
+		min-width: 65px;
+	}
+
+	.meta-value {
+		color: var(--color-text);
+	}
+
+	.retreat-excerpt {
+		font-size: var(--font-size-sm);
+		color: var(--color-muted);
+		line-height: var(--leading-normal);
+		margin: 0;
+	}
+
+	.card-footer {
+		padding: var(--spacing-md) var(--spacing-xl) var(--spacing-lg);
+		border-top: 1px solid var(--color-border);
+	}
+
+	.card-btn {
+		width: 100%;
+	}
+
+	/* Past retreats cards */
+	.past-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+		gap: var(--spacing-lg);
+	}
+
+	.past-card {
+		background: var(--color-surface);
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius);
+		padding: var(--spacing-lg);
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: var(--spacing-md);
+	}
+
+	.past-card-content {
+		flex: 1;
+	}
+
+	.past-dates {
+		font-size: var(--font-size-xs);
+		font-weight: 600;
+		color: var(--color-muted);
+		display: block;
+		margin-bottom: var(--spacing-xs);
+	}
+
+	.past-title {
+		margin: 0 0 2px;
+		font-size: var(--font-size-lg);
+	}
+
+	.past-title a {
+		color: var(--color-text);
+		text-decoration: none;
+	}
+
+	.past-title a:hover {
+		color: var(--color-brand);
+	}
+
+	.past-location {
+		font-size: var(--font-size-xs);
+		color: var(--color-muted);
+		margin: 0 0 var(--spacing-xs);
+	}
+
+	.past-excerpt {
+		font-size: var(--font-size-xs);
+		color: var(--color-muted);
+		margin: 0;
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+
+	.btn-sm {
+		font-size: var(--font-size-xs);
+		padding: var(--spacing-xs) var(--spacing-md);
+	}
+
+	.empty-state {
+		text-align: center;
+		padding: var(--spacing-3xl);
+		background: var(--color-surface);
+		border: 1px dashed var(--color-border);
+		border-radius: var(--radius-lg);
+		color: var(--color-muted);
+	}
+
+	@media (max-width: 640px) {
+		.retreats-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.past-card {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+
+		.past-card-action {
+			width: 100%;
+			margin-top: var(--spacing-sm);
+		}
+
+		.past-card-action .btn {
+			width: 100%;
+		}
+	}
+</style>

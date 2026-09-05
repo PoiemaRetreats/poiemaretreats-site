@@ -1,0 +1,215 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base
+	title="About Poiema Retreats"
+	description="The mission, pastoral leadership, and purpose behind Poiema Retreats — Ephesians 2:10."
+>
+	<div class="about-page">
+		<header class="page-header">
+			<div class="container">
+				<span class="sub-heading">Our Mission & Identity</span>
+				<h1 class="page-title">For We Are His Workmanship</h1>
+				<p class="page-intro">
+					"For we are His workmanship, created in Christ Jesus for good works, which God prepared beforehand that we should walk in them." &mdash; Ephesians 2:10
+				</p>
+			</div>
+		</header>
+
+		<section class="section">
+			<div class="container">
+				<div class="story-grid">
+					<div class="story-content">
+						<h2>The Purpose of Poiema</h2>
+						<p>
+							Poiema Retreats was formed out of a pastoral concern for young adults, college students, and singles living in a fragmented and hurried culture. Between college life and career demands, deep Christian friendship and unhurried theological reflection often get crowded out.
+						</p>
+						<p>
+							The Greek word <em>ποίημα</em> (poiema) signifies something skillfully crafted &mdash; a work of art, a poem, an intentional creation. Scripture reminds us that the church is not a machine or a corporate enterprise, but God's living workmanship in the world.
+						</p>
+						<p>
+							Our retreats take young people away from daily distractions and place them in settings of natural wonder &mdash; whether the barrier island shores of the Outer Banks or the highlands of the Blue Ridge &mdash; to feast upon God's Word, sing together, break bread, and build enduring Christian friendships.
+						</p>
+
+						<h2>Church Oversight & Doctrine</h2>
+						<p>
+							Poiema Retreats is a ministry operating under the spiritual oversight and care of <strong>Saint Peter Presbyterian Church</strong>, located in Bristol, Virginia. Our teaching is firmly grounded in the historic Reformed and Presbyterian tradition, holding faithfully to the Westminster Confession of Faith and Catechisms while welcoming believers across faithful Christian denominations.
+						</p>
+					</div>
+
+					<aside class="pillars-sidebar">
+						<div class="pillar-box">
+							<h3>Core Pillars</h3>
+							<ul class="pillars-list">
+								<li>
+									<strong>Theological Depth</strong>
+									<span>Sound doctrine that nourishes heart and mind, taught by seasoned pastors and teachers.</span>
+								</li>
+								<li>
+									<strong>Shared Hospitality</strong>
+									<span>Common tables, communal home cooking, and unstructured time for meaningful dialogue.</span>
+								</li>
+								<li>
+									<strong>Creation & Rest</strong>
+									<span>Coastal breezes and mountain vistas that invite contemplation and true Sabbath rest.</span>
+								</li>
+								<li>
+									<strong>Lifelong Fellowship</strong>
+									<span>Friendships forged across churches, vocations, and geographic boundaries.</span>
+								</li>
+							</ul>
+						</div>
+
+						<div class="sidebar-cta">
+							<h3>Join Us at Our Next Gathering</h3>
+							<p>Explore upcoming conference dates and secure your spot.</p>
+							<a href="/retreats" class="btn btn-primary cta-btn">Explore Retreats &rarr;</a>
+						</div>
+					</aside>
+				</div>
+			</div>
+		</section>
+	</div>
+</Base>
+
+<style>
+	.container {
+		max-width: var(--wide-width);
+		margin: 0 auto;
+		padding: 0 var(--spacing-xl);
+	}
+
+	.page-header {
+		padding: var(--spacing-4xl) 0 var(--spacing-3xl);
+		background: var(--color-surface);
+		border-bottom: 1px solid var(--color-border);
+		text-align: center;
+	}
+
+	.sub-heading {
+		font-size: var(--font-size-sm);
+		font-weight: 600;
+		color: var(--color-accent);
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		display: block;
+		margin-bottom: var(--spacing-xs);
+	}
+
+	.page-title {
+		margin: 0 0 var(--spacing-md);
+		color: var(--color-text);
+	}
+
+	.page-intro {
+		max-width: 680px;
+		margin: 0 auto;
+		font-size: var(--font-size-lg);
+		color: var(--color-muted);
+		line-height: var(--leading-relaxed);
+		font-style: italic;
+	}
+
+	.section {
+		padding: var(--spacing-4xl) 0 var(--spacing-5xl);
+	}
+
+	.story-grid {
+		display: grid;
+		grid-template-columns: 1.5fr 1fr;
+		gap: var(--spacing-4xl);
+		align-items: start;
+	}
+
+	.story-content h2 {
+		font-size: var(--font-size-3xl);
+		margin: var(--spacing-2xl) 0 var(--spacing-md);
+	}
+
+	.story-content h2:first-child {
+		margin-top: 0;
+	}
+
+	.story-content p {
+		font-size: var(--font-size-lg);
+		color: var(--color-text);
+		line-height: var(--leading-relaxed);
+		margin-bottom: var(--spacing-xl);
+	}
+
+	.pillars-sidebar {
+		display: flex;
+		flex-direction: column;
+		gap: var(--spacing-2xl);
+	}
+
+	.pillar-box {
+		background: var(--color-surface);
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-lg);
+		padding: var(--spacing-xl);
+	}
+
+	.pillar-box h3 {
+		margin: 0 0 var(--spacing-lg);
+		font-size: var(--font-size-xl);
+		border-bottom: 1px solid var(--color-border);
+		padding-bottom: var(--spacing-xs);
+	}
+
+	.pillars-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		gap: var(--spacing-lg);
+	}
+
+	.pillars-list li {
+		display: flex;
+		flex-direction: column;
+		gap: var(--spacing-xs);
+	}
+
+	.pillars-list strong {
+		color: var(--color-brand);
+		font-size: var(--font-size-base);
+	}
+
+	.pillars-list span {
+		color: var(--color-muted);
+		font-size: var(--font-size-sm);
+		line-height: var(--leading-normal);
+	}
+
+	.sidebar-cta {
+		background: color-mix(in srgb, var(--color-accent) 10%, var(--color-surface));
+		border: 1px solid color-mix(in srgb, var(--color-accent) 25%, var(--color-border));
+		border-radius: var(--radius-lg);
+		padding: var(--spacing-xl);
+		text-align: center;
+	}
+
+	.sidebar-cta h3 {
+		margin: 0 0 var(--spacing-xs);
+		font-size: var(--font-size-xl);
+	}
+
+	.sidebar-cta p {
+		color: var(--color-muted);
+		font-size: var(--font-size-sm);
+		margin: 0 0 var(--spacing-lg);
+	}
+
+	.cta-btn {
+		width: 100%;
+	}
+
+	@media (max-width: 860px) {
+		.story-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

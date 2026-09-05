@@ -1,0 +1,199 @@
+---
+import { getEmDashCollection } from "emdash";
+import Base from "../../layouts/Base.astro";
+
+const { entries: articles, cacheHint } = await getEmDashCollection("articles", {
+	status: "published",
+	orderBy: { published_at: "desc" },
+});
+
+if (cacheHint) {
+	Astro.cache.set(cacheHint);
+}
+---
+
+<Base
+	title="Pastoral Articles & Essays"
+	description="Essays, theological reflections, and letters from pastors on Christian vocation, discipleship, and communion."
+>
+	<div class="articles-page">
+		<header class="page-header">
+			<div class="container">
+				<span class="sub-heading">Writings & Reflections</span>
+				<h1 class="page-title">Articles & Essays</h1>
+				<p class="page-intro">
+					Theological essays, pastoral letters, and devotional reflections on being crafted as God's workmanship in our homes, callings, and churches.
+				</p>
+			</div>
+		</header>
+
+		<section class="section">
+			<div class="container">
+				{articles.length === 0 ? (
+					<div class="empty-state">
+						<p>No articles published yet. Check back soon for new pastoral writings.</p>
+					</div>
+				) : (
+					<div class="articles-list">
+						{articles.map((article) => {
+							const formattedDate = article.data.published_at
+								? new Date(article.data.published_at).toLocaleDateString("en-US", {
+										month: "long",
+										day: "numeric",
+										year: "numeric",
+									})
+								: null;
+
+							return (
+								<article class="article-card" {...article.edit}>
+									<div class="article-meta">
+										<span class="article-author">{article.data.author}</span>
+										{formattedDate && (
+											<>
+												<span class="meta-dot">&bull;</span>
+												<time datetime={article.data.published_at}>
+													{formattedDate}
+												</time>
+											</>
+										)}
+									</div>
+
+									<h2 class="article-title">
+										<a href={`/articles/${article.id}`}>{article.data.title}</a>
+									</h2>
+
+									{article.data.excerpt && (
+										<p class="article-excerpt">{article.data.excerpt}</p>
+									)}
+
+									<div class="article-footer">
+										<a href={`/articles/${article.id}`} class="read-more-link">
+											Read Article &rarr;
+										</a>
+									</div>
+								</article>
+							);
+						})}
+					</div>
+				)}
+			</div>
+		</section>
+	</div>
+</Base>
+
+<style>
+	.container {
+		max-width: var(--max-width);
+		margin: 0 auto;
+		padding: 0 var(--spacing-xl);
+	}
+
+	.page-header {
+		padding: var(--spacing-4xl) 0 var(--spacing-3xl);
+		background: var(--color-surface);
+		border-bottom: 1px solid var(--color-border);
+		text-align: center;
+	}
+
+	.sub-heading {
+		font-size: var(--font-size-sm);
+		font-weight: 600;
+		color: var(--color-accent);
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		display: block;
+		margin-bottom: var(--spacing-xs);
+	}
+
+	.page-title {
+		margin: 0 0 var(--spacing-md);
+		color: var(--color-text);
+	}
+
+	.page-intro {
+		max-width: 600px;
+		margin: 0 auto;
+		font-size: var(--font-size-lg);
+		color: var(--color-muted);
+		line-height: var(--leading-relaxed);
+	}
+
+	.section {
+		padding: var(--spacing-4xl) 0 var(--spacing-5xl);
+	}
+
+	.articles-list {
+		display: flex;
+		flex-direction: column;
+		gap: var(--spacing-3xl);
+	}
+
+	.article-card {
+		padding-bottom: var(--spacing-3xl);
+		border-bottom: 1px solid var(--color-border);
+	}
+
+	.article-card:last-child {
+		border-bottom: none;
+	}
+
+	.article-meta {
+		font-size: var(--font-size-xs);
+		color: var(--color-muted);
+		margin-bottom: var(--spacing-xs);
+		display: flex;
+		align-items: center;
+		gap: var(--spacing-xs);
+	}
+
+	.article-author {
+		font-weight: 600;
+		color: var(--color-accent);
+	}
+
+	.meta-dot {
+		opacity: 0.5;
+	}
+
+	.article-title {
+		margin: 0 0 var(--spacing-sm);
+		font-size: var(--font-size-3xl);
+	}
+
+	.article-title a {
+		color: var(--color-text);
+		text-decoration: none;
+	}
+
+	.article-title a:hover {
+		color: var(--color-brand);
+	}
+
+	.article-excerpt {
+		font-size: var(--font-size-base);
+		color: var(--color-muted);
+		line-height: var(--leading-relaxed);
+		margin: 0 0 var(--spacing-md);
+	}
+
+	.read-more-link {
+		font-size: var(--font-size-sm);
+		font-weight: 600;
+		color: var(--color-brand);
+		text-decoration: none;
+	}
+
+	.read-more-link:hover {
+		color: var(--color-brand-strong);
+		text-decoration: underline;
+	}
+
+	.empty-state {
+		text-align: center;
+		padding: var(--spacing-3xl);
+		background: var(--color-surface);
+		border: 1px dashed var(--color-border);
+		border-radius: var(--radius-lg);
+		color: var(--color-muted);
+	}
+</style>
