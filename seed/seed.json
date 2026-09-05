@@ -2,15 +2,186 @@
 	"$schema": "https://emdashcms.com/seed.schema.json",
 	"version": "1",
 	"meta": {
-		"name": "Marketing Starter",
-		"description": "A conversion-focused marketing site with landing pages",
-		"author": "EmDash"
+		"name": "Poiema Retreats",
+		"description": "Poiema Retreats ministry website — conferences, pastoral articles, and media",
+		"author": "Poiema Retreats"
 	},
 	"settings": {
-		"title": "Acme",
-		"tagline": "Build products people actually want"
+		"title": "Poiema Retreats",
+		"tagline": "For we are His workmanship — Ephesians 2:10"
 	},
 	"collections": [
+		{
+			"slug": "retreats",
+			"label": "Retreats",
+			"labelSingular": "Retreat",
+			"supports": ["drafts", "revisions", "search", "seo"],
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Retreat Title",
+					"type": "string",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "subtitle",
+					"label": "Subtitle / Theme",
+					"type": "string"
+				},
+				{
+					"slug": "start_date",
+					"label": "Start Date",
+					"type": "datetime",
+					"required": true
+				},
+				{
+					"slug": "end_date",
+					"label": "End Date",
+					"type": "datetime",
+					"required": true
+				},
+				{
+					"slug": "registration_deadline",
+					"label": "Registration Deadline",
+					"type": "datetime"
+				},
+				{
+					"slug": "status_override",
+					"label": "Status Override (automatic, sold_out, waitlist, canceled)",
+					"type": "string"
+				},
+				{
+					"slug": "location",
+					"label": "Location / Venue",
+					"type": "string",
+					"required": true
+				},
+				{
+					"slug": "price",
+					"label": "Cost / Registration Fee",
+					"type": "string"
+				},
+				{
+					"slug": "easy_tithe_form_id",
+					"label": "EasyTithe / MinistryForms Form ID",
+					"type": "string"
+				},
+				{
+					"slug": "featured_image",
+					"label": "Featured Image",
+					"type": "image"
+				},
+				{
+					"slug": "excerpt",
+					"label": "Brief Summary",
+					"type": "text",
+					"searchable": true
+				},
+				{
+					"slug": "content",
+					"label": "Full Description & Details",
+					"type": "portableText",
+					"searchable": true
+				},
+				{
+					"slug": "schedule",
+					"label": "Schedule Outline",
+					"type": "text"
+				},
+				{
+					"slug": "lodging_info",
+					"label": "Lodging & Accommodations",
+					"type": "text"
+				}
+			]
+		},
+		{
+			"slug": "articles",
+			"label": "Articles",
+			"labelSingular": "Article",
+			"supports": ["drafts", "revisions", "search", "seo"],
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Title",
+					"type": "string",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "author",
+					"label": "Author",
+					"type": "string",
+					"required": true
+				},
+				{
+					"slug": "published_at",
+					"label": "Published Date",
+					"type": "datetime",
+					"required": true
+				},
+				{
+					"slug": "excerpt",
+					"label": "Summary / Excerpt",
+					"type": "text",
+					"searchable": true
+				},
+				{
+					"slug": "featured_image",
+					"label": "Featured Image",
+					"type": "image"
+				},
+				{
+					"slug": "content",
+					"label": "Article Content",
+					"type": "portableText",
+					"searchable": true
+				}
+			]
+		},
+		{
+			"slug": "media",
+			"label": "Media",
+			"labelSingular": "Media Item",
+			"supports": ["drafts", "revisions", "search", "seo"],
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Title",
+					"type": "string",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "media_type",
+					"label": "Media Type (Sermon, Lecture, Podcast)",
+					"type": "string",
+					"required": true
+				},
+				{
+					"slug": "speaker",
+					"label": "Speaker / Teacher",
+					"type": "string"
+				},
+				{
+					"slug": "date",
+					"label": "Date Recorded",
+					"type": "datetime"
+				},
+				{
+					"slug": "media_url",
+					"label": "Audio/Video URL or Embed",
+					"type": "string"
+				},
+				{
+					"slug": "description",
+					"label": "Description",
+					"type": "text",
+					"searchable": true
+				}
+			]
+		},
 		{
 			"slug": "pages",
 			"label": "Pages",
@@ -36,153 +207,167 @@
 			"name": "primary",
 			"label": "Primary Navigation",
 			"items": [
-				{
-					"type": "custom",
-					"label": "Features",
-					"url": "/#features"
-				},
-				{
-					"type": "custom",
-					"label": "Pricing",
-					"url": "/pricing"
-				},
-				{
-					"type": "custom",
-					"label": "Contact",
-					"url": "/contact"
-				}
-			]
-		},
-		{
-			"name": "footer_product",
-			"label": "Footer: Product",
-			"items": [
-				{ "type": "custom", "label": "Features", "url": "/#features" },
-				{ "type": "custom", "label": "Pricing", "url": "/pricing" },
-				{ "type": "custom", "label": "Changelog", "url": "/changelog" }
-			]
-		},
-		{
-			"name": "footer_company",
-			"label": "Footer: Company",
-			"items": [
+				{ "type": "custom", "label": "Retreats", "url": "/retreats" },
+				{ "type": "custom", "label": "Articles", "url": "/articles" },
+				{ "type": "custom", "label": "Media", "url": "/media" },
 				{ "type": "custom", "label": "About", "url": "/about" },
-				{ "type": "custom", "label": "Blog", "url": "/blog" },
-				{ "type": "custom", "label": "Careers", "url": "/careers" }
+				{ "type": "custom", "label": "Give", "url": "/funding" },
+				{ "type": "custom", "label": "Contact", "url": "/contact" }
 			]
 		},
 		{
-			"name": "footer_support",
-			"label": "Footer: Support",
+			"name": "footer_gatherings",
+			"label": "Retreats & Gatherings",
 			"items": [
-				{ "type": "custom", "label": "Documentation", "url": "/docs" },
-				{ "type": "custom", "label": "Contact", "url": "/contact" },
-				{ "type": "custom", "label": "Status", "url": "/status" }
+				{ "type": "custom", "label": "Upcoming Retreats", "url": "/retreats" },
+				{ "type": "custom", "label": "Past Retreats Archive", "url": "/retreats#past" },
+				{ "type": "custom", "label": "Financial Aid & Scholarships", "url": "/funding" }
+			]
+		},
+		{
+			"name": "footer_ministry",
+			"label": "Ministry & Resources",
+			"items": [
+				{ "type": "custom", "label": "Pastoral Articles", "url": "/articles" },
+				{ "type": "custom", "label": "Audio & Sermons", "url": "/media" },
+				{ "type": "custom", "label": "About Poiema", "url": "/about" },
+				{ "type": "custom", "label": "Contact Us", "url": "/contact" }
 			]
 		}
 	],
 	"content": {
-		"pages": [
+		"retreats": [
 			{
-				"id": "home",
-				"slug": "home",
+				"id": "poiema-obx-2026",
+				"slug": "poiema-obx-2026",
 				"status": "published",
 				"data": {
-					"title": "Home",
+					"title": "Poiema OBX 2026",
+					"subtitle": "Community, Fellowship, and Truth by the Ocean",
+					"start_date": "2026-10-15T16:00:00.000Z",
+					"end_date": "2026-10-19T11:00:00.000Z",
+					"registration_deadline": "2026-10-01T23:59:59.000Z",
+					"status_override": "automatic",
+					"location": "Kill Devil Hills, Outer Banks, NC",
+					"price": "$450 (lodging and meals included)",
+					"easy_tithe_form_id": "aa7f78b7-1076-4016-a63b-047c6243fb71",
+					"excerpt": "Join young adults and college students for a restorative week on the North Carolina coast with rich fellowship, sound biblical teaching, and ocean hospitality.",
 					"content": [
 						{
-							"_type": "marketing.hero",
-							"_key": "hero",
-							"headline": "Build products people actually want",
-							"subheadline": "The all-in-one platform for modern teams. Ship faster, collaborate better, and focus on what matters.",
-							"primaryCtaLabel": "Start Free Trial",
-							"primaryCtaUrl": "/signup",
-							"secondaryCtaLabel": "Watch Demo",
-							"secondaryCtaUrl": "/demo"
-						},
+							"_type": "block",
+							"_key": "b1",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"_key": "s1",
+									"text": "Poiema Retreats gathers young adults from across churches for theological depth, heartfelt worship, and genuine rest. Located right on the shores of Kill Devil Hills, our days feature morning lectures, communal meals, seaside recreation, and evening discussions around Scripture."
+								}
+							]
+						}
+					],
+					"schedule": "Thursday: Arrival & Welcome Dinner (6:00 PM)\nFriday & Saturday: Morning Prayer, Teaching Sessions, Free Ocean Time, Evening Seminar\nSunday: Lord's Day Worship & Feast\nMonday: Breakfast & Departure",
+					"lodging_info": "Spacious beachfront houses with shared bedrooms and common spaces for conversation, prayer, and relaxation."
+				}
+			},
+			{
+				"id": "blue-ridge-spring-retreat",
+				"slug": "blue-ridge-spring-retreat",
+				"status": "published",
+				"data": {
+					"title": "Blue Ridge Mountain Retreat",
+					"subtitle": "Quiet Waters & Mountain Fellowship",
+					"start_date": "2026-11-06T17:00:00.000Z",
+					"end_date": "2026-11-08T13:00:00.000Z",
+					"registration_deadline": "2026-10-25T23:59:59.000Z",
+					"status_override": "automatic",
+					"location": "Abingdon & Bristol Area, Blue Ridge Highlands, VA",
+					"price": "$220",
+					"easy_tithe_form_id": "aa7f78b7-1076-4016-a63b-047c6243fb71",
+					"excerpt": "A weekend retreat nestled in the Appalachian highlands focusing on prayer, vocation, and encouragement.",
+					"content": [
 						{
-							"_type": "marketing.features",
-							"_key": "features",
-							"headline": "Everything you need to ship",
-							"subheadline": "Powerful features that help your team move faster without sacrificing quality.",
-							"features": [
+							"_type": "block",
+							"_key": "br1",
+							"style": "normal",
+							"children": [
 								{
-									"icon": "zap",
-									"title": "Lightning Fast",
-									"description": "Built for speed from the ground up. Your team will notice the difference from day one."
-								},
+									"_type": "span",
+									"_key": "brs1",
+									"text": "Escape the noise of daily routines and step into the high stillness of the Blue Ridge mountains. Together, we will examine how Christian vocation and faithful friendship sustain us in our callings."
+								}
+							]
+						}
+					],
+					"schedule": "Friday: Check-in & Campfire Hymn Sing (7:00 PM)\nSaturday: Dual Lectures, Hiking / Recreation, Group Discussion\nSunday: Worship & Closing Fellowship",
+					"lodging_info": "Mountain lodge cabins with rustic warmth, wood-burning fireplaces, and catered family-style meals."
+				}
+			},
+			{
+				"id": "poiema-international-gdansk",
+				"slug": "poiema-international-gdansk",
+				"status": "published",
+				"data": {
+					"title": "Poiema International: Gdańsk, Poland",
+					"subtitle": "Global Fellowship & Church History",
+					"start_date": "2025-06-10T09:00:00.000Z",
+					"end_date": "2025-06-18T18:00:00.000Z",
+					"registration_deadline": "2025-04-01T23:59:59.000Z",
+					"status_override": "automatic",
+					"location": "Gdańsk, Poland",
+					"price": "$1,450",
+					"excerpt": "A historical and theological study tour uniting American and European believers across the Baltic coast.",
+					"content": [
+						{
+							"_type": "block",
+							"_key": "gd1",
+							"style": "normal",
+							"children": [
 								{
-									"icon": "shield",
-									"title": "Enterprise Security",
-									"description": "SOC 2 compliant with end-to-end encryption. Your data stays yours."
-								},
+									"_type": "span",
+									"_key": "gds1",
+									"text": "Our international trip brought young believers together for theological discussions, visits to historic Reformation sites, and encouragement alongside local sister congregations."
+								}
+							]
+						}
+					],
+					"schedule": "8 Days of lectures, site visits across Gdańsk and northern Poland, and collaborative worship.",
+					"lodging_info": "Historic city center accommodations with local transport included."
+				}
+			}
+		],
+		"articles": [
+			{
+				"id": "created-as-his-workmanship",
+				"slug": "created-as-his-workmanship",
+				"status": "published",
+				"data": {
+					"title": "Created as His Workmanship: The Meaning of Poiema",
+					"author": "Pastor Laurence Windham",
+					"published_at": "2026-08-15T12:00:00.000Z",
+					"excerpt": "Why Paul chose the word 'poiema' in Ephesians 2:10, and what it means for our redemption and daily callings as God's poetic masterpieces.",
+					"content": [
+						{
+							"_type": "block",
+							"_key": "a1",
+							"style": "normal",
+							"children": [
 								{
-									"icon": "users",
-									"title": "Team Collaboration",
-									"description": "Real-time collaboration features that make working together feel effortless."
-								},
-								{
-									"icon": "chart",
-									"title": "Powerful Analytics",
-									"description": "Understand how your team works with detailed insights and reporting."
-								},
-								{
-									"icon": "code",
-									"title": "Developer Friendly",
-									"description": "A robust API and CLI tools that integrate with your existing workflow."
-								},
-								{
-									"icon": "globe",
-									"title": "Global Scale",
-									"description": "Deployed to edge locations worldwide. Fast for everyone, everywhere."
+									"_type": "span",
+									"_key": "as1",
+									"text": "In Ephesians 2:10, the apostle Paul writes: 'For we are His workmanship (ποίημα, poiema), created in Christ Jesus for good works, which God prepared beforehand that we should walk in them.' We are not haphazard products of fate, nor are we mere cog-like functionaries. The Greek word poiema signifies a crafted work of art, a poem, an intentional masterpiece."
 								}
 							]
 						},
 						{
-							"_type": "marketing.testimonials",
-							"_key": "testimonials",
-							"headline": "Trusted by teams everywhere",
-							"testimonials": [
+							"_type": "block",
+							"_key": "a2",
+							"style": "normal",
+							"children": [
 								{
-									"quote": "We cut our deployment time by 80%. The team actually enjoys shipping now.",
-									"author": "Sarah Chen",
-									"role": "CTO",
-									"company": "Streamline"
-								},
-								{
-									"quote": "The best developer experience I've used. Everything just works the way you'd expect.",
-									"author": "Marcus Johnson",
-									"role": "Lead Engineer",
-									"company": "Volt Labs"
-								},
-								{
-									"quote": "Finally, a tool that doesn't get in the way. Our team is more productive than ever.",
-									"author": "Elena Rodriguez",
-									"role": "VP Engineering",
-									"company": "Nexus"
-								}
-							]
-						},
-						{
-							"_type": "marketing.faq",
-							"_key": "faq",
-							"headline": "Frequently asked questions",
-							"items": [
-								{
-									"question": "How long does setup take?",
-									"answer": "Most teams are up and running in under 15 minutes. Our onboarding wizard guides you through connecting your existing tools and inviting your team."
-								},
-								{
-									"question": "Can I migrate from my current tool?",
-									"answer": "Yes. We have built-in importers for all major platforms, and our support team can help with custom migrations for larger teams."
-								},
-								{
-									"question": "What kind of support do you offer?",
-									"answer": "All plans include email support with a 24-hour response time. Pro and Enterprise plans include priority support with dedicated account managers."
-								},
-								{
-									"question": "Is there a free trial?",
-									"answer": "Yes, all plans come with a 14-day free trial. No credit card required. You can upgrade, downgrade, or cancel at any time."
+									"_type": "span",
+									"_key": "as2",
+									"text": "When we gather at Poiema Retreats, our longing is to rediscover what it means to be living expressions of God's grace in our generation. When believers step away from the relentless churn of cultural performance and rest together in Christ, the beauty of that divine workmanship becomes unmistakably clear."
 								}
 							]
 						}
@@ -190,68 +375,132 @@
 				}
 			},
 			{
-				"id": "pricing",
-				"slug": "pricing",
+				"id": "living-together-in-an-age-of-loneliness",
+				"slug": "living-together-in-an-age-of-loneliness",
 				"status": "published",
 				"data": {
-					"title": "Pricing",
+					"title": "Living Together in an Age of Loneliness",
+					"author": "Elder David Cooper",
+					"published_at": "2026-07-20T12:00:00.000Z",
+					"excerpt": "Christian friendship is not an optional hobby. Biblical communion requires intentional time, shared tables, and deep mutual affection.",
 					"content": [
 						{
-							"_type": "marketing.hero",
-							"_key": "pricing-hero",
-							"headline": "Simple, transparent pricing",
-							"subheadline": "No hidden fees. No surprises. Start free and scale as you grow.",
-							"centered": true
-						},
-						{
-							"_type": "marketing.pricing",
-							"_key": "pricing-plans",
-							"plans": [
+							"_type": "block",
+							"_key": "c1",
+							"style": "normal",
+							"children": [
 								{
-									"name": "Starter",
-									"price": "$0",
-									"period": "/month",
-									"description": "Perfect for trying things out",
-									"features": "Up to 3 team members\n5 projects\nBasic analytics\nCommunity support\n1GB storage",
-									"ctaLabel": "Get Started",
-									"ctaUrl": "/signup"
-								},
-								{
-									"name": "Pro",
-									"price": "$29",
-									"period": "/user/month",
-									"description": "For growing teams",
-									"features": "Unlimited team members\nUnlimited projects\nAdvanced analytics\nPriority support\n100GB storage\nCustom integrations\nAPI access",
-									"ctaLabel": "Start Free Trial",
-									"ctaUrl": "/signup?plan=pro",
-									"highlighted": true
-								},
-								{
-									"name": "Enterprise",
-									"price": "Custom",
-									"description": "For large organizations",
-									"features": "Everything in Pro\nDedicated support\nCustom contracts\nSLA guarantee\nUnlimited storage",
-									"ctaLabel": "Contact Sales",
-									"ctaUrl": "/contact"
+									"_type": "span",
+									"_key": "cs1",
+									"text": "Modern life connects us to thousands through glowing screens, yet leaves us uniquely starved for real communion. Dietrich Bonhoeffer reminded us that Christian brotherhood is not an ideal which we must realize, but a reality created by God in Christ in which we may participate."
 								}
 							]
 						},
 						{
-							"_type": "marketing.faq",
-							"_key": "pricing-faq",
-							"headline": "Pricing FAQ",
-							"items": [
+							"_type": "block",
+							"_key": "c2",
+							"style": "normal",
+							"children": [
 								{
-									"question": "Can I change plans later?",
-									"answer": "Yes, you can upgrade or downgrade at any time. Changes take effect immediately and we'll prorate your billing."
-								},
+									"_type": "span",
+									"_key": "cs2",
+									"text": "This is why the retreat format matters so much. A weekend around a common table, breaking bread and singing psalms without urgency, reminds our souls of what we were built for."
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"media": [
+			{
+				"id": "vocation-and-covenant",
+				"slug": "vocation-and-covenant",
+				"status": "published",
+				"data": {
+					"title": "Vocation and the Covenant Life",
+					"media_type": "Sermon",
+					"speaker": "Pastor Laurence Windham",
+					"date": "2026-05-14T10:00:00.000Z",
+					"media_url": "https://soundcloud.com/poiemaretreats/vocation-and-covenant",
+					"description": "An exploration of ordinary callings, work, and spiritual faithfulness in the marketplace."
+				}
+			},
+			{
+				"id": "apologetics-in-a-confused-age",
+				"slug": "apologetics-in-a-confused-age",
+				"status": "published",
+				"data": {
+					"title": "Apologetics & Cultural Discernment",
+					"media_type": "Lecture",
+					"speaker": "David Cooper",
+					"date": "2026-04-22T14:00:00.000Z",
+					"media_url": "https://soundcloud.com/poiemaretreats/apologetics-discernment",
+					"description": "How to answer contemporary cultural dilemmas with clarity, gentleness, and conviction."
+				}
+			}
+		],
+		"pages": [
+			{
+				"id": "home",
+				"slug": "home",
+				"status": "published",
+				"data": {
+					"title": "Poiema Retreats",
+					"content": [
+						{
+							"_type": "block",
+							"_key": "h1",
+							"style": "normal",
+							"children": [
 								{
-									"question": "What payment methods do you accept?",
-									"answer": "We accept all major credit cards, and Enterprise customers can pay via invoice with NET 30 terms."
-								},
+									"_type": "span",
+									"_key": "hs1",
+									"text": "For we are His workmanship (ποίημα), created in Christ Jesus for good works. Poiema Retreats hosts transformative conferences and restful gatherings for college students, singles, and young adults across the East Coast and beyond."
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "about",
+				"slug": "about",
+				"status": "published",
+				"data": {
+					"title": "About Poiema Retreats",
+					"content": [
+						{
+							"_type": "block",
+							"_key": "ab1",
+							"style": "normal",
+							"children": [
 								{
-									"question": "Is there a discount for annual billing?",
-									"answer": "Yes, annual plans receive a 20% discount compared to monthly billing."
+									"_type": "span",
+									"_key": "abs1",
+									"text": "Poiema Retreats was born out of a desire to see young adults rooted deeply in Christian truth, vibrant fellowship, and godly vocation. Operating as a ministry of Saint Peter Presbyterian Church in Bristol, Virginia, we bring together believers from diverse churches to learn, pray, and grow as living works of God's grace."
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "funding",
+				"slug": "funding",
+				"status": "published",
+				"data": {
+					"title": "Support & Give",
+					"content": [
+						{
+							"_type": "block",
+							"_key": "f1",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"_key": "fs1",
+									"text": "Poiema Retreats relies on generous gifts to keep retreat ticket prices affordable for college students, provide need-based scholarships, and fund international theological initiatives. Your tax-deductible gift helps build lifelong discipleship."
 								}
 							]
 						}
@@ -263,14 +512,19 @@
 				"slug": "contact",
 				"status": "published",
 				"data": {
-					"title": "Contact",
+					"title": "Contact Us",
 					"content": [
 						{
-							"_type": "marketing.hero",
-							"_key": "contact-hero",
-							"headline": "Get in touch",
-							"subheadline": "Have questions? Want a demo? We'd love to hear from you.",
-							"centered": true
+							"_type": "block",
+							"_key": "ct1",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"_key": "cts1",
+									"text": "Have a question about upcoming retreats, registration, speaking, or scholarship assistance? We would love to hear from you."
+								}
+							]
 						}
 					]
 				}
