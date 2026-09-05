@@ -1,32 +1,69 @@
 /*
-  theme.css -- your theme overrides. This is the file to edit to
-  retheme the site.
-
-  Every design token lives in src/styles/tokens.css (colors, gradients,
-  type scale, spacing, layout, shadows) with its default value. Override
-  any of them here: declarations in this file are unlayered, so they
-  always beat the @layer base defaults in tokens.css.
-
-  Colors are defined with light-dark(). Overriding with a plain color
-  changes light and dark mode at once; use light-dark(<light>, <dark>)
-  to set different values per mode.
-
-  Rebranding usually only needs --color-brand-* and --color-accent-* --
-  the gradient tokens follow automatically. For a flat, gradient-free
-  brand, set the --gradient-* tokens to solid colors.
-
-  Webfonts are loaded in astro.config.mjs (--font-body). Swap the loaded
-  font there; use overrides here for system fonts or a separate heading
-  face.
-
-  Example:
-
-  :root {
-    --color-brand: light-dark(#0d9488, #2dd4bf);
-    --color-accent: #f59e0b;
-    --font-weight-display: 700;
-  }
+  theme.css -- Poiema Retreats Theme Overrides
+  Aesthetic: Coastal Dunes & Mountain Mist
+  Colors, typography, and styling honoring Outer Banks coast & Blue Ridge mountains.
 */
 
 :root {
+	/* Palette: Coastal Navy, Warm Sand/Linen, Mountain Pine & Ochre */
+	--color-brand: light-dark(#1e3a5f, #7ea2d6);
+	--color-brand-strong: light-dark(#132742, #9cbce6);
+	--color-brand-soft: light-dark(#2d558a, #527bb5);
+
+	--color-accent: light-dark(#456254, #7ca291);
+	--color-accent-soft: light-dark(#7ca291, #a3c2b4);
+
+	--color-ochre: light-dark(#b87b32, #dfb175);
+	--color-ochre-soft: light-dark(#f4ebe1, #30261c);
+
+	/* Backgrounds & Surfaces: Warm sand / linen cream */
+	--color-bg: light-dark(#fbf9f4, #12171d);
+	--color-surface: light-dark(#f4efe6, #1a222c);
+	--color-text: light-dark(#1b2733, #eaeef3);
+	--color-muted: light-dark(#5c6b79, #91a0ad);
+	--color-border: light-dark(#e2dacb, #2b3947);
+
+	--color-brand-ring: color-mix(in srgb, var(--color-brand) 15%, transparent);
+
+	/* Gradients: Quiet ocean to pine */
+	--gradient-brand: linear-gradient(135deg, var(--color-brand), var(--color-accent));
+	--gradient-brand-strong: linear-gradient(135deg, var(--color-brand-strong), var(--color-brand));
+	--gradient-brand-soft: linear-gradient(135deg, var(--color-surface), color-mix(in srgb, var(--color-brand-soft) 12%, transparent));
+	--gradient-headline: linear-gradient(135deg, var(--color-text), var(--color-brand));
+
+	/* Typography weights & metrics (font families are provided by Astro's font pipeline) */
+	--font-weight-heading: 600;
+	--font-weight-display: 700;
+
+	--leading-tight: 1.15;
+	--leading-snug: 1.25;
+	--leading-normal: 1.65;
+	--leading-relaxed: 1.8;
+
+	--tracking-tight: -0.01em;
+	--tracking-snug: 0;
+
+	/* Soft organic borders & subtle warm shadows */
+	--radius-sm: 6px;
+	--radius: 10px;
+	--radius-lg: 16px;
+
+	--shadow-sm: 0 1px 3px rgba(18, 23, 29, 0.05);
+	--shadow: 0 4px 10px -1px rgba(18, 23, 29, 0.07), 0 2px 5px -2px rgba(18, 23, 29, 0.05);
+	--shadow-lg: 0 12px 24px -4px rgba(18, 23, 29, 0.08), 0 4px 8px -4px rgba(18, 23, 29, 0.04);
+}
+
+/* Fallback for browsers without light-dark() */
+@supports not (color: light-dark(#000, #fff)) {
+	:root {
+		--color-bg: #fbf9f4;
+		--color-surface: #f4efe6;
+		--color-text: #1b2733;
+		--color-muted: #5c6b79;
+		--color-border: #e2dacb;
+		--color-brand: #1e3a5f;
+		--color-brand-strong: #132742;
+		--color-brand-soft: #2d558a;
+		--color-accent: #456254;
+	}
 }

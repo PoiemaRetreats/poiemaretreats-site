@@ -14,24 +14,24 @@ interface Props {
 
 const { title, description, image } = Astro.props;
 const settings = await getSiteSettings();
-const siteTitle = settings?.title || "Acme";
+const siteTitle = settings?.title || "Poiema Retreats";
 const fullTitle = title ? `${title} — ${siteTitle}` : siteTitle;
 const siteDescription =
-	settings?.tagline || "Build products people actually want";
+	settings?.tagline || "For we are His workmanship — Ephesians 2:10";
 const siteLogo = (settings?.logo as any)?.url ? settings.logo as
 	{ mediaId: string; alt?: string; url: string } : null;
 
-const [menu, footerProduct, footerCompany, footerSupport] = await Promise.all([
+const [menu, footerGatherings, footerMinistry, legacyProduct, legacyCompany] = await Promise.all([
 	getMenu("primary"),
+	getMenu("footer_gatherings"),
+	getMenu("footer_ministry"),
 	getMenu("footer_product"),
 	getMenu("footer_company"),
-	getMenu("footer_support"),
 ]);
 
 const footerColumns = [
-	{ heading: "Product", menu: footerProduct },
-	{ heading: "Company", menu: footerCompany },
-	{ heading: "Support", menu: footerSupport },
+	{ heading: "Retreats & Gatherings", menu: footerGatherings || legacyProduct },
+	{ heading: "Ministry & Resources", menu: footerMinistry || legacyCompany },
 ].filter((col) => col.menu && col.menu.items.length > 0);
 
 const pageCtx = createPublicPageContext({
@@ -55,6 +55,7 @@ const pageCtx = createPublicPageContext({
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>{fullTitle}</title>
 		<EmDashHead page={pageCtx} />
+		<Font cssVariable="--font-heading" preload />
 		<Font cssVariable="--font-body" preload />
 		<script is:inline>
 			// Apply an explicit theme choice immediately to prevent flash.
@@ -89,7 +90,7 @@ const pageCtx = createPublicPageContext({
 				</div>
 				<div class="nav-actions">
 					<a href="/_emdash/admin" class="nav-admin">Admin</a>
-					<a href="/signup" class="btn btn-primary nav-cta">Get Started</a>
+					<a href="/retreats" class="btn btn-primary nav-cta">Upcoming Retreats</a>
 				</div>
 			</nav>
 		</header>
@@ -108,7 +109,7 @@ const pageCtx = createPublicPageContext({
 						}
 					</span>
 					<p class="footer-tagline">
-						{settings?.tagline || "Build something amazing"}
+						{settings?.tagline || "For we are His workmanship — Ephesians 2:10"}
 					</p>
 				</div>
 				<div class="footer-links">
@@ -202,247 +203,58 @@ const pageCtx = createPublicPageContext({
 			});
 		</script>
 
-		<style is:global>
-			/*
-			 * Establish layer order: "base" has lower priority than unlayered
-			 * styles, so theme.css overrides always win regardless of source
-			 * order in the bundled CSS.
-			 */
-			@layer base;
-
-			@layer base {
-				*,
-				*::before,
-				*::after {
-					box-sizing: border-box;
-					margin: 0;
-					padding: 0;
-				}
-
-				/*
-				 * Design tokens live in src/styles/tokens.css. Colors are
-				 * defined with light-dark(); these rules pin the scheme when
-				 * the footer switcher sets an explicit choice. With no class,
-				 * color-scheme: light dark follows the OS preference. The
-				 * @supports guard keeps the toggle from forcing dark UA form
-				 * controls on browsers stuck on the plain-light fallback.
-				 */
-				@supports (color: light-dark(#000, #fff)) {
-					:root.light {
-						color-scheme: light;
-					}
-
-					:root.dark {
-						color-scheme: dark;
-					}
-				}
-
-				html {
-					scroll-behavior: smooth;
-				}
-
-				body {
-					font-family: var(--font-body);
-					font-size: var(--font-size-base);
-					line-height: var(--leading-normal);
-					color: var(--color-text);
-					background: var(--color-bg);
-					-webkit-font-smoothing: antialiased;
-					min-height: 100vh;
-				}
-
-				a:where(:not([class*="emdash"]):not([class*="ec-"])) {
-					color: currentColor;
-					text-decoration: none;
-				}
-
-				/* Inline links in authored content (Portable Text renders bare
-				   <a> tags) need a visible style; component links restyle
-				   themselves via classes. */
-				p a:not([class]),
-				li a:not([class]) {
-					color: var(--color-brand);
-					text-decoration: underline;
-					text-underline-offset: 2px;
-				}
-
-				img {
-					max-width: 100%;
-					height: auto;
-					display: block;
-				}
-
-				h1,
-				h2,
-				h3,
-				h4,
-				h5,
-				h6 {
-					font-family: var(--font-heading);
-					font-weight: var(--font-weight-heading);
-					line-height: var(--leading-snug);
-					letter-spacing: var(--tracking-snug);
-				}
-
-				h1 {
-					font-size: var(--font-size-5xl);
-				}
-				h2 {
-					font-size: var(--font-size-3xl);
-				}
-				h3 {
-					font-size: var(--font-size-2xl);
-				}
-				h4 {
-					font-size: var(--font-size-xl);
-				}
-
-				/* Utility classes */
-				.container {
-					max-width: var(--wide-width);
-					margin: 0 auto;
-					padding: 0 var(--spacing-lg);
-				}
-
-				.section {
-					padding: var(--spacing-5xl) 0;
-				}
-
-				.section-header {
-					text-align: center;
-					max-width: var(--max-width);
-					margin: 0 auto var(--spacing-4xl);
-				}
-
-				.section-headline {
-					font-size: var(--font-size-3xl);
-					font-weight: var(--font-weight-display);
-				}
-
-				.section-subheadline {
-					margin-top: var(--spacing-md);
-					font-size: var(--font-size-lg);
-					color: var(--color-muted);
-				}
-
-				.icon-tile {
-					width: 48px;
-					height: 48px;
-					display: flex;
-					align-items: center;
-					justify-content: center;
-					flex-shrink: 0;
-					font-size: 1.5rem;
-					color: var(--color-on-brand);
-					background: var(--gradient-brand);
-					border-radius: var(--radius);
-				}
-
-				.btn {
-					display: inline-flex;
-					align-items: center;
-					justify-content: center;
-					gap: var(--spacing-sm);
-					padding: var(--spacing-sm) var(--spacing-lg);
-					font-family: inherit;
-					font-size: var(--font-size-sm);
-					font-weight: 600;
-					border-radius: var(--radius);
-					cursor: pointer;
-					transition:
-						background var(--transition-fast),
-						transform var(--transition-fast),
-						box-shadow var(--transition-fast);
-				}
-
-				.btn:hover {
-					transform: translateY(-1px);
-				}
-
-				.btn:active {
-					transform: translateY(0);
-				}
-
-				.btn-primary {
-					color: var(--color-on-brand);
-					background: var(--gradient-brand-strong);
-					border: none;
-					transition:
-						background 0.3s ease,
-						box-shadow 0.3s ease,
-						transform var(--transition-fast);
-				}
-
-				.btn-primary:hover {
-					background: var(--gradient-brand);
-					box-shadow: var(--shadow-lg);
-				}
-
-				.btn-secondary {
-					color: var(--color-text);
-					background: transparent;
-					border: 1px solid var(--color-border);
-				}
-
-				.btn-secondary:hover {
-					background: var(--color-surface);
-					border-color: var(--color-muted);
-				}
-
-				.btn-lg {
-					padding: var(--spacing-md) var(--spacing-xl);
-					font-size: var(--font-size-base);
-				}
-			}
-		</style>
-
 		<style>
+			/*
+			 * Scoped styles for the shell (header, footer, buttons).
+			 * Uses tokens defined in tokens.css / theme.css.
+			 */
+
 			.site-header {
 				position: sticky;
 				top: 0;
-				z-index: 100;
-				background: var(--color-bg);
+				z-index: 50;
+				background: color-mix(in srgb, var(--color-bg) 85%, transparent);
+				backdrop-filter: blur(12px);
 				border-bottom: 1px solid var(--color-border);
 			}
 
 			.nav {
 				max-width: var(--wide-width);
 				margin: 0 auto;
-				padding: var(--spacing-md) var(--spacing-lg);
+				padding: var(--spacing-md) var(--spacing-xl);
 				display: flex;
-				flex-wrap: nowrap;
 				align-items: center;
-				gap: var(--spacing-lg);
+				gap: var(--spacing-2xl);
 			}
 
 			.site-logo {
+				font-family: var(--font-heading);
 				font-size: var(--font-size-xl);
 				font-weight: var(--font-weight-display);
 				letter-spacing: var(--tracking-tight);
-				background: var(--gradient-brand);
-				-webkit-background-clip: text;
-				-webkit-text-fill-color: transparent;
-				background-clip: text;
+				text-decoration: none;
+				color: var(--color-text);
+				flex-shrink: 0;
 			}
 
 			.site-logo-img {
-				height: 48px;
+				height: 28px;
 				width: auto;
 				display: block;
-				margin: -8px 0;
 			}
 
 			.nav-links {
 				display: flex;
-				flex-wrap: wrap;
+				align-items: center;
 				gap: var(--spacing-lg);
 				margin-left: auto;
 			}
 
 			.nav-links a {
+				color: var(--color-muted);
+				text-decoration: none;
 				font-size: var(--font-size-sm);
 				font-weight: 500;
-				color: var(--color-muted);
 				transition: color var(--transition-fast);
 			}
 
@@ -453,72 +265,211 @@ const pageCtx = createPublicPageContext({
 			.nav-actions {
 				display: flex;
 				align-items: center;
-				gap: var(--spacing-lg);
+				gap: var(--spacing-md);
+				flex-shrink: 0;
 			}
 
 			.nav-admin {
-				font-size: var(--font-size-sm);
+				font-size: var(--font-size-xs);
 				color: var(--color-muted);
-				opacity: 0.5;
-			}
-
-			/* Compact variant of .btn.btn-primary for the header */
-			.nav-cta {
-				padding: var(--spacing-sm) var(--spacing-md);
+				text-decoration: none;
+				padding: var(--spacing-xs) var(--spacing-sm);
+				border: 1px solid var(--color-border);
 				border-radius: var(--radius-sm);
+				transition: all var(--transition-fast);
 			}
 
-			main {
-				min-height: calc(100vh - 200px);
+			.nav-admin:hover {
+				color: var(--color-text);
+				border-color: var(--color-text);
 			}
+
+			.nav-cta {
+				font-size: var(--font-size-sm);
+				padding: var(--spacing-xs) var(--spacing-md);
+			}
+
+			/* Buttons -- shared styles used by nav and blocks */
+
+			:global(.btn) {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				font-family: var(--font-body);
+				font-size: var(--font-size-base);
+				font-weight: 600;
+				padding: var(--spacing-sm) var(--spacing-xl);
+				border-radius: var(--radius);
+				text-decoration: none;
+				border: 1px solid transparent;
+				cursor: pointer;
+				transition: all var(--transition-fast);
+				line-height: 1.4;
+			}
+
+			:global(.btn-primary) {
+				background: var(--gradient-brand-strong);
+				color: var(--color-on-brand);
+				box-shadow: var(--shadow-sm);
+			}
+
+			:global(.btn-primary:hover) {
+				background: var(--gradient-brand);
+				box-shadow: var(--shadow);
+				transform: translateY(-1px);
+			}
+
+			:global(.btn-secondary) {
+				background: var(--color-surface);
+				color: var(--color-text);
+				border-color: var(--color-border);
+			}
+
+			:global(.btn-secondary:hover) {
+				border-color: var(--color-muted);
+				transform: translateY(-1px);
+			}
+
+			/* Typography defaults */
+
+			:global(body) {
+				font-family: var(--font-body);
+				color: var(--color-text);
+				background: var(--color-bg);
+				line-height: var(--leading-normal);
+				margin: 0;
+				-webkit-font-smoothing: antialiased;
+				-moz-osx-font-smoothing: grayscale;
+			}
+
+			:global(h1),
+			:global(h2),
+			:global(h3),
+			:global(h4),
+			:global(h5),
+			:global(h6) {
+				font-family: var(--font-heading);
+				font-weight: var(--font-weight-heading);
+				line-height: var(--leading-snug);
+				letter-spacing: var(--tracking-snug);
+			}
+
+			:global(h1) {
+				font-size: var(--font-size-5xl);
+			}
+			:global(h2) {
+				font-size: var(--font-size-3xl);
+			}
+			:global(h3) {
+				font-size: var(--font-size-2xl);
+			}
+			:global(h4) {
+				font-size: var(--font-size-xl);
+			}
+
+			/* Utility classes */
+
+			:global(.section-header) {
+				text-align: center;
+				max-width: var(--max-width);
+				margin: 0 auto var(--spacing-3xl);
+			}
+
+			:global(.section-headline) {
+				font-size: var(--font-size-4xl);
+				font-weight: var(--font-weight-display);
+				letter-spacing: var(--tracking-tight);
+				line-height: var(--leading-tight);
+				margin: 0 0 var(--spacing-md);
+			}
+
+			:global(.section-subheadline) {
+				font-size: var(--font-size-lg);
+				color: var(--color-muted);
+				line-height: var(--leading-relaxed);
+				margin: 0;
+			}
+
+			:global(.icon-tile) {
+				width: 48px;
+				height: 48px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				border-radius: var(--radius);
+				background: var(--gradient-brand-soft);
+				border: 1px solid var(--color-border);
+				flex-shrink: 0;
+			}
+
+			:global(.icon-tile-accent) {
+				background: var(--gradient-brand);
+				color: var(--color-on-brand);
+				border-color: transparent;
+			}
+
+			/* Footer */
 
 			.site-footer {
-				background: var(--color-surface);
 				border-top: 1px solid var(--color-border);
+				background: var(--color-surface);
+				margin-top: var(--spacing-5xl);
 			}
 
 			.footer-content {
 				max-width: var(--wide-width);
 				margin: 0 auto;
-				padding: var(--spacing-4xl) var(--spacing-lg) var(--spacing-2xl);
+				padding: var(--spacing-4xl) var(--spacing-xl) var(--spacing-3xl);
 				display: grid;
-				grid-template-columns: 1fr 2fr;
+				grid-template-columns: 1.5fr 3fr;
 				gap: var(--spacing-4xl);
 			}
 
+			.footer-brand {
+				display: flex;
+				flex-direction: column;
+				gap: var(--spacing-sm);
+			}
+
 			.footer-logo {
+				font-family: var(--font-heading);
 				font-size: var(--font-size-xl);
 				font-weight: var(--font-weight-display);
 				letter-spacing: var(--tracking-tight);
+				color: var(--color-text);
 			}
 
 			.footer-logo-img {
 				height: 24px;
 				width: auto;
+				display: block;
 			}
 
 			.footer-tagline {
-				margin-top: var(--spacing-sm);
-				font-size: var(--font-size-sm);
 				color: var(--color-muted);
+				font-size: var(--font-size-sm);
+				line-height: var(--leading-relaxed);
+				margin: 0;
 			}
 
 			.footer-links {
 				display: grid;
 				grid-template-columns: repeat(3, 1fr);
-				gap: var(--spacing-xl);
+				gap: var(--spacing-2xl);
 			}
 
 			.footer-col h4 {
 				font-size: var(--font-size-sm);
 				font-weight: 600;
-				margin-bottom: var(--spacing-md);
+				margin: 0 0 var(--spacing-md);
+				color: var(--color-text);
 			}
 
 			.footer-col a {
 				display: block;
-				font-size: var(--font-size-sm);
 				color: var(--color-muted);
+				text-decoration: none;
+				font-size: var(--font-size-sm);
 				padding: var(--spacing-xs) 0;
 				transition: color var(--transition-fast);
 			}
@@ -530,33 +481,46 @@ const pageCtx = createPublicPageContext({
 			.footer-bottom {
 				max-width: var(--wide-width);
 				margin: 0 auto;
-				padding: var(--spacing-lg);
-				display: flex;
-				justify-content: space-between;
-				align-items: center;
-				font-size: var(--font-size-sm);
-				color: var(--color-muted);
+				padding: var(--spacing-lg) var(--spacing-xl);
 				border-top: 1px solid var(--color-border);
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				font-size: var(--font-size-xs);
+				color: var(--color-muted);
+			}
+
+			.footer-bottom p {
+				margin: 0;
 			}
 
 			.footer-powered a {
+				color: var(--color-muted);
+				text-decoration: underline;
+			}
+
+			.footer-powered a:hover {
 				color: var(--color-text);
 			}
 
 			.theme-switcher {
 				display: flex;
-				gap: var(--spacing-xs);
+				gap: 2px;
+				background: var(--color-bg);
+				padding: 2px;
+				border-radius: var(--radius-sm);
+				border: 1px solid var(--color-border);
 			}
 
 			.theme-btn {
-				background: transparent;
-				border: 1px solid var(--color-border);
+				background: none;
+				border: none;
+				padding: 2px 8px;
+				font-size: var(--font-size-xs);
 				color: var(--color-muted);
-				font-family: var(--font-body);
-				font-size: var(--font-size-sm);
-				padding: var(--spacing-xs) var(--spacing-sm);
-				border-radius: var(--radius-sm);
+				border-radius: calc(var(--radius-sm) - 2px);
 				cursor: pointer;
+				font-family: var(--font-body);
 				transition: all var(--transition-fast);
 			}
 
