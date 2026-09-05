@@ -2,6 +2,8 @@
 
 ## Scope
 
+Private design playground: `/design-studio/` is included in the key-gated review Worker, with no site navigation link. A same-origin iframe previews the existing pages. Separate light/dark palettes, four starting directions, fonts, text size, spacing, radius, and drag/arrow homepage section ordering apply only inside the preview. All eight homepage sections remain. Browser-local drafts use `poiema-design-playground-v1`; JSON import validates values and section completeness. Export includes version, base revision, settings, and implementation instructions. No CMS writes or publishing. Keep this route private when deploying the full CMS, since the review Worker currently supplies its access control.
+
 About and Funding photo restoration: all five original About photos and both Funding photos are restored from the archived WordPress uploads, encoded as WebP without enlargement. About opens with the uncropped waterfront group photo and includes the meal, friends, and two leader portraits. Funding opens with its group photo and retains the shirt photo beside giving. Copy and giving URLs are unchanged. Sources under `/wp-content/uploads/2021/10/`: `IMG_2846-scaled-e1633985563938.jpg`, `IMG_2851.jpg`, `IMG_2866.jpg`, `IMG_2293-scaled.jpg`, `Lobster.jpg`, `IMG_2890.jpg`, and `IMG_2865-e1633980750295.jpg`.
 
 Live registration verification: the review Worker's `no-referrer` policy left the provider iframe blank. Authorized asset responses now use `strict-origin-when-cross-origin`, allowing the form's parent-origin handshake without exposing the invitation key. The key-exchange redirect retains `no-referrer`. The deployed OBX form now displays Step 1 of 5, its fields, and Next. No registration or payment was submitted.
