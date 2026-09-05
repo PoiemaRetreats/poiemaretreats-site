@@ -8,12 +8,15 @@ import Base from "../layouts/Base.astro";
 >
 	<div class="funding-page">
 		<header class="page-header">
-			<div class="container">
+			<div class="container opening-grid">
+				<div>
 				<span class="sub-heading">Financial Stewardship & Giving</span>
 				<h1 class="page-title">Funding & Donations</h1>
 				<p class="page-intro">
 					We appreciate your financial help. The purpose of our ministry is to inform, encourage, and inspire Christian young adults regarding who they are in Christ.
 				</p>
+				</div>
+				<img class="opening-photo" src="/images/funding-group.webp" alt="Poiema retreat attendees gathered outdoors" width="809" height="606" fetchpriority="high" />
 			</div>
 		</header>
 
@@ -67,6 +70,7 @@ import Base from "../layouts/Base.astro";
 					</div>
 
 					<aside class="donation-card-container">
+						<img class="giving-photo" src="/images/funding-shirt.webp" alt="Retreat attendee wearing a Poiema shirt and hat beside the water" width="720" height="720" loading="lazy" />
 						<div class="donation-card">
 							<h3>Donate to Poiema</h3>
 							<p class="donation-intro">
@@ -92,6 +96,10 @@ import Base from "../layouts/Base.astro";
 </Base>
 
 <style>
+	.opening-grid { display: grid; grid-template-columns: 1fr 1.15fr; gap: 48px; align-items: center; text-align: left; }
+	.opening-photo { display: block; width: 100%; height: auto; border-radius: var(--radius-lg); }
+	.giving-photo { display: block; width: 100%; height: auto; border-radius: var(--radius-lg); margin-bottom: 24px; }
+	@media (max-width: 860px) { .opening-grid { grid-template-columns: 1fr; gap: 28px; } }
 	.container {
 		max-width: var(--wide-width);
 		margin: 0 auto;

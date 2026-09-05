@@ -2,6 +2,8 @@
 
 ## Scope
 
+About and Funding photo restoration: all five original About photos and both Funding photos are restored from the archived WordPress uploads, encoded as WebP without enlargement. About opens with the uncropped waterfront group photo and includes the meal, friends, and two leader portraits. Funding opens with its group photo and retains the shirt photo beside giving. Copy and giving URLs are unchanged. Sources under `/wp-content/uploads/2021/10/`: `IMG_2846-scaled-e1633985563938.jpg`, `IMG_2851.jpg`, `IMG_2866.jpg`, `IMG_2293-scaled.jpg`, `Lobster.jpg`, `IMG_2890.jpg`, and `IMG_2865-e1633980750295.jpg`.
+
 Live registration verification: the review Worker's `no-referrer` policy left the provider iframe blank. Authorized asset responses now use `strict-origin-when-cross-origin`, allowing the form's parent-origin handshake without exposing the invitation key. The key-exchange redirect retains `no-referrer`. The deployed OBX form now displays Step 1 of 5, its fields, and Next. No registration or payment was submitted.
 
 Retreat grouping: the media archive now renders separate retreat sections and a Retreat dropdown alongside the other filters. Current source titles establish Poiema OBX 2024 and Spring Poiema 2023; no exact event dates were invented. Unidentified material remains under Other recordings. Newest/oldest sorting orders the retreat groups, and numbered talks stay in sequence. Verified Spring 2023 plus Lecture returns talks 1 through 4, title search narrows to one, reset restores all 14, and query selections survive a reload.

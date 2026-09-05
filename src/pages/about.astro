@@ -14,12 +14,17 @@ import Base from "../layouts/Base.astro";
 				<p class="page-intro">
 					“For we are His workmanship, created in Christ Jesus for good works, which God prepared beforehand that we should walk in them.” &mdash; Ephesians 2:10
 				</p>
+				<img class="opening-photo" src="/images/about-group.webp" alt="Poiema retreat attendees gathered beside the water" width="1800" height="497" fetchpriority="high" />
 			</div>
 		</header>
 
 		<section class="section">
 			<div class="container">
 				<div class="story-grid">
+					<div class="fellowship-photos">
+						<img src="/images/about-table.webp" alt="Retreat attendees sharing pizza around a table" width="720" height="960" loading="lazy" />
+						<img src="/images/about-friends.webp" alt="Two friends wearing Poiema hats at a retreat" width="720" height="960" loading="lazy" />
+					</div>
 					<div class="story-content">
 						<h2>What are we about?</h2>
 						<p class="lead-paragraph">
@@ -40,6 +45,7 @@ import Base from "../layouts/Base.astro";
 						<h2>Who are our Team leaders?</h2>
 						<div class="team-grid">
 							<div class="team-card">
+								<img class="leader-photo" src="/images/about-laurence.webp" alt="Laurence Windham on a boat trip" width="720" height="960" loading="lazy" />
 								<div class="team-card-header">
 									<h3>Laurence Windham</h3>
 									<span class="team-role">Pastor of Saint Peter Presbyterian Church</span>
@@ -50,6 +56,7 @@ import Base from "../layouts/Base.astro";
 							</div>
 
 							<div class="team-card">
+								<img class="leader-photo" src="/images/about-david.webp" alt="David Cooper holding a lobster on a boat trip" width="600" height="800" loading="lazy" />
 								<div class="team-card-header">
 									<h3>David Cooper</h3>
 									<span class="team-role">Elder at Providence Church in Lynchburg, Virginia</span>
@@ -102,6 +109,14 @@ import Base from "../layouts/Base.astro";
 </Base>
 
 <style>
+	.opening-photo { display: block; width: 100%; height: auto; margin-top: 32px; border-radius: var(--radius-lg); }
+	.fellowship-photos { grid-area: photos; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+	.story-content { grid-area: story; }
+	.pillars-sidebar { grid-area: sidebar; }
+	.fellowship-photos img { display: block; width: 100%; height: auto; border-radius: var(--radius-md); }
+	.leader-photo { width: 160px; height: auto; float: left; margin: 0 24px 12px 0; border-radius: var(--radius-md); }
+	.team-card { display: flow-root; }
+	@media (max-width: 520px) { .leader-photo { float: none; width: 100%; max-height: 360px; object-fit: cover; object-position: center 60%; margin: 0 0 20px; } }
 	.container {
 		max-width: var(--wide-width);
 		margin: 0 auto;
@@ -148,7 +163,9 @@ import Base from "../layouts/Base.astro";
 	.story-grid {
 		display: grid;
 		grid-template-columns: 1.6fr 1fr;
-		gap: var(--spacing-4xl);
+		grid-template-areas: "story photos" "story sidebar";
+		grid-template-rows: auto 1fr;
+		gap: 32px var(--spacing-4xl);
 		align-items: start;
 	}
 
@@ -294,6 +311,7 @@ import Base from "../layouts/Base.astro";
 	@media (max-width: 860px) {
 		.story-grid {
 			grid-template-columns: 1fr;
+			grid-template-areas: "photos" "story" "sidebar";
 		}
 	}
 </style>
