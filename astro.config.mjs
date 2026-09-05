@@ -73,14 +73,14 @@ export default defineConfig({
 	fonts: [
 		{
 			provider: fontProviders.google(),
-			name: "Cormorant Garamond",
+			name: "Oswald",
 			cssVariable: "--font-heading",
 			weights: [400, 500, 600, 700],
 			fallbacks: ["Georgia", "serif"],
 		},
 		{
 			provider: fontProviders.google(),
-			name: "Plus Jakarta Sans",
+			name: "Poppins",
 			cssVariable: "--font-body",
 			weights: [400, 500, 600, 700],
 			fallbacks: ["system-ui", "sans-serif"],

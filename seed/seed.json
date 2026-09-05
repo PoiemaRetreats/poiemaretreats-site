@@ -69,7 +69,17 @@
         },
         {
           "slug": "easy_tithe_form_id",
-          "label": "EasyTithe / MinistryForms Form ID",
+          "label": "Legacy form ID",
+          "type": "string"
+        },
+        {
+          "slug": "registration_url",
+          "label": "Registration Form URL",
+          "type": "string"
+        },
+        {
+          "slug": "payment_url",
+          "label": "Payment URL",
           "type": "string"
         },
         {
@@ -306,17 +316,18 @@
       {
         "id": "poiema-obx-2026",
         "slug": "poiema-obx-2026",
-        "status": "published",
+      "status": "draft",
         "data": {
           "title": "Poiema OBX 2026",
-          "subtitle": "August 3rd–7th | Kill Devil Hills, NC",
+        "subtitle": "Kill Devil Hills, NC",
           "start_date": "2026-08-03T16:00:00.000Z",
           "end_date": "2026-08-07T11:00:00.000Z",
           "registration_deadline": "2026-07-20T23:59:59.000Z",
           "status_override": "automatic",
           "location": "Kill Devil Hills, Outer Banks, NC",
           "price": "$325",
-          "easy_tithe_form_id": "aa7f78b7-1076-4016-a63b-047c6243fb71",
+        "registration_url": "https://forms.gle/P56eUTsuWHw5aBHK7",
+        "payment_url": "https://app.easytithe.com/app/giving/sppc",
           "excerpt": "Step out of the daily churn for rich interactive lectures, unhurried meals, coastal beauty, and deep Christian fellowship at the Outer Banks.",
           "content": [
             {
@@ -344,14 +355,14 @@
               ]
             }
           ],
-          "schedule": "Morning devotions & coffee; interactive theological lectures with open Q&A; afternoon ocean time, recreation & volleyball; communal home-cooked dinners; evening sunset devotion & hymn singing.",
-          "lodging_info": "Spacious oceanfront beach houses with communal dining areas, shared rooms, pool access, and direct boardwalk access to the Atlantic shore."
+        "schedule": "",
+        "lodging_info": ""
         }
       },
       {
         "id": "poiema-spring-2026",
         "slug": "poiema-spring-2026",
-        "status": "published",
+      "status": "draft",
         "data": {
           "title": "Poiema Spring 2026 Retreat",
           "subtitle": "Spring Rest & Study in the Highlands",
@@ -361,7 +372,8 @@
           "status_override": "automatic",
           "location": "Blue Ridge Mountains, VA",
           "price": "$350",
-          "easy_tithe_form_id": "aa7f78b7-1076-4016-a63b-047c6243fb71",
+        "registration_url": "https://forms.gle/k3swRTybmL68G1dC6",
+        "payment_url": "https://app.easytithe.com/app/giving/sppc",
           "excerpt": "A weekend mountain gathering focused on biblical discipleship, fellowship around shared tables, and evening devotions.",
           "content": [
             {
@@ -377,14 +389,14 @@
               ]
             }
           ],
-          "schedule": "Friday evening welcome dinner and campfire singing; Saturday interactive lectures, scenic hiking, and group discussions; Sunday morning worship and closing fellowship.",
-          "lodging_info": "Mountain lodge cabins with rustic warmth, wood-burning fireplaces, and catered family-style meals."
+        "schedule": "",
+        "lodging_info": ""
         }
       },
       {
         "id": "poiema-international-gdansk",
         "slug": "poiema-international-gdansk",
-        "status": "published",
+      "status": "draft",
         "data": {
           "title": "Poiema International: Gdańsk",
           "subtitle": "May 29th–June 8th | Poland",
@@ -394,7 +406,8 @@
           "status_override": "automatic",
           "location": "Gdańsk, Poland",
           "price": "$550 (program fee)",
-          "easy_tithe_form_id": "aa7f78b7-1076-4016-a63b-047c6243fb71",
+        "registration_url": "https://form.jotform.com/260655039743158",
+        "payment_url": "https://app.easytithe.com/app/giving/sppc",
           "excerpt": "Taking young adults on retreats to other countries to be immersed in the work of Christ in other parts of the world.",
           "content": [
             {
@@ -410,16 +423,16 @@
               ]
             }
           ],
-          "schedule": "10-day immersive study and service tour: exploring historic Reformation sites, visiting local sister congregations, theological lectures, and cultural immersion across northern Poland.",
-          "lodging_info": "Centrally located accommodations in historic Gdańsk with all regional transit and group excursions included."
+        "schedule": "",
+        "lodging_info": ""
         }
       }
     ],
     "articles": [
-      {
-        "id": "created-as-his-workmanship",
-        "slug": "created-as-his-workmanship",
-        "status": "published",
+    {
+      "id": "created-as-his-workmanship",
+      "slug": "created-as-his-workmanship",
+      "status": "draft",
         "data": {
           "title": "Created as His Workmanship: The Meaning of Poiema",
           "author": "Pastor Laurence Windham",
@@ -453,10 +466,10 @@
           ]
         }
       },
-      {
-        "id": "living-together-in-an-age-of-loneliness",
-        "slug": "living-together-in-an-age-of-loneliness",
-        "status": "published",
+    {
+      "id": "living-together-in-an-age-of-loneliness",
+      "slug": "living-together-in-an-age-of-loneliness",
+      "status": "draft",
         "data": {
           "title": "Living Together in an Age of Loneliness",
           "author": "Elder David Cooper",
@@ -586,53 +599,93 @@
         "id": "poiema-obx-2024-talk-1",
         "slug": "poiema-obx-2024-talk-1",
         "status": "published",
-        "data": {
-          "title": "Poiema OBX 2024 Talk 1",
-          "media_type": "Lecture",
-          "speaker": "Pastor Laurence Windham",
-          "date": "2024-08-04T10:00:00.000Z",
-          "media_url": "https://poiemaretreats.org/wp-content/uploads/2025/01/Poiema-Talk-1.m4a",
-          "description": "Opening address on God’s workmanship and our identity in Christ at the Outer Banks."
+      "data": {
+        "title": "Poiema OBX 2024 Talk 1",
+        "media_type": "Lecture",
+        "speaker": "",
+        "media_url": "https://poiemaretreats.org/wp-content/uploads/2025/01/Poiema-Talk-1.m4a",
+        "description": "Poiema OBX 2024 Talk 1."
         }
       },
       {
         "id": "poiema-obx-2024-talk-2",
         "slug": "poiema-obx-2024-talk-2",
         "status": "published",
-        "data": {
-          "title": "Poiema OBX 2024 Talk 2",
-          "media_type": "Lecture",
-          "speaker": "Pastor Laurence Windham",
-          "date": "2024-08-04T19:00:00.000Z",
-          "media_url": "https://poiemaretreats.org/wp-content/uploads/2025/01/Poiema-Talk-2.m4a",
-          "description": "Session 2: Discipleship, calling, and Christian living in the modern world."
+      "data": {
+        "title": "Poiema OBX 2024 Talk 2",
+        "media_type": "Lecture",
+        "speaker": "",
+        "media_url": "https://poiemaretreats.org/wp-content/uploads/2025/01/Poiema-Talk-2.m4a",
+        "description": "Poiema OBX 2024 Talk 2."
         }
       },
       {
         "id": "spring-poiema-2023-devotion-1",
         "slug": "spring-poiema-2023-devotion-1",
         "status": "published",
-        "data": {
-          "title": "Spring Poiema 2023 Evening Devotion & Singing",
-          "media_type": "Devotion",
-          "speaker": "David Cooper & Laurence Windham",
-          "date": "2023-05-12T20:00:00.000Z",
-          "media_url": "https://poiemaretreats.org/wp-content/uploads/2023/05/Spring-Poiema-2023-Evening-Devotion-and-singing-1.m4a",
-          "description": "Evening communal hymn sing, psalmody, and devotional meditation."
+      "data": {
+        "title": "Spring Poiema 2023 Evening Devotion & Singing",
+        "media_type": "Devotion",
+        "speaker": "",
+        "media_url": "https://poiemaretreats.org/wp-content/uploads/2023/05/Spring-Poiema-2023-Evening-Devotion-and-singing-1.m4a",
+        "description": "Spring Poiema 2023 Evening Devotion and singing 1."
         }
       },
       {
         "id": "yahweh-to-my-lord-hath-spoken",
         "slug": "yahweh-to-my-lord-hath-spoken",
         "status": "published",
-        "data": {
-          "title": "Yahweh To My Lord Hath Spoken (Psalm 110)",
-          "media_type": "Music",
-          "speaker": "Poiema Fellowship Choral",
-          "date": "2023-05-13T10:00:00.000Z",
-          "media_url": "https://poiemaretreats.org/wp-content/uploads/2023/05/yahweh-to-my-Lord-hath-spoken.m4a",
-          "description": "Communal acappella psalm singing recorded live during the Spring Poiema retreat."
+      "data": {
+        "title": "Yahweh To My Lord Hath Spoken (Psalm 110)",
+        "media_type": "Music",
+        "speaker": "",
+        "media_url": "https://poiemaretreats.org/wp-content/uploads/2023/05/yahweh-to-my-Lord-hath-spoken.m4a",
+        "description": "Yahweh To My Lord Hath Spoken."
         }
+      },
+      {
+        "id": "spring-poiema-2023-devotion-2",
+        "slug": "spring-poiema-2023-devotion-2",
+        "status": "published",
+        "data": { "title": "Spring Poiema 2023 Evening Devotion and singing 2", "media_type": "Devotion", "media_url": "https://poiemaretreats.org/wp-content/uploads/2023/05/Spring-Poiema-2023-Evening-Devotion-and-singing-2.m4a", "description": "Spring Poiema 2023 Evening Devotion and singing 2." }
+      },
+      {
+        "id": "spring-poiema-2023-devotion-3",
+        "slug": "spring-poiema-2023-devotion-3",
+        "status": "published",
+        "data": { "title": "Spring Poiema 2023 Evening Devotion and singing 3", "media_type": "Devotion", "media_url": "https://poiemaretreats.org/wp-content/uploads/2023/05/Spring-Poiema-2023-Evening-Devotion-and-singing-3.m4a", "description": "Spring Poiema 2023 Evening Devotion and singing 3." }
+      },
+      {
+        "id": "poiema-obx-2024-talk-3", "slug": "poiema-obx-2024-talk-3", "status": "published",
+        "data": { "title": "Poiema OBX 2024 Talk 3", "media_type": "Lecture", "media_url": "https://poiemaretreats.org/wp-content/uploads/2025/01/Poiema-Talk-3.m4a", "description": "Poiema OBX 2024 Talk 3." }
+      },
+      {
+        "id": "poiema-obx-2024-talk-4", "slug": "poiema-obx-2024-talk-4", "status": "published",
+        "data": { "title": "Poiema OBX 2024 Talk 4", "media_type": "Lecture", "media_url": "https://poiemaretreats.org/wp-content/uploads/2025/01/Poiema-Talk-4.m4a", "description": "Poiema OBX 2024 Talk 4." }
+      },
+      {
+        "id": "poiema-obx-2024-talk-5", "slug": "poiema-obx-2024-talk-5", "status": "published",
+        "data": { "title": "Poiema OBX 2024 Talk 5", "media_type": "Lecture", "media_url": "https://poiemaretreats.org/wp-content/uploads/2025/01/Poeima-Talk-5.m4a", "description": "Poiema OBX 2024 Talk 5." }
+      },
+      {
+        "id": "poiema-obx-2024-talk-6", "slug": "poiema-obx-2024-talk-6", "status": "published",
+        "data": { "title": "Poiema OBX 2024 Talk 6", "media_type": "Lecture", "media_url": "https://poiemaretreats.org/wp-content/uploads/2025/01/Poiema-Talk-6.m4a", "description": "Poiema OBX 2024 Talk 6." }
+      },
+      {
+        "id": "spring-poiema-2023-lecture-1", "slug": "spring-poiema-2023-lecture-1", "status": "published",
+        "data": { "title": "Spring Poiema 2023 Lecture 1", "media_type": "Lecture", "media_url": "https://poiemaretreats.org/wp-content/uploads/2023/05/Spring-Poiema-2023-Lecture-1.m4a", "description": "Spring Poiema 2023 Lecture 1." }
+      },
+      {
+        "id": "spring-poiema-2023-lecture-2", "slug": "spring-poiema-2023-lecture-2", "status": "published",
+        "data": { "title": "Spring Poiema 2023 Lecture 2", "media_type": "Lecture", "media_url": "https://poiemaretreats.org/wp-content/uploads/2023/05/Spring-Poiema-2023-Lecture-2.m4a", "description": "Spring Poiema 2023 Lecture 2." }
+      },
+      {
+        "id": "spring-poiema-2023-lecture-3", "slug": "spring-poiema-2023-lecture-3", "status": "published",
+        "data": { "title": "Spring Poiema 2023 Lecture 3", "media_type": "Lecture", "media_url": "https://poiemaretreats.org/wp-content/uploads/2023/05/Spring-Poiema-2023-Lecture-3.m4a", "description": "Spring Poiema 2023 Lecture 3." }
+      },
+      {
+        "id": "spring-poiema-2023-lecture-4", "slug": "spring-poiema-2023-lecture-4", "status": "published",
+        "data": { "title": "Spring Poiema 2023 Lecture 4", "media_type": "Lecture", "media_url": "https://poiemaretreats.org/wp-content/uploads/2023/05/Spring-Poiema-2023-Lecture-4.m4a", "description": "Spring Poiema 2023 Lecture 4." }
       }
     ]
   }

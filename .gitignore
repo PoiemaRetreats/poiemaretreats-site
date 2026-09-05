@@ -26,6 +26,8 @@ uploads/
 
 # Cloudflare Wrangler local state & secrets
 .wrangler/
+.migration/
+.artifacts/
 .dev.vars
 .dev.vars.*
 

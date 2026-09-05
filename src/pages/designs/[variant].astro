@@ -1,0 +1,19 @@
+---
+import DesignPreview from "../../components/DesignPreview.astro";
+import { Font } from "astro:assets";
+import { env } from "cloudflare:workers";
+const { variant } = Astro.params;
+if (!["coast", "gather", "heritage"].includes(variant || "")) return new Response("Not found", { status: 404 });
+const secret = (env as unknown as Record<string, string>).DESIGN_PREVIEW_KEY;
+const supplied = Astro.url.searchParams.get("key") || Astro.cookies.get("poiema_preview")?.value;
+if (!secret || supplied !== secret) return new Response("Private design preview. Use the review link provided by the site team.", { status: 404, headers: { "Cache-Control": "no-store", "X-Robots-Tag": "noindex, nofollow" } });
+if (Astro.url.searchParams.has("key")) {
+  Astro.cookies.set("poiema_preview", secret, { httpOnly: true, secure: Astro.url.protocol === "https:", sameSite: "lax", path: "/designs", maxAge: 604800 });
+  return Astro.redirect(`/designs/${variant}`, 303);
+}
+Astro.response.headers.set("Cache-Control", "private, no-store");
+Astro.response.headers.set("X-Robots-Tag", "noindex, nofollow, noarchive");
+Astro.response.headers.set("Referrer-Policy", "no-referrer");
+---
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" /><meta name="robots" content="noindex,nofollow,noarchive" /><title>Poiema | {variant} design preview</title><Font cssVariable="--font-body" /><Font cssVariable="--font-heading" /><style is:global>html{color-scheme:light}body{margin:0}a:focus-visible,summary:focus-visible{outline:3px solid #da8531;outline-offset:5px}</style></head><body><DesignPreview variant={variant as "coast" | "gather" | "heritage"} /></body></html>

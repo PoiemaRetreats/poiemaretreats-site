@@ -1,0 +1,14 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "poiema-design-review",
+  "account_id": "3ab6a8a92318b627c0e8c10cbfadc494",
+  "main": "scripts/review-worker.ts",
+  "compatibility_date": "2026-09-05",
+  "workers_dev": true,
+  "routes": [{ "pattern": "review.poiemaretreats.org", "custom_domain": true }],
+  "assets": {
+    "directory": ".artifacts/review/assets",
+    "binding": "ASSETS",
+    "run_worker_first": true
+  }
+}

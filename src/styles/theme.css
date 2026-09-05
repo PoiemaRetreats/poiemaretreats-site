@@ -53,6 +53,57 @@
 	--shadow-lg: 0 12px 24px -4px rgba(18, 23, 29, 0.08), 0 4px 8px -4px rgba(18, 23, 29, 0.04);
 }
 
+/* Modernization: retain the original gold, charcoal, and retreat photography. */
+:root {
+  --color-bg: light-dark(#fff, #161d19);
+  --color-surface: light-dark(#f5f6f2, #202b24);
+  --color-text: light-dark(#243329, #f0f3ee);
+  --color-muted: light-dark(#58635b, #bcc8bf);
+  --color-border: light-dark(#dce2da, #3c4b41);
+  --color-accent: light-dark(#526741, #b3c79d);
+  --color-brand: #efaf4b;
+  --color-brand-strong: #e8a53d;
+  --color-on-brand: #1d2b22;
+  --gradient-brand: linear-gradient(#f3bb60, #f3bb60);
+  --gradient-brand-strong: linear-gradient(#efaf4b, #efaf4b);
+  --color-text-main: var(--color-text);
+  --color-text-muted: var(--color-muted);
+  --color-surface-soft: var(--color-surface);
+  --radius-md: 6px;
+  --radius: 4px;
+  --radius-lg: 8px;
+  --font-weight-heading: 500;
+  --font-weight-display: 600;
+  --tracking-tight: 0;
+  --tracking-snug: 0;
+}
+* { box-sizing: border-box; }
+:root.light {color-scheme:light;}
+:root.dark {color-scheme:dark;}
+img { max-width: 100%; }
+html { scroll-padding-top: 100px; }
+a:focus-visible,button:focus-visible,summary:focus-visible { outline: 3px solid #ba7a18; outline-offset: 5px; }
+:root body .nav { min-height: 84px; gap: 24px; }
+:root body .site-logo { display:flex; align-items:center; gap:11px; font-family:var(--font-body); font-size:16px; letter-spacing:0; }
+.logo-greek {font-family:Georgia,serif;font-size:27px;font-weight:bold;}
+.logo-name {border-left:1px solid var(--color-border);padding-left:11px;}
+:root body .nav-links { gap:21px; }
+:root body .nav-links a {font-size:13px;font-weight:500;}
+:root body .nav-links a[aria-current="page"] {color:var(--color-text);text-decoration:underline;text-underline-offset:6px;}
+:root body .nav-cta { min-height:42px;gap:14px;font-size:12px;white-space:nowrap; }
+.menu-toggle {display:none;}
+:root body .site-footer {margin-top:0;}
+:root body .footer-content {padding-top:55px;padding-bottom:40px;}
+:root body .footer-tagline {max-width:380px;line-height:1.8;}
+:root body .page-header {padding-top:65px;padding-bottom:55px;}
+:root body .page-title {font-weight:500;}
+:root body .page-intro {font-family:var(--font-body);font-style:normal;font-size:16px;line-height:1.8;}
+:root body .email-card {flex-wrap:wrap;}
+:root body .native-audio {width:100%;}
+:root body .media-grid,:root body .retreats-grid {grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));}
+@media(max-width:1100px){:root body .nav{flex-wrap:wrap;gap:15px;position:relative;}:root body .nav-links{display:none;order:4;width:100%;margin:0;padding:15px 0 10px;border-top:1px solid var(--color-border);flex-wrap:wrap;}:root body .nav-links.is-open{display:flex;}:root body .menu-toggle{display:inline-flex;align-items:center;gap:10px;margin-left:auto;background:none;border:1px solid var(--color-border);border-radius:4px;color:var(--color-text);padding:10px 12px;font:inherit;font-size:13px;min-height:44px;}:root body .nav-actions{display:flex;}}
+@media(max-width:600px){:root body .nav{padding:15px 22px;min-height:76px;}:root body .nav-actions{display:none;}:root body .site-logo{font-size:13px;gap:8px;}.logo-greek{font-size:24px;}.logo-name{padding-left:8px;}:root body .nav-links.is-open{display:grid;grid-template-columns:1fr 1fr;gap:0;}:root body .nav-links a{padding:12px 0;}:root body .footer-content{grid-template-columns:1fr;gap:25px;padding:40px 22px;}:root body .footer-links{gap:30px;}:root body .page-header{padding:40px 0;}:root body .section{padding-top:40px;padding-bottom:50px;}:root body .container{padding-left:22px;padding-right:22px;}.contact-grid,.funding-grid{min-width:0;}:root body .email-card{padding:22px;}:root body .email-btn{white-space:normal;}}
+
 /* Fallback for browsers without light-dark() */
 @supports not (color: light-dark(#000, #fff)) {
 	:root {

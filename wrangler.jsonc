@@ -1,6 +1,7 @@
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "poiemaretreats-site",
+	"account_id": "3ab6a8a92318b627c0e8c10cbfadc494",
 	"main": "./src/worker.ts",
 	"compatibility_date": "2026-02-24",
 	"compatibility_flags": ["nodejs_compat"],
@@ -47,7 +48,8 @@
 			"d1_databases": [
 				{
 					"binding": "DB",
-					"database_name": "poiemaretreats-db-staging"
+					"database_name": "poiemaretreats-db-staging",
+					"database_id": "f4c92286-fc56-4a51-ac22-9bf852bff570"
 				}
 			],
 			"r2_buckets": [
@@ -86,7 +88,8 @@
 			"d1_databases": [
 				{
 					"binding": "DB",
-					"database_name": "poiemaretreats-db-prod"
+					"database_name": "poiemaretreats-db-prod",
+					"database_id": "1ea5533c-5da2-4b82-8882-1b9ea05d876d"
 				}
 			],
 			"r2_buckets": [

@@ -14,6 +14,7 @@ interface Props {
 
 const { title, description, image } = Astro.props;
 const settings = await getSiteSettings();
+const defaultNavigation = ["Retreats", "Funding", "About", "Media", "Contact"].map(label => ({ label, url: `/${label.toLowerCase()}`, target: undefined }));
 const siteTitle = settings?.title || "Poiema Retreats";
 const fullTitle = title ? `${title} — ${siteTitle}` : siteTitle;
 const siteDescription =
@@ -72,30 +73,30 @@ const pageCtx = createPublicPageContext({
 	</head>
 	<body>
 		<header class="site-header">
-			<nav class="nav">
+			<nav class="nav" aria-label="Main navigation">
 				<a href="/" class="site-logo">
 					{siteLogo
 						? <img src={siteLogo.url} alt={siteLogo.alt || siteTitle} class="site-logo-img" />
-						: siteTitle
+						: <><span class="logo-greek">ποίημα</span><span class="logo-name">Poiema Retreats</span></>
 					}
 				</a>
-				<div class="nav-links">
+				<button class="menu-toggle" aria-expanded="false" aria-controls="main-navigation" type="button">Menu <span aria-hidden="true">☰</span></button>
+				<div class="nav-links" id="main-navigation">
 					{
-						menu?.items.map((item) => (
-							<a href={item.url} target={item.target}>
+						(menu?.items.length ? menu.items : defaultNavigation).map((item) => (
+							<a href={item.url} target={item.target} aria-current={Astro.url.pathname.replace(/\/$/, '') === item.url ? "page" : undefined}>
 								{item.label}
 							</a>
 						))
 					}
 				</div>
 				<div class="nav-actions">
-					<a href="/_emdash/admin" class="nav-admin">Admin</a>
-					<a href="/retreats" class="btn btn-primary nav-cta">Upcoming Retreats</a>
+					<a href="/retreats" class="btn btn-primary nav-cta">Find a retreat <span aria-hidden="true">↗</span></a>
 				</div>
 			</nav>
 		</header>
 
-		<main>
+		<main id="main-content">
 			<slot />
 		</main>
 
@@ -132,7 +133,7 @@ const pageCtx = createPublicPageContext({
 			</div>
 			<div class="footer-bottom">
 				<p>
-					&copy; {new Date().getFullYear()}
+					&copy; {new Date().getFullYear()}{" "}
 					{siteTitle}. All rights reserved.
 				</p>
 				<div class="theme-switcher">
@@ -162,6 +163,17 @@ const pageCtx = createPublicPageContext({
 		</footer>
 
 		<script>
+			const menuToggle = document.querySelector<HTMLButtonElement>(".menu-toggle");
+			menuToggle?.addEventListener("click", () => {
+				const expanded = menuToggle.getAttribute("aria-expanded") !== "true";
+				menuToggle.setAttribute("aria-expanded", String(expanded));
+				document.querySelector(".nav-links")?.classList.toggle("is-open", expanded);
+			});
+			document.addEventListener("keydown", event => {
+				if (event.key === "Escape" && menuToggle?.getAttribute("aria-expanded") === "true") {
+					menuToggle.click(); menuToggle.focus();
+				}
+			});
 			// Theme switcher
 			const THEME_REGEX = /theme=([^;]+)/;
 			const themeBtns =
