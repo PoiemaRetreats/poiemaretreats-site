@@ -2,6 +2,8 @@
 
 ## Scope
 
+Main-only scope correction: alternate design work is stopped. The main homepage now preserves the original eight-section order, all 33 source text blocks, all five testimonials, six CTA buttons, and six image placements. Both original retreat panels are retained with their original printed dates plus a separate date-confirmation note. Their formerly broken product links now reach the existing corresponding registration pages. The unpublished CMS seed events remain drafts. Run `node scripts/check-home-copy.mjs` to prevent omissions, or set `POIEMA_REVIEW_ORIGIN=https://review.poiemaretreats.org` to test the private deployed snapshot.
+
 Copy correction, 2026-09-05: the homepage and all three concepts now reuse original WordPress wording through `src/data/original-copy.ts`. Removed the replacement marketing headlines and paragraphs. Restored the original headline, Scripture quotation, full value descriptions, donation wording, and all five testimonials on the main page. Only layout, short navigation labels, and the empty-state contact prompt differ where needed. Uncertain event dates remain unpublished rather than being rewritten.
 
 Hero image check: WordPress media item 747 identifies `DA2A4259.jpg` as 1334 by 885 pixels at full size. The downloaded photo and direct JPEG both have those dimensions. The listed derivatives are smaller, and no larger duplicate was found in the archived media inventory. The same photo is retained without artificial enlargement.
