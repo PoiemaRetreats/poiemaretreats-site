@@ -2,6 +2,8 @@
 
 ## Scope
 
+Live registration verification: the review Worker's `no-referrer` policy left the provider iframe blank. Authorized asset responses now use `strict-origin-when-cross-origin`, allowing the form's parent-origin handshake without exposing the invitation key. The key-exchange redirect retains `no-referrer`. The deployed OBX form now displays Step 1 of 5, its fields, and Next. No registration or payment was submitted.
+
 Retreat grouping: the media archive now renders separate retreat sections and a Retreat dropdown alongside the other filters. Current source titles establish Poiema OBX 2024 and Spring Poiema 2023; no exact event dates were invented. Unidentified material remains under Other recordings. Newest/oldest sorting orders the retreat groups, and numbered talks stay in sequence. Verified Spring 2023 plus Lecture returns talks 1 through 4, title search narrows to one, reset restores all 14, and query selections survive a reload.
 
 Media and signup update: media now has search, year/type filters, newest/oldest/title sorting, a live result count, no-results state, reset, and shareable filter query parameters. Known title years provide year-level sorting where exact recording dates are absent; undated recordings sort last. Existing recording content is unchanged.

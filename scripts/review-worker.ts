@@ -14,6 +14,9 @@ export default {
     const response = await env.ASSETS.fetch(request);
     const output = new Response(response.body, response);
     for (const [name, value] of Object.entries(headers)) output.headers.set(name, value);
+    // The embedded registration form needs the parent origin for its handshake.
+    // The key exchange above stays no-referrer; cross-origin requests only get the origin.
+    output.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
     return output;
   }
 } satisfies ExportedHandler<Env>;
