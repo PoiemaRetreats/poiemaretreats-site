@@ -82,6 +82,13 @@
 :root.dark {color-scheme:dark;}
 img { max-width: 100%; }
 html { scroll-padding-top: 100px; }
+@media (max-width: 1100px) {
+  .site-header { transition: transform 180ms ease; }
+  .site-header.is-scroll-hidden { transform: translateY(-100%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .site-header { transition: none; }
+}
 a:focus-visible,button:focus-visible,summary:focus-visible { outline: 3px solid #ba7a18; outline-offset: 5px; }
 :root body .nav { min-height: 84px; gap: 24px; }
 :root body .site-logo { display:flex; align-items:center; gap:11px; font-family:var(--font-body); font-size:16px; letter-spacing:0; }

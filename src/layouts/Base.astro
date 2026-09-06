@@ -164,9 +164,30 @@ const pageCtx = createPublicPageContext({
 
 		<script>
 			const menuToggle = document.querySelector<HTMLButtonElement>(".menu-toggle");
+			const header = document.querySelector(".site-header") as unknown as HTMLElement | null;
+			const mobileHeader = window.matchMedia("(max-width: 1100px)");
+			const scrollPosition = () => Math.max(0, Math.min(window.scrollY, document.documentElement.scrollHeight - window.innerHeight));
+			let previousScroll = scrollPosition();
+			window.addEventListener("scroll", () => {
+				const current = scrollPosition();
+				const menuOpen = menuToggle?.getAttribute("aria-expanded") === "true";
+				const keyboardFocus = header?.querySelector(":focus-visible");
+				if (!mobileHeader.matches || menuOpen || keyboardFocus || current <= (header?.offsetHeight || 0) || current < previousScroll) {
+					header?.classList.remove("is-scroll-hidden");
+				} else if (current > previousScroll) {
+					header?.classList.add("is-scroll-hidden");
+				}
+				previousScroll = current;
+			}, { passive: true });
+			header?.addEventListener("focusin", () => header.classList.remove("is-scroll-hidden"));
+			mobileHeader.addEventListener("change", () => {
+				header?.classList.remove("is-scroll-hidden");
+				previousScroll = scrollPosition();
+			});
 			menuToggle?.addEventListener("click", () => {
 				const expanded = menuToggle.getAttribute("aria-expanded") !== "true";
 				menuToggle.setAttribute("aria-expanded", String(expanded));
+				header?.classList.remove("is-scroll-hidden");
 				document.querySelector(".nav-links")?.classList.toggle("is-open", expanded);
 			});
 			document.addEventListener("keydown", event => {
