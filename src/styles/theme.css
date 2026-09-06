@@ -128,3 +128,28 @@ a:focus-visible,button:focus-visible,summary:focus-visible { outline: 3px solid 
 		--color-accent: #456254;
 	}
 }
+/* Original WordPress photos, kept uncropped so nobody is cut out. */
+.retreats-original-photo {
+  display: block;
+  width: 100%;
+  max-width: 960px;
+  height: auto;
+  margin: 2rem auto 0;
+  border-radius: var(--radius-lg);
+}
+.contact-original-photos {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: 2.5rem;
+}
+.contact-original-photos img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-lg);
+}
+@media (max-width: 640px) {
+  .contact-original-photos { grid-template-columns: 1fr; }
+}
