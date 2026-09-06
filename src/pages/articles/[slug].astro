@@ -70,7 +70,7 @@ const formattedDate = rawDate
 					<div class="author-bio-card">
 						<div class="author-bio-info">
 							<span class="bio-author-name">{article.data.author}</span>
-							<p>Pastoral teacher and contributor to Poiema Retreats conferences.</p>
+							<p>{article.id === "example-article-lorem-ipsum" ? "Placeholder article for layout review. Not a pastoral contribution." : "Pastoral teacher and contributor to Poiema Retreats conferences."}</p>
 						</div>
 					</div>
 
@@ -87,7 +87,7 @@ const formattedDate = rawDate
 
 <style>
 	.container {
-		max-width: var(--content-width);
+		max-width: 900px;
 		margin: 0 auto;
 		padding: 0 var(--spacing-xl);
 	}

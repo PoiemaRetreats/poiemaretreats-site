@@ -433,7 +433,7 @@
       {
         "id": "example-article-lorem-ipsum",
         "slug": "example-article-lorem-ipsum",
-        "status": "draft",
+        "status": "published",
         "data": {
           "title": "Example Article: Lorem Ipsum",
           "author": "Sample author",

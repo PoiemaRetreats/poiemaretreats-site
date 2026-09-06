@@ -3,7 +3,7 @@ import { mkdir, readFile, writeFile, cp } from 'node:fs/promises';
 // A private static review snapshot, not a replacement for the EmDash deployment.
 const origin = 'http://127.0.0.1:4321';
 const vars = Object.fromEntries((await readFile('.dev.vars', 'utf8')).trim().split('\n').map(line => line.split('=')));
-const routes = ['/', '/about', '/contact', '/funding', '/retreats', '/articles', '/media', '/registration'];
+const routes = ['/', '/about', '/contact', '/funding', '/retreats', '/articles', '/articles/example-article-lorem-ipsum', '/media', '/registration'];
 await mkdir('.artifacts/review/assets', { recursive: true });
 await cp('dist/client', '.artifacts/review/assets', { recursive: true });
 for (const route of routes) {

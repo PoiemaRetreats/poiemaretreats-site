@@ -78,6 +78,9 @@
   --tracking-snug: 0;
 }
 * { box-sizing: border-box; }
+body { min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; }
+body > .site-header, body > .site-footer { flex-shrink: 0; }
+body > main { flex: 1 0 auto; }
 :root.light {color-scheme:light;}
 :root.dark {color-scheme:dark;}
 img { max-width: 100%; }
